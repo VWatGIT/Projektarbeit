@@ -1,0 +1,25 @@
+{
+  "name": "baseline",
+  "number_of_simulations": 3,
+  "random_seed": 42,
+  "sauger_1_id": 26,
+  "sauger_2_id": 27,
+  "suction_positions": {
+    "s1": {
+      "nominal_x": 200.0,
+      "nominal_z": 300.0,
+      "deviation_x": 20.0,
+      "deviation_z": 20.0
+    },
+    "s2": {
+      "nominal_x": 400.0,
+      "nominal_z": 500.0,
+      "deviation_x": 20.0,
+      "deviation_z": 20.0
+    }
+  },
+  "displacement_y": {
+    "min": -100.0,
+    "max": 0.0
+  }
+}
