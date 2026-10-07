@@ -1,0 +1,107 @@
+<mxfile host="65bd71144e">
+    <diagram id="2vKwJhEJ-7abHfm3HKmS" name="Page-1">
+        <mxGraphModel dx="845" dy="499" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="A5PSTxj6DOPow0smZ9hD-4" edge="1" parent="1" source="A5PSTxj6DOPow0smZ9hD-1" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="A5PSTxj6DOPow0smZ9hD-2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="A5PSTxj6DOPow0smZ9hD-6" edge="1" parent="1" source="A5PSTxj6DOPow0smZ9hD-1" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="A5PSTxj6DOPow0smZ9hD-8">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="630" y="600" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="A5PSTxj6DOPow0smZ9hD-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Oberfläche mit parametrisierten Saugerflächen&lt;br&gt;(Inventor)" vertex="1">
+                    <mxGeometry height="60" width="120" x="240" y="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-1" edge="1" parent="1" source="A5PSTxj6DOPow0smZ9hD-2" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="A5PSTxj6DOPow0smZ9hD-8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="A5PSTxj6DOPow0smZ9hD-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Verschiebung der Saugerflächen über iLogic in Inventor" vertex="1">
+                    <mxGeometry height="60" width="120" x="470" y="470" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-15" edge="1" parent="1" source="A5PSTxj6DOPow0smZ9hD-3" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="jcxpxHtq5WgWTWVW7oct-11">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-18" edge="1" parent="1" source="A5PSTxj6DOPow0smZ9hD-3" style="edgeStyle=orthogonalEdgeStyle;html=1;" target="jcxpxHtq5WgWTWVW7oct-3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="A5PSTxj6DOPow0smZ9hD-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Nastran FEM-Modelldatei" vertex="1">
+                    <mxGeometry height="60" width="120" x="910" y="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-8" edge="1" parent="1" source="A5PSTxj6DOPow0smZ9hD-8" style="edgeStyle=orthogonalEdgeStyle;html=1;" target="A5PSTxj6DOPow0smZ9hD-3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="A5PSTxj6DOPow0smZ9hD-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Meshgeneration&lt;br&gt;(in Nastran)" vertex="1">
+                    <mxGeometry height="60" width="120" x="700" y="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-23" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="jcxpxHtq5WgWTWVW7oct-24">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1429" y="600" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Variation der Displacements in Python" vertex="1">
+                    <mxGeometry height="60" width="120" x="1310" y="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-9" edge="1" parent="1" source="jcxpxHtq5WgWTWVW7oct-3" style="edgeStyle=orthogonalEdgeStyle;html=1;startArrow=classic;startFill=1;endArrow=none;endFill=0;dashed=1;" target="jcxpxHtq5WgWTWVW7oct-14">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-17" edge="1" parent="1" source="jcxpxHtq5WgWTWVW7oct-11" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" target="jcxpxHtq5WgWTWVW7oct-3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="Verschiebung der Saugerflächen mit Python --&amp;gt; Manuelle Mesh Selection" vertex="1">
+                    <mxGeometry height="60" width="120" x="1100" y="700" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="RBE2-Kopplung&lt;br&gt;--&amp;gt; Verschiebung eines Referenzknotens" vertex="1">
+                    <mxGeometry height="60" width="140" x="1300" y="850" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-19" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Option A" vertex="1">
+                    <mxGeometry height="50" width="80" x="490" y="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-20" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Option B" vertex="1">
+                    <mxGeometry height="30" width="60" x="1130" y="790" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-28" edge="1" parent="1" source="jcxpxHtq5WgWTWVW7oct-22" style="edgeStyle=orthogonalEdgeStyle;html=1;" target="jcxpxHtq5WgWTWVW7oct-27">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-30" connectable="0" parent="jcxpxHtq5WgWTWVW7oct-28" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#d5e8d4;labelBorderColor=#82b366;" value="python ruft auf" vertex="1">
+                    <mxGeometry relative="1" x="0.0976" y="3" as="geometry">
+                        <mxPoint x="-6" y="13" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Modifizierte Nastran FEM-Modelldateien" vertex="1">
+                    <mxGeometry height="60" width="120" x="1680" y="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-25" edge="1" parent="1" source="jcxpxHtq5WgWTWVW7oct-24" style="edgeStyle=orthogonalEdgeStyle;html=1;" target="jcxpxHtq5WgWTWVW7oct-22">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1689" y="600" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-24" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" value="x100" vertex="1">
+                    <mxGeometry height="80" width="80" x="1519" y="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-32" edge="1" parent="1" source="jcxpxHtq5WgWTWVW7oct-27" style="edgeStyle=orthogonalEdgeStyle;html=1;" target="jcxpxHtq5WgWTWVW7oct-31">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-27" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Nastran Solver" vertex="1">
+                    <mxGeometry height="60" width="120" x="1920" y="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-35" edge="1" parent="1" source="jcxpxHtq5WgWTWVW7oct-31" style="edgeStyle=orthogonalEdgeStyle;html=1;" target="jcxpxHtq5WgWTWVW7oct-34">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-36" connectable="0" parent="jcxpxHtq5WgWTWVW7oct-35" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=#d5e8d4;labelBorderColor=#82b366;" value="post-processing" vertex="1">
+                    <mxGeometry relative="1" x="-0.1414" y="2" as="geometry">
+                        <mxPoint x="7" y="2" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-31" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Ergebnisse / Displacement Maps/" vertex="1">
+                    <mxGeometry height="60" width="120" x="2120" y="570" as="geometry"/>
+                </mxCell>
+                <mxCell id="jcxpxHtq5WgWTWVW7oct-34" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Gappy-POD&amp;nbsp;&lt;br&gt;in Python" vertex="1">
+                    <mxGeometry height="60" width="120" x="2360" y="570" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

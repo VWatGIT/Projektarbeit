@@ -1,0 +1,1446 @@
+                                                                               
+ADS NASTRAN VERSION 19.1.0.27   11:40  10/07/26                                
+                                                                               
+                                                                               
+INITIALIZATION PROCESSOR MODULE                                                
+                                                                               
+                                                                               
+READING IN FILE:  C:\Program Files\Autodesk\Inventor Nastran 2025\Nastran\NASTR
+                                                                               
+PROCESSING MODEL INITIALIZATION FILE                                           
+                                                                               
+NUMBER OF PROCESSOR THREADS REQUESTED =    4                                   
+NUMBER OF PROCESSOR THREADS AVAILABLE =   12                                   
+NUMBER OF PROCESSOR THREADS USED      =    4                                   
+                                                                               
+CONDITIONAL NUMERICAL REPRODUCIBILITY = ENABLED                                
+                                                                               
+NASTRAN PROCESS PRIORITY = NORMAL                                              
+                                                                               
+ÿ                                                                              DELETING FILE:  simulation_008.STA                                             
+                                                                               
+VIRTUAL MEMORY =  2075464192 WORDS     15834.5 MEGABYTES                       
+REAL MEMORY    =   540537344 WORDS      4124.0 MEGABYTES                       
+                                                                               
+DRIVE C: DISK SPACE =    16942602240 WORDS    129261.8 MEGABYTES               
+                                                                               
+WRITING MODEL RESULTS OUTPUT TO FILE:  simulation_008.OUT                      
+                                                                               
+WRITING OUT MODEL INITIALIZATION DIRECTIVES                                    
+PAGES WRITTEN:      0                                                          PAGES WRITTEN:       2                                                         
+                                                                               
+                                                                               
+MODEL TRANSLATOR MODULE                                                        
+                                                                               
+                                                                               
+GENERATING DATABASE:  simulation_008.NDB                                       
+                                                                               
+READING IN FILE:  simulation_008.nas                                           
+LINES READ:       0                                                            LINES READ:      4400                                                          
+                                                                               
+DETERMINING MODEL SIZE                                                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+PROCESSING CASE CONTROL COMMANDS                                               
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+11 CASE CONTROL COMMANDS WERE RECOGNIZED OF A TOTAL OF 11 READ IN              
+                                                                               
+PROCESSING BULK DATA ENTRIES                                                   
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+WARNING T2004: UNRECOGNIZED BULK DATA ENTRY                                    
+PARAM                                              UNITS                *X   0Z
+                                                                               
+4388 BULK DATA ENTRIES WERE RECOGNIZED OF A TOTAL OF 4389 READ IN              
+                                                                               
+WRITING OUT MODEL TRANSLATOR MESSAGES                                          
+PAGES WRITTEN:      0                                                          PAGES WRITTEN:       1                                                         
+                                                                               
+WRITING OUT MODEL DATA                                                         
+PAGES WRITTEN:      0                                                          PAGES WRITTEN:       9                                                         
+                                                                               
+                                                                               
+MODEL DATABASE SIZE                                                            
+                                                                               
+SUBCASES                     =        1                                        
+GRID POINTS                  =     1345                                        
+ELEMENTS                     =      426                                        
+ELEMENT PROPERTIES           =        1                                        
+MATERIAL PROPERTIES          =        1                                        
+SINGLE POINT CONSTRAINTS     =        4                                        
+MULTIPOINT CONSTRAINTS       =      673                                        
+SETS                         =        1                                        
+SURFACES                     =        1                                        
+                                                                               
+MODULE SEQUENCE FOR SOLUTION: NONLINEAR STATIC                                 
+                                                                               
+                                                                               
+GEOMETRY PROCESSOR MODULE                                                      
+                                                                               
+                                                                               
+MODEL SIZE    =        8070 DEGREES OF FREEDOM                                 
+MATRIX SIZE   =      468213 WORDS        3.6 MEGABYTES                         
+SEMIBANDWIDTH =         155 WORDS                                              
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2065916416 WORDS     15761.7 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   537263104 WORDS      4099.0 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16941772800 WORDS    129255.5 MEGABYTES               
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX                                             
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+ELEMENT GEOMETRY STATISTICS                                                    
+                                                                               
+MAXIMUM QUAD ELEMENT WARPING ANGLE        =   0.00 DEGREES ON ELEMENT 426      
+MAXIMUM QUAD ELEMENT SKEW ANGLE           =  31.58 DEGREES ON ELEMENT 49       
+MAXIMUM QUAD ELEMENT EDGE POINT DEVIATION =   0.00 DEGREES ON ELEMENT 426      
+MAXIMUM QUAD ELEMENT INTERIOR ANGLE       = 141.45 DEGREES ON ELEMENT 11       
+MINIMUM QUAD ELEMENT INTERIOR ANGLE       =  50.12 DEGREES ON ELEMENT 49       
+                                                                               
+MAXIMUM QUAD ELEMENT TAPER RATIO             =   0.63 ON ELEMENT 11            
+MAXIMUM QUAD ELEMENT ASPECT RATIO            =   1.96 ON ELEMENT 348           
+MINIMUM QUAD ELEMENT EDGE POINT LENGTH RATIO =   1.00 ON ELEMENT 426           
+                                                                               
+MAXIMUM TRI ELEMENT SKEW ANGLE           =  36.27 DEGREES ON ELEMENT 13        
+MAXIMUM TRI ELEMENT EDGE POINT DEVIATION =   0.00 DEGREES ON ELEMENT 273       
+MAXIMUM TRI ELEMENT INTERIOR ANGLE       =  83.44 DEGREES ON ELEMENT 13        
+MINIMUM TRI ELEMENT INTERIOR ANGLE       =  32.29 DEGREES ON ELEMENT 13        
+                                                                               
+MAXIMUM TRI ELEMENT ASPECT RATIO            =   1.93 ON ELEMENT 13             
+MINIMUM TRI ELEMENT EDGE POINT LENGTH RATIO =   1.00 ON ELEMENT 273            
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.03 SECONDS                                  
+                                                                               
+CALCULATING PART DEFINITIONS                                                   
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+WRITING OUT PART DEFINITIONS                                                   
+PAGES WRITTEN:      0                                                          PAGES WRITTEN:       1                                                         
+                                                                               
+                                                                               
+NONLINEAR SOLUTION PROCESSOR MODULE                                            
+                                                                               
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  1.43 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.02 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM STIFFNESS MATRIX DIAGONAL =  1.0047E+08  AT GRID 514 COMPONENT 6       
+MINIMUM STIFFNESS MATRIX DIAGONAL =  8.8555E+04  AT GRID 458 COMPONENT 2       
+                                                                               
+WARNING E5016: LOAD SET 6 DOES NOT EXIST                                       
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2061649408 WORDS     15729.1 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   532428288 WORDS      4062.1 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16941287424 WORDS    129251.8 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR SUBCASE 1                              
+PERCENT COMPLETE:    0                                                         READING                                                                        PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 7.016E+04 AT GRID 283 COMPONENT 3       
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =         981751 WORDS       15.0 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        1697536 WORDS       13.0 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 981751 WORDS = 0.15 SECONDS                             
+                                                                               
+STORING DATABASE FOR SUBCASE 1                                                 
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+NONLINEAR SOLUTION SEQUENCE FOR SUBCASE 1                                      
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 1.000 PERCENT                                      
+                                                                               
+ASSEMBLING GLOBAL LOAD VECTOR FOR INCREMENT 1                                  
+                                                                               
+MAXIMUM APPLIED INCREMENTAL FORCE MAGNITUDE  =  0.000000E+00  AT GRID 1345     
+MAXIMUM APPLIED INCREMENTAL MOMENT MAGNITUDE =  0.000000E+00  AT GRID 1345     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 1  ITERATION 1                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  9.650191E-01  AT GRID 456        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  1.064370E-03  AT GRID 81         
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  9.650191E-01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  1.064370E-03  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 1  ITERATION 1                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  6.886042E-01  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  2.911116E-03  AT GRID 429         
+                                                                               
+WORK CONVERGENCE         =   6.9                                               
+LOAD CONVERGENCE         =  69.0                                               
+DISPLACEMENT CONVERGENCE =   2.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 1.000 PERCENT                                      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 1  ITERATION 2                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  8.765462E-03  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  1.425980E-05  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  9.647300E-01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  1.064059E-03  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 1  ITERATION 2                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  3.029985E-03  AT GRID 763         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  9.557827E-05  AT GRID 1303        
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  83.2                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 1.000 PERCENT                                      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 1  ITERATION 3                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  8.747889E-03  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  1.431062E-05  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  9.649993E-01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  1.064263E-03  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 1  ITERATION 3                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  4.192345E-03  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  5.981168E-05  AT GRID 429         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         = 100.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+STORING DATABASE FOR SUBCASE 1  INCREMENT 1                                    
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 3.000 PERCENT                                      
+                                                                               
+ASSEMBLING GLOBAL LOAD VECTOR FOR INCREMENT 2                                  
+                                                                               
+MAXIMUM APPLIED INCREMENTAL FORCE MAGNITUDE  =  5.527804E-02  AT GRID 1250     
+MAXIMUM APPLIED INCREMENTAL MOMENT MAGNITUDE =  3.140185E-02  AT GRID 429      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 2  ITERATION 1                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.930058E+00  AT GRID 456        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  2.128774E-03  AT GRID 81         
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  2.895057E+00  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  3.193037E-03  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 2  ITERATION 1                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.000000E+00  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  3.784306E-03  AT GRID 158         
+                                                                               
+WORK CONVERGENCE         =   1.3                                               
+LOAD CONVERGENCE         =   8.7                                               
+DISPLACEMENT CONVERGENCE =   3.0                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 2  ITERATION 1                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.03 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  9.9933E-16                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2058996736 WORDS     15708.9 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   528886272 WORDS      4035.1 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940702720 WORDS    129247.3 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 2  ITERATION 1               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 2.111E+04 AT GRID 317 COMPONENT 1       
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1500658 WORDS       22.9 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3473920 WORDS       26.5 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1500658 WORDS = 0.04 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 3.000 PERCENT                                      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 2  ITERATION 2                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  6.659554E-04  AT GRID 459        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  2.754784E-06  AT GRID 879        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  2.894944E+00  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  3.190842E-03  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 2  ITERATION 2                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.781296E-04  AT GRID 480         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  8.244619E-06  AT GRID 481         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         = 100.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+STORING DATABASE FOR SUBCASE 1  INCREMENT 2                                    
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 7.000 PERCENT                                      
+                                                                               
+ASSEMBLING GLOBAL LOAD VECTOR FOR INCREMENT 3                                  
+                                                                               
+MAXIMUM APPLIED INCREMENTAL FORCE MAGNITUDE  =  1.997049E-02  AT GRID 480      
+MAXIMUM APPLIED INCREMENTAL MOMENT MAGNITUDE =  1.303243E-02  AT GRID 481      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 3  ITERATION 1                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  3.850647E+00  AT GRID 456        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  4.240810E-03  AT GRID 81         
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  6.745591E+00  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  7.431642E-03  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 3  ITERATION 1                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.915950E-01  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  6.672509E-03  AT GRID 429         
+                                                                               
+WORK CONVERGENCE         =   0.7                                               
+LOAD CONVERGENCE         =   3.9                                               
+DISPLACEMENT CONVERGENCE =   3.5                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 3  ITERATION 1                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.03 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2058615808 WORDS     15706.0 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   529140736 WORDS      4037.0 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940687360 WORDS    129247.2 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 3  ITERATION 1               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 5.217E+04 AT GRID 1289 COMPONENT 2      
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1476044 WORDS       22.5 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3433472 WORDS       26.2 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1476044 WORDS = 0.05 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 7.000 PERCENT                                      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 3  ITERATION 2                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.640988E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  2.618966E-04  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  6.753014E+00  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  7.422933E-03  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 3  ITERATION 2                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.147774E-03  AT GRID 593         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  2.309201E-05  AT GRID 1           
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         = 100.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+STORING DATABASE FOR SUBCASE 1  INCREMENT 3                                    
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 15.000 PERCENT                                     
+                                                                               
+ASSEMBLING GLOBAL LOAD VECTOR FOR INCREMENT 4                                  
+                                                                               
+MAXIMUM APPLIED INCREMENTAL FORCE MAGNITUDE  =  6.961513E-01  AT GRID 593      
+MAXIMUM APPLIED INCREMENTAL MOMENT MAGNITUDE =  8.640299E-02  AT GRID 1        
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 4  ITERATION 1                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  7.680190E+00  AT GRID 456        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  8.383418E-03  AT GRID 81         
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  1.443320E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  1.580626E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 4  ITERATION 1                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.716564E-01  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.221392E-02  AT GRID 429         
+                                                                               
+WORK CONVERGENCE         =   0.2                                               
+LOAD CONVERGENCE         =   1.1                                               
+DISPLACEMENT CONVERGENCE =   3.8                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 4  ITERATION 1                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.04 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  7.1693E-16                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2058171392 WORDS     15702.6 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   529427968 WORDS      4039.2 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940687360 WORDS    129247.2 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 4  ITERATION 1               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 3.553E+04 AT GRID 324 COMPONENT 5       
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1451259 WORDS       22.1 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3416960 WORDS       26.1 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1451259 WORDS = 0.04 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 15.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 4  ITERATION 2                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.956223E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  3.120506E-04  AT GRID 457        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  1.445000E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  1.570786E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 4  ITERATION 2                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.916683E-03  AT GRID 480         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  9.286081E-05  AT GRID 879         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  37.6                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 15.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 4  ITERATION 3                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.213894E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  1.963439E-04  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  1.445320E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  1.570323E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 4  ITERATION 3                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  3.078259E-04  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  2.530588E-05  AT GRID 158         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         = 100.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+STORING DATABASE FOR SUBCASE 1  INCREMENT 4                                    
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 31.000 PERCENT                                     
+                                                                               
+ASSEMBLING GLOBAL LOAD VECTOR FOR INCREMENT 5                                  
+                                                                               
+MAXIMUM APPLIED INCREMENTAL FORCE MAGNITUDE  =  8.479525E-01  AT GRID 1250     
+MAXIMUM APPLIED INCREMENTAL MOMENT MAGNITUDE =  2.177191E-01  AT GRID 158      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 5  ITERATION 1                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.514079E+01  AT GRID 456        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  1.596667E-02  AT GRID 81         
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  2.959399E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  3.166875E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 5  ITERATION 1                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.843400E-01  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  2.698967E-02  AT GRID 1303        
+                                                                               
+WORK CONVERGENCE         =   0.1                                               
+LOAD CONVERGENCE         =   0.6                                               
+DISPLACEMENT CONVERGENCE =   3.9                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 5  ITERATION 1                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.04 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2059243520 WORDS     15710.8 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   527604224 WORDS      4025.3 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940686336 WORDS    129247.2 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 5  ITERATION 1               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 1.945E+04 AT GRID 1274 COMPONENT 3      
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1472294 WORDS       22.5 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3438464 WORDS       26.2 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1472294 WORDS = 0.05 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 31.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 5  ITERATION 2                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  5.485230E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  9.647302E-04  AT GRID 457        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  2.960246E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  3.116722E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 5  ITERATION 2                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  5.233339E-03  AT GRID 480         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  7.108432E-04  AT GRID 583         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  12.3                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 31.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 5  ITERATION 3                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  3.239168E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  5.257853E-04  AT GRID 457        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  2.960245E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  3.112000E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 5  ITERATION 3                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  5.663530E-04  AT GRID 593         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.252751E-04  AT GRID 1303        
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  46.3                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 31.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 5  ITERATION 4                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  4.362110E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  7.378897E-04  AT GRID 457        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  2.960049E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  3.109636E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 5  ITERATION 4                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.766935E-03  AT GRID 480         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  3.325030E-04  AT GRID 583         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  34.2                                               
+DISPLACEMENT CONVERGENCE =  20.9                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 31.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 5  ITERATION 5                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.223359E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  2.169506E-04  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  2.959980E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  3.111097E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 5  ITERATION 5                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  3.314340E-04  AT GRID 480         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  7.928129E-05  AT GRID 583         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  93.9                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 31.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 5  ITERATION 6                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  8.739430E-02  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  1.675745E-04  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  2.960067E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  3.111411E-02  AT GRID 81         
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 5  ITERATION 6                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  2.936426E-04  AT GRID 792         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.024507E-05  AT GRID 1065        
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         = 100.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+STORING DATABASE FOR SUBCASE 1  INCREMENT 5                                    
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 61.000 PERCENT                                     
+                                                                               
+ASSEMBLING GLOBAL LOAD VECTOR FOR INCREMENT 6                                  
+                                                                               
+MAXIMUM APPLIED INCREMENTAL FORCE MAGNITUDE  =  3.322927E+00  AT GRID 792      
+MAXIMUM APPLIED INCREMENTAL MOMENT MAGNITUDE =  2.287478E-01  AT GRID 1065     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 6  ITERATION 1                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  2.720921E+01  AT GRID 856        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  2.959483E-02  AT GRID 877        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  5.678643E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  5.865714E-02  AT GRID 156        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 6  ITERATION 1                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  2.270532E-01  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  5.741839E-02  AT GRID 597         
+                                                                               
+WORK CONVERGENCE         =   0.1                                               
+LOAD CONVERGENCE         =   0.6                                               
+DISPLACEMENT CONVERGENCE =   4.0                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 6  ITERATION 1                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.04 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.04 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2059124224 WORDS     15709.9 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   528716288 WORDS      4033.8 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940686336 WORDS    129247.2 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 6  ITERATION 1               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 1.672E+04 AT GRID 1249 COMPONENT 6      
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1505953 WORDS       23.0 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3448064 WORDS       26.3 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1505953 WORDS = 0.04 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 61.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 6  ITERATION 2                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.438368E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  3.376052E-03  AT GRID 1272       
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  5.601144E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  5.882577E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 6  ITERATION 2                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  6.789626E-03  AT GRID 1266        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.152370E-03  AT GRID 865         
+                                                                               
+WORK CONVERGENCE         =  98.1                                               
+LOAD CONVERGENCE         =   7.1                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 61.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 6  ITERATION 3                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.888929E-01  AT GRID 361        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  8.396253E-04  AT GRID 743        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  5.590744E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  5.891475E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 6  ITERATION 3                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  9.871955E-04  AT GRID 941         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  2.865984E-04  AT GRID 1303        
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  33.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 61.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 6  ITERATION 4                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  9.110610E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  2.012107E-03  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  5.584678E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  5.892934E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 6  ITERATION 4                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.133316E-03  AT GRID 792         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  9.002038E-05  AT GRID 804         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  47.6                                               
+DISPLACEMENT CONVERGENCE =  90.8                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 61.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 6  ITERATION 5                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.860883E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  4.753895E-03  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  5.582432E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  5.892643E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 6  ITERATION 5                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.188309E-03  AT GRID 786         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  3.438564E-04  AT GRID 136         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  56.4                                               
+DISPLACEMENT CONVERGENCE =  68.6                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 6  ITERATION 5                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.03 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2060846592 WORDS     15723.0 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   528605696 WORDS      4032.9 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940685312 WORDS    129247.2 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 6  ITERATION 5               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1479347 WORDS       22.6 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3449856 WORDS       26.3 MEGABYTES        
+                                                                               
+WARNING E5049: SINGULARITY DETECTED AT GRID 492 COMPONENT 2                    
+                                                                               
+FACTORIZATION TIME FOR 1479347 WORDS = 0.04 SECONDS                            
+                                                                               
+WARNING E5077: DIFFERENTIAL STIFFNESS MATRIX IGNORED FOR THIS ITERATION        
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 6  ITERATION 5                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.03 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2060942848 WORDS     15723.7 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   528897024 WORDS      4035.2 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940685312 WORDS    129247.2 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 6  ITERATION 5               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 2.382E+04 AT GRID 1278 COMPONENT 4      
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1479347 WORDS       22.6 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3434112 WORDS       26.2 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1479347 WORDS = 0.04 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 61.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 6  ITERATION 6                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.085826E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  2.482152E-03  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  5.582263E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  5.895440E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 6  ITERATION 6                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  5.157095E-04  AT GRID 926         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  2.489542E-04  AT GRID 136         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  70.2                                               
+DISPLACEMENT CONVERGENCE =   1.8                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 61.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 6  ITERATION 7                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.578635E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  3.404325E-03  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  5.582991E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  5.893286E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 6  ITERATION 7                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  3.409847E-03  AT GRID 792         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.464321E-04  AT GRID 136         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  42.4                                               
+DISPLACEMENT CONVERGENCE =  49.0                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 6  ITERATION 7                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.03 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2061157888 WORDS     15725.4 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   529500672 WORDS      4039.8 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940677120 WORDS    129247.1 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 6  ITERATION 7               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 3.506E+04 AT GRID 305 COMPONENT 4       
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1476151 WORDS       22.5 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3429888 WORDS       26.2 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1476151 WORDS = 0.04 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 61.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 6  ITERATION 8                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  2.865172E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  8.334743E-04  AT GRID 340        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  5.583326E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  5.893234E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 6  ITERATION 8                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  3.641574E-04  AT GRID 584         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  4.373728E-05  AT GRID 727         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         = 100.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+STORING DATABASE FOR SUBCASE 1  INCREMENT 6                                    
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 91.000 PERCENT                                     
+                                                                               
+ASSEMBLING GLOBAL LOAD VECTOR FOR INCREMENT 7                                  
+                                                                               
+MAXIMUM APPLIED INCREMENTAL FORCE MAGNITUDE  =  1.434256E+01  AT GRID 584      
+MAXIMUM APPLIED INCREMENTAL MOMENT MAGNITUDE =  3.220778E+00  AT GRID 727      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 7  ITERATION 1                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  2.703090E+01  AT GRID 853        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  3.085385E-02  AT GRID 1262       
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  8.275118E+01  AT GRID 456        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  8.943170E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 7  ITERATION 1                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.484358E-01  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  5.015634E-02  AT GRID 597         
+                                                                               
+WORK CONVERGENCE         =   0.2                                               
+LOAD CONVERGENCE         =   0.8                                               
+DISPLACEMENT CONVERGENCE =   6.1                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 7  ITERATION 1                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.03 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2060922880 WORDS     15723.6 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   529741312 WORDS      4041.6 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940676096 WORDS    129247.1 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 7  ITERATION 1               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 1.645E+04 AT GRID 1249 COMPONENT 1      
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1480446 WORDS       22.6 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3435520 WORDS       26.2 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1480446 WORDS = 0.05 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 91.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 7  ITERATION 2                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  3.393387E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  8.335905E-03  AT GRID 327        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  8.180887E+01  AT GRID 1345       
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  8.888280E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 7  ITERATION 2                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.446084E-02  AT GRID 479         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.970533E-03  AT GRID 869         
+                                                                               
+WORK CONVERGENCE         =  48.3                                               
+LOAD CONVERGENCE         =   4.3                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 91.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 7  ITERATION 3                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  4.676077E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  1.019104E-02  AT GRID 328        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  8.180887E+01  AT GRID 1345       
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  8.872894E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 7  ITERATION 3                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  9.549702E-03  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  2.973884E-03  AT GRID 597         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =   8.3                                               
+DISPLACEMENT CONVERGENCE =  70.9                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 91.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 7  ITERATION 4                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  2.006428E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  5.188561E-03  AT GRID 745        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  8.180887E+01  AT GRID 1345       
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  8.875218E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 7  ITERATION 4                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  4.875412E-03  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.307574E-03  AT GRID 597         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  18.4                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 91.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 7  ITERATION 5                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  2.931757E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  6.635007E-03  AT GRID 751        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  8.191141E+01  AT GRID 316        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  8.878940E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 7  ITERATION 5                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  3.430321E-03  AT GRID 745         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  5.392681E-04  AT GRID 125         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  17.6                                               
+DISPLACEMENT CONVERGENCE =  21.0                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 7  ITERATION 5                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.04 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2060942848 WORDS     15723.7 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   528234496 WORDS      4030.1 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940676096 WORDS    129247.1 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 7  ITERATION 5               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 1.837E+04 AT GRID 657 COMPONENT 5       
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1536055 WORDS       23.4 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3529216 WORDS       26.9 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1536055 WORDS = 0.04 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 91.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 7  ITERATION 6                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  4.572344E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  3.673583E-03  AT GRID 310        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  8.204343E+01  AT GRID 852        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  8.876385E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 7  ITERATION 6                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.841574E-03  AT GRID 608         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  3.729384E-04  AT GRID 845         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  25.9                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 91.000 PERCENT                                     
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 7  ITERATION 7                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  3.252616E-01  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  7.394904E-04  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  8.204824E+01  AT GRID 316        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  8.874836E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 7  ITERATION 7                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  2.828391E-04  AT GRID 1049        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  3.934178E-05  AT GRID 600         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         = 100.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+STORING DATABASE FOR SUBCASE 1  INCREMENT 7                                    
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 100.000 PERCENT                                    
+                                                                               
+ASSEMBLING GLOBAL LOAD VECTOR FOR INCREMENT 8                                  
+                                                                               
+MAXIMUM APPLIED INCREMENTAL FORCE MAGNITUDE  =  2.297204E+01  AT GRID 1049     
+MAXIMUM APPLIED INCREMENTAL MOMENT MAGNITUDE =  6.735081E+00  AT GRID 600      
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 8  ITERATION 1                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  8.090987E+00  AT GRID 152        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  8.607554E-03  AT GRID 114        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  8.999374E+01  AT GRID 852        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  9.699645E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 8  ITERATION 1                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  3.468767E-02  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.094851E-02  AT GRID 597         
+                                                                               
+WORK CONVERGENCE         =   3.8                                               
+LOAD CONVERGENCE         =   3.5                                               
+DISPLACEMENT CONVERGENCE =  22.0                                               
+                                                                               
+PERFORMING STIFFNESS MATRIX UPDATE                                             
+                                                                               
+ASSEMBLING GLOBAL STIFFNESS MATRIX FOR INCREMENT 8  ITERATION 1                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS                                    
+                                                                               
+SPARSE MATRIX SIZE =     468213 WORDS        3.6 MEGABYTES                     
+MEMORY ALLOCATED   =     702319 WORDS        5.4 MEGABYTES                     
+                                                                               
+ASSEMBLY TIME FOR 426 ELEMENTS = 0.03 SECONDS                                  
+                                                                               
+APPLYING GLOBAL STIFFNESS MATRIX MULTIPOINT CONSTRAINTS FOR SUBCASE 1          
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+MINIMUM GLOBAL STIFFNESS MATRIX TERM ZEROED =  0.0000E+00                      
+REDUCTION IN GLOBAL STIFFNESS MATRIX SIZE   =  2.79 PERCENT                    
+                                                                               
+MODIFICATION TIME FOR 1346 MULTIPOINT CONSTRAINTS = 0.05 SECONDS               
+                                                                               
+ALIGNING SPARSE STORAGE                                                        
+PERCENT COMPLETE:    0                                                         READING                                                                        READING                                                                        WRITING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+AVAILABLE VIRTUAL MEMORY  =  2060915712 WORDS     15723.5 MEGABYTES            
+AVAILABLE PHYSICAL MEMORY =   528544768 WORDS      4032.5 MEGABYTES            
+                                                                               
+DRIVE C: DISK SPACE =    16940675072 WORDS    129247.1 MEGABYTES               
+                                                                               
+FACTORIZING GLOBAL STIFFNESS MATRIX FOR INCREMENT 8  ITERATION 1               
+PERCENT COMPLETE:    0                                                         PARTITIONING                                                                   REORDERING                                                                     PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS                               
+                                                                               
+NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0                                
+MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 2.262E+04 AT GRID 1271 COMPONENT 1      
+                                                                               
+REORDERING METHOD REQUESTED = AUTO                                             
+REORDERING METHOD USED      = VRM7                                             
+                                                                               
+FACTORED SPARSE MATRIX SIZE =        1501385 WORDS       22.9 MEGABYTES        
+ADDITIONAL MEMORY ALLOCATED =        3459200 WORDS       26.4 MEGABYTES        
+                                                                               
+FACTORIZATION TIME FOR 1501385 WORDS = 0.04 SECONDS                            
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 100.000 PERCENT                                    
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 8  ITERATION 2                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  1.141597E+00  AT GRID 458        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  2.190399E-03  AT GRID 458        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  9.006450E+01  AT GRID 852        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  9.736751E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 8  ITERATION 2                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  9.985954E-04  AT GRID 1250        
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  2.687011E-04  AT GRID 1303        
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         =  34.7                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+LOAD LEVEL FOR SUBCASE 1 AT 100.000 PERCENT                                    
+                                                                               
+SOLVING FOR DISPLACEMENTS FOR INCREMENT 8  ITERATION 3                         
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM INCREMENTAL DISPLACEMENT MAGNITUDE =  8.244121E-02  AT GRID 457        
+MAXIMUM INCREMENTAL ROTATION MAGNITUDE     =  4.076587E-04  AT GRID 310        
+MAXIMUM TOTAL DISPLACEMENT MAGNITUDE       =  9.006989E+01  AT GRID 852        
+MAXIMUM TOTAL ROTATION MAGNITUDE           =  9.745167E-02  AT GRID 877        
+                                                                               
+CALCULATING ELEMENT STRAINS FOR INCREMENT 8  ITERATION 3                       
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:   10                                                         PERCENT COMPLETE:   20                                                         PERCENT COMPLETE:   30                                                         PERCENT COMPLETE:   40                                                         PERCENT COMPLETE:   50                                                         PERCENT COMPLETE:   60                                                         PERCENT COMPLETE:   70                                                         PERCENT COMPLETE:   80                                                         PERCENT COMPLETE:   90                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+MAXIMUM RESIDUAL INCREMENTAL FORCE INDEX  =  1.819618E-04  AT GRID 470         
+MAXIMUM RESIDUAL INCREMENTAL MOMENT INDEX =  1.467729E-04  AT GRID 583         
+                                                                               
+WORK CONVERGENCE         = 100.0                                               
+LOAD CONVERGENCE         = 100.0                                               
+DISPLACEMENT CONVERGENCE = 100.0                                               
+                                                                               
+STORING DATABASE FOR SUBCASE 1  INCREMENT 8                                    
+PERCENT COMPLETE:    0                                                         READING                                                                        WRITING                                                                        PERCENT COMPLETE:  100                                                         
+                                                                               
+CALCULATING RESULTS FOR SUBCASE 1  INCREMENT 8                                 
+                                                                               
+WRITING GRID POINT DISPLACEMENTS FOR INCREMENT 8 TO FILE: ...ulation_008.DIS   
+                                                                               
+WRITING GRID POINT FORCES FOR INCREMENT 8 TO FILE: ...ulation_008.GPF          
+                                                                               
+NONLINEAR SOLUTION STATISTICS                                                  
+                                                                               
+NUMBER OF LOAD INCREMENTS          = 8                                         
+NUMBER OF LOAD BISECTIONS          = 0                                         
+NUMBER OF EQUILIBRIUM ITERATIONS   = 34                                        
+NUMBER OF LINE SEARCHES            = 0                                         
+NUMBER OF STIFFNESS MATRIX UPDATES = 11                                        
+                                                                               
+SOLUTION TIME FOR 8070 DEGREES OF FREEDOM = 2.55 SECONDS                       
+                                                                               
+ÿ                                                                              DELETING FILE:  IOYUZ48Z027432.TMP                                             DELETING FILE:  IOZWZ48Z027432.TMP                                             DELETING FILE:  pardiso_ooc.cfg                                                DELETING FILE:  ML09Z48Z027432.NDB                                             DELETING FILE:  ML11Z48Z027432.NDB                                             DELETING FILE:  ML12Z48Z027432.NDB                                             DELETING FILE:  ML13Z48Z027432.NDB                                             DELETING FILE:  ML14Z48Z027432.NDB                                             DELETING FILE:  ML15Z48Z027432.NDB                                             DELETING FILE:  ML16Z48Z027432.NDB                                             DELETING FILE:  ML17Z48Z027432.NDB                                             DELETING FILE:  GM18Z48Z027432.NDB                                             DELETING FILE:  SL27Z48Z027432.NDB                                             DELETING FILE:  RS28Z48Z027432.NDB                                             DELETING FILE:  RS29Z48Z027432.NDB                                             DELETING FILE:  RS30Z48Z027432.NDB                                             DELETING FILE:  simulation_008.NDB                                             
+                                                                               
+GENERATING RESULTS NEUTRAL FILE                                                
+PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:    0                                                         PERCENT COMPLETE:  100                                                         
+                                                                               
+WRITING RESULTS NEUTRAL FILE TO: simulation_008.FNO                            DELETING FILE:  simulation_008.ELF                                             DELETING FILE:  simulation_008.ECD                                             
+                                                                               
+MODEL ANALYSIS TIME SUMMARY                                                    
+                                                                               
+TOTAL CPU TIME = 11.67 SECONDS                                                 
+WALLCLOCK TIME = 4.03 SECONDS                                                  
+                                                                               
+EXECUTION TERMINATED NORMALLY                                                  
+                                                                               
+TOTAL WARNINGS     = 4                                                         
+TOTAL FATAL ERRORS = 0                                                         
+ 
