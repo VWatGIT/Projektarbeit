@@ -147,7 +147,17 @@ def create_parameters(
     with destination.open("w", newline="", encoding="utf-8") as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=columns)
         writer.writeheader()
-        writer.writerows(cases)
+        for case in cases:
+            writer.writerow(
+                {
+                    column: (
+                        f"{case[column]:.6f}" # Format floats with 6 decimal places, unnecessary? trying to fix inventor COM ilogic rule error
+                        if column in FLOAT_COLUMNS
+                        else case[column]
+                    )
+                    for column in columns
+                }
+            )
 
     print(
         f"Created {destination} with {len(cases)} simulations "
@@ -159,6 +169,15 @@ REQUIRED_COLUMNS = [
     "simulation_id",
     "sauger_1_id",
     "sauger_2_id",
+    "s1_x",
+    "s1_z",
+    "s2_x",
+    "s2_z",
+    "sauger_1_displacement",
+    "sauger_2_displacement",
+]
+
+FLOAT_COLUMNS = [
     "s1_x",
     "s1_z",
     "s2_x",

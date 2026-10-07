@@ -1,7 +1,5 @@
 ' External iLogic rule: update the four named Inventor parameters.
-' Expected arguments: d4, d5, d6, d7.
-
-' TODO: extend this to regenerate the Nastran mesh and export the updated Nastran input file.
+' Expected arguments: s1_x, s1_z, s2_x, s2_z.
 
 Dim parameterNames() As String = {"s1_x", "s1_z", "s2_x", "s2_z"}
 

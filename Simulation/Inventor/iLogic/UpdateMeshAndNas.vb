@@ -23,7 +23,7 @@ Sub Main()
     '=========================================================
 
     Dim oDoc As Document
-    oDoc = ThisApplication.ActiveDocument
+    oDoc = ThisDoc.Document
 
     If oDoc Is Nothing Then
         Throw New Exception("No active Inventor document.")
@@ -125,7 +125,7 @@ Sub Main()
     ' FORCE INVENTOR MODEL UPDATE
     '=========================================================
 
-    ThisApplication.ActiveDocument.Update()
+    oDoc.Update()
 
     '=========================================================
     ' ENTER INVENTOR NASTRAN ENVIRONMENT

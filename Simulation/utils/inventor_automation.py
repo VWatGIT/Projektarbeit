@@ -75,6 +75,7 @@ def run_external_rule(
 
         automation = ilogic_addin.Automation
         arguments = position.as_arguments(inventor)
+        print(f"Running iLogic rule {rule_path} on {document_path} with arguments {arguments}")
         automation.RunExternalRuleWithArguments(
             document,
             str(rule_path),
@@ -110,7 +111,7 @@ def generate_case(
 
 if __name__ == "__main__":
 
-    project_root = Path(__file__).resolve().parents[1]
+    project_root = Path(__file__).resolve().parents[2]
 
     s1_x = 100
     s1_z = 400
