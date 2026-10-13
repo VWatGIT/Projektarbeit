@@ -6,7 +6,7 @@
     "nastranVersion": "19.1.0.27",
     "schemaVersion": "1.0.1",
     "warnings": {
-        "count": 5,
+        "count": 1,
         "data": [
             {
                 "code": "E5016",
@@ -18,56 +18,6 @@
                         "recommendation": [
                             "LOAD"
                         ]
-                    }
-                ],
-                "type": "Warning"
-            },
-            {
-                "code": "E5049",
-                "count": 1,
-                "entityType": "Node",
-                "info": [
-                    {
-                        "entityID": 776,
-                        "location": [
-                            -550.260346571,
-                            0.0,
-                            -75.9101355776
-                        ],
-                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 776 COMPONENT 2"
-                    }
-                ],
-                "type": "Warning"
-            },
-            {
-                "code": "E5077",
-                "count": 1,
-                "entityType": "Unknown",
-                "info": [
-                    {
-                        "message": "WARNING E5077: DIFFERENTIAL STIFFNESS MATRIX IGNORED FOR THIS ITERATION"
-                    }
-                ],
-                "type": "Warning"
-            },
-            {
-                "code": "E5078",
-                "count": 1,
-                "entityType": "Unknown",
-                "info": [
-                    {
-                        "message": "WARNING E5078: SOLUTION HAS DIVERGED"
-                    }
-                ],
-                "type": "Warning"
-            },
-            {
-                "code": "E5075",
-                "count": 1,
-                "entityType": "Unknown",
-                "info": [
-                    {
-                        "message": "WARNING E5075: BISECTING CURRENT LOAD INCREMENT"
                     }
                 ],
                 "type": "Warning"

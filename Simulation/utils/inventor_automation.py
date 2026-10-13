@@ -46,7 +46,7 @@ def run_external_rule(
     document_path: str | Path,
     rule_path: str | Path,
     position: SuctionPosition,
-    visible: bool = False,
+    visible: bool = True,
 ) -> Path:
     """Run an iLogic rule and save the Inventor document in place.
 
@@ -75,7 +75,7 @@ def run_external_rule(
 
         automation = ilogic_addin.Automation
         arguments = position.as_arguments(inventor)
-        print(f"Running iLogic rule {rule_path} on {document_path} with arguments {arguments}")
+        #print(f"Running iLogic rule {rule_path} on {document_path} with arguments {arguments}") # debugging
         automation.RunExternalRuleWithArguments(
             document,
             str(rule_path),

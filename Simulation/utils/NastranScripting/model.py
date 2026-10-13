@@ -84,22 +84,46 @@ def change_forced_displacement_by_position(
     new_value: float,
     tolerance: float = 1e-3,
 ) -> None:
-    """Change the forced displacement attached to a GRID position.
+    """Change the translational forced displacement at a GRID position."""
+
+    change_forced_value_by_position(
+        model=model,
+        position_x=position_x,
+        position_z=position_z,
+        component=2,
+        new_value=new_value,
+        tolerance=tolerance,
+    )
+
+
+def change_forced_value_by_position(
+    model: BDF,
+    position_x: float,
+    position_z: float,
+    component: int,
+    new_value: float,
+    tolerance: float = 1e-3,
+) -> None:
+    """Change one SPC/SPCD component at a GRID position.
 
     The x and z coordinates must use the Nastran model coordinate system. A
     numeric tolerance is used because Nastran rewrites coordinates with
-    floating-point formatting.
-    Exactly one SPC/SPCD card must reference a matching GRID.
+    floating-point formatting. Components 1-3 are translations and
+    components 4-6 are rotations.
     """
 
-    matching_cards = []
+    if component not in range(1, 7):
+        raise ValueError(f"Nastran component must be between 1 and 6: {component}")
+
+    matching_entries = []
+    matching_workpoint_cards = []
     for cards in (model.loads.values(), model.spcs.values()):
         for card_group in cards:
             for card in card_group:
                 if card.type not in {"SPCD", "SPC"}:
                     continue
 
-                matching_indices = []
+                workpoint_node_ids = set()
                 for index, node_id in enumerate(card.node_ids):
                     node = model.nodes.get(node_id)
                     if node is None:
@@ -110,34 +134,44 @@ def change_forced_displacement_by_position(
                         abs(float(coordinates[0]) - position_x) <= tolerance
                         and abs(float(coordinates[2]) - position_z) <= tolerance
                     ):
-                        matching_indices.append(index)
+                        workpoint_node_ids.add(node_id)
+                        if int(card.components[index]) == component:
+                            matching_entries.append((card, index))
 
-                if matching_indices:
-                    matching_cards.append((card, matching_indices))
+                if workpoint_node_ids:
+                    matching_workpoint_cards.append((card, workpoint_node_ids))
 
-    if not matching_cards:
+    if len(matching_entries) > 1:
         raise RuntimeError(
-            "No SPC/SPCD forced displacement found at "
-            f"x={position_x}, z={position_z} "
-            f"within tolerance {tolerance}."
+            "Multiple SPC/SPCD components found at "
+            f"x={position_x}, z={position_z}, component={component} "
+            f"within tolerance {tolerance}: {len(matching_entries)} entries."
         )
 
-    if len(matching_cards) > 1:
-        raise RuntimeError(
-            "Multiple SPC/SPCD forced displacements found at "
-            f"x={position_x}, z={position_z} "
-            f"within tolerance {tolerance}."
-        )
+    if not matching_entries:
+        if len(matching_workpoint_cards) != 1:
+            raise RuntimeError(
+                "No unique SPCD workpoint found at "
+                f"x={position_x}, z={position_z} for component={component} "
+                f"within tolerance {tolerance}."
+            )
 
-    card, matching_indices = matching_cards[0]
-    for index in matching_indices:
-        old_value = card.enforced[index]
-        card.enforced[index] = new_value
-        # print(
-        #     f"{card.type} changed: GRID={card.node_ids[index]}, "
-        #     f"DOF={card.components[index]}, "
-        #     f"{float(old_value):g} -> {new_value:g}"
-        # )
+        card, node_ids = matching_workpoint_cards[0]
+        if card.type != "SPCD" or len(node_ids) != 1:
+            raise RuntimeError(
+                "Cannot add a forced component at "
+                f"x={position_x}, z={position_z}: the matching workpoint "
+                "is not one SPCD node."
+            )
+
+        node_id = next(iter(node_ids))
+        card.node_ids.append(node_id)
+        card.components.append(component)
+        card.enforced.append(new_value)
+        return
+
+    card, index = matching_entries[0]
+    card.enforced[index] = new_value
 
 
 def save_model(model: BDF, output_file: Path) -> None:

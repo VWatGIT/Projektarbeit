@@ -8,6 +8,11 @@ from typing import Iterable
 
 import numpy as np
 
+try:
+    from .result_status import successful_npz_files
+except ImportError:
+    from utils.result_status import successful_npz_files
+
 
 def _as_state(displacement: np.ndarray) -> np.ndarray:
     """Flatten node-major displacement data to [Ux, Uy, Uz, ...]."""
@@ -54,9 +59,7 @@ class SnapshotSet:
 def load_snapshots(results_dir: str | Path) -> SnapshotSet:
     """Load and validate all simulation_*.npz files in ``results_dir``."""
     results_path = Path(results_dir)
-    files = sorted(results_path.glob("simulation_*/simulation_*.npz"))
-    if not files:
-        raise FileNotFoundError(f"No simulation NPZ files found in {results_path}.")
+    files = successful_npz_files(results_path)
 
     reference_ids: np.ndarray | None = None
     reference_coordinates: np.ndarray | None = None

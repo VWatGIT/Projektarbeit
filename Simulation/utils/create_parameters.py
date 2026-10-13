@@ -16,6 +16,7 @@ class SuctionStudyConfig:
     nominal_z: float
     position_deviation_x: float
     position_deviation_z: float
+    vary_position: bool = True
 
 
 @dataclass(frozen=True)
@@ -24,6 +25,15 @@ class RangeConfig:
 
     minimum: float
     maximum: float
+    varies: bool = True
+    fixed_value: float | None = None
+
+    def sample(self, random_generator: random.Random) -> float:
+        if not self.varies:
+            if self.fixed_value is None:
+                raise ValueError("A disabled range requires a fixed value.")
+            return self.fixed_value
+        return random_generator.uniform(self.minimum, self.maximum)
 
 
 @dataclass(frozen=True)
@@ -36,6 +46,9 @@ class ParameterStudyConfig:
     sauger_1: SuctionStudyConfig
     sauger_2: SuctionStudyConfig
     displacement_y: RangeConfig
+    rotation_x: RangeConfig
+    rotation_y: RangeConfig
+    rotation_z: RangeConfig
     sauger_1_id: int = 1
     sauger_2_id: int = 2
 
@@ -48,6 +61,10 @@ def load_study_config(config_file: str | Path) -> ParameterStudyConfig:
 
     suction_data = data["suction_positions"]
     displacement_data = data["displacement_y"]
+    rotation_data = {
+        axis: data[f"rotation_{axis}"]
+        for axis in ("x", "y", "z")
+    }
 
     def suction(name: str) -> SuctionStudyConfig:
         values = suction_data[name]
@@ -56,6 +73,38 @@ def load_study_config(config_file: str | Path) -> ParameterStudyConfig:
             nominal_z=float(values["nominal_z"]),
             position_deviation_x=float(values["deviation_x"]),
             position_deviation_z=float(values["deviation_z"]),
+            vary_position=read_boolean(
+                values.get("vary_position", True),
+                f"suction_positions.{name}.vary_position",
+            ),
+        )
+
+    def range_config(
+        values: dict[str, Any],
+        name: str,
+        variation_key: str,
+    ) -> RangeConfig:
+        deprecated_keys = {key for key in ("enabled", "value") if key in values}
+        if deprecated_keys:
+            raise ValueError(
+                f"{name} uses deprecated configuration keys: "
+                f"{sorted(deprecated_keys)}."
+            )
+        varies = read_boolean(
+            values.get(variation_key, True),
+            f"{name}.{variation_key}",
+        )
+        fixed_value = values.get("fixed_value")
+        if not varies and fixed_value is None:
+            raise ValueError(
+                f"{name}.fixed_value is required when "
+                f"{name}.{variation_key} is false."
+            )
+        return RangeConfig(
+            minimum=float(values["min"]),
+            maximum=float(values["max"]),
+            varies=varies,
+            fixed_value=(None if fixed_value is None else float(fixed_value)),
         )
 
     config = ParameterStudyConfig(
@@ -64,17 +113,29 @@ def load_study_config(config_file: str | Path) -> ParameterStudyConfig:
         random_seed=int(data["random_seed"]),
         sauger_1=suction("s1"),
         sauger_2=suction("s2"),
-        displacement_y=RangeConfig(
-            minimum=float(displacement_data["min"]),
-            maximum=float(displacement_data["max"]),
+        displacement_y=range_config(
+            displacement_data,
+            "displacement_y",
+            "vary_displacement",
         ),
+        rotation_x=range_config(rotation_data["x"], "rotation_x", "vary_rotation"),
+        rotation_y=range_config(rotation_data["y"], "rotation_y", "vary_rotation"),
+        rotation_z=range_config(rotation_data["z"], "rotation_z", "vary_rotation"),
         sauger_1_id=int(data.get("sauger_1_id", 26)),
         sauger_2_id=int(data.get("sauger_2_id", 27)),
     )
     if config.number_of_simulations < 1:
         raise ValueError("number_of_simulations must be positive.")
-    if config.displacement_y.minimum > config.displacement_y.maximum:
-        raise ValueError("displacement_y.min must not exceed displacement_y.max.")
+    for name in ("displacement_y", "rotation_x", "rotation_y", "rotation_z"):
+        parameter_range = getattr(config, name)
+        if parameter_range.minimum > parameter_range.maximum:
+            raise ValueError(f"{name}.min must not exceed {name}.max.")
+    for axis in ("x", "y", "z"):
+        rotation_range = getattr(config, f"rotation_{axis}")
+        if rotation_range.minimum > rotation_range.maximum:
+            raise ValueError(
+                f"rotation_{axis}.min must not exceed rotation_{axis}.max."
+            )
     for name, suction_config in (
         ("s1", config.sauger_1),
         ("s2", config.sauger_2),
@@ -89,6 +150,12 @@ def load_study_config(config_file: str | Path) -> ParameterStudyConfig:
     return config
 
 
+def read_boolean(value: Any, name: str) -> bool:
+    if not isinstance(value, bool):
+        raise ValueError(f"{name} must be a JSON boolean.")
+    return value
+
+
 def generate_cases(config: ParameterStudyConfig) -> list[dict[str, float | int]]:
     """Generate concrete cases from a study definition."""
     if config.number_of_simulations < 1:
@@ -97,6 +164,8 @@ def generate_cases(config: ParameterStudyConfig) -> list[dict[str, float | int]]
     random_generator = random.Random(config.random_seed)
 
     def position(suction: SuctionStudyConfig) -> tuple[float, float]:
+        if not suction.vary_position:
+            return suction.nominal_x, suction.nominal_z
         return (
             random_generator.uniform(
                 suction.nominal_x - suction.position_deviation_x,
@@ -121,14 +190,14 @@ def generate_cases(config: ParameterStudyConfig) -> list[dict[str, float | int]]
                 "s1_z": s1_z,
                 "s2_x": s2_x,
                 "s2_z": s2_z,
-                "sauger_1_displacement": random_generator.uniform(
-                    config.displacement_y.minimum,
-                    config.displacement_y.maximum,
-                ),
-                "sauger_2_displacement": random_generator.uniform(
-                    config.displacement_y.minimum,
-                    config.displacement_y.maximum,
-                ),
+                "sauger_1_displacement": config.displacement_y.sample(random_generator),
+                "sauger_2_displacement": config.displacement_y.sample(random_generator),
+                "sauger_1_rotation_x": config.rotation_x.sample(random_generator),
+                "sauger_1_rotation_y": config.rotation_y.sample(random_generator),
+                "sauger_1_rotation_z": config.rotation_z.sample(random_generator),
+                "sauger_2_rotation_x": config.rotation_x.sample(random_generator),
+                "sauger_2_rotation_y": config.rotation_y.sample(random_generator),
+                "sauger_2_rotation_z": config.rotation_z.sample(random_generator),
             }
         )
     return cases
@@ -175,6 +244,12 @@ REQUIRED_COLUMNS = [
     "s2_z",
     "sauger_1_displacement",
     "sauger_2_displacement",
+    "sauger_1_rotation_x",
+    "sauger_1_rotation_y",
+    "sauger_1_rotation_z",
+    "sauger_2_rotation_x",
+    "sauger_2_rotation_y",
+    "sauger_2_rotation_z",
 ]
 
 FLOAT_COLUMNS = [
@@ -184,6 +259,12 @@ FLOAT_COLUMNS = [
     "s2_z",
     "sauger_1_displacement",
     "sauger_2_displacement",
+    "sauger_1_rotation_x",
+    "sauger_1_rotation_y",
+    "sauger_1_rotation_z",
+    "sauger_2_rotation_x",
+    "sauger_2_rotation_y",
+    "sauger_2_rotation_z",
 ]
 
 
@@ -230,6 +311,14 @@ def load_parameter_cases(csv_file: Path) -> pd.DataFrame:
         "sauger_1_displacement",
         "sauger_2_displacement",
     ]
+    rotation_columns = [
+        "sauger_1_rotation_x",
+        "sauger_1_rotation_y",
+        "sauger_1_rotation_z",
+        "sauger_2_rotation_x",
+        "sauger_2_rotation_y",
+        "sauger_2_rotation_z",
+    ]
     position_columns = [
         "s1_x",
         "s1_z",
@@ -244,6 +333,12 @@ def load_parameter_cases(csv_file: Path) -> pd.DataFrame:
         ).astype(int)
 
     for column in displacement_columns:
+        parameters[column] = pd.to_numeric(
+            parameters[column],
+            errors="raise",
+        ).astype(float)
+
+    for column in rotation_columns:
         parameters[column] = pd.to_numeric(
             parameters[column],
             errors="raise",

@@ -9,17 +9,39 @@
       "nominal_x": 200.0,
       "nominal_z": 300.0,
       "deviation_x": 20.0,
-      "deviation_z": 20.0
+      "deviation_z": 20.0,
+      "vary_position": true
     },
     "s2": {
       "nominal_x": 400.0,
       "nominal_z": 500.0,
       "deviation_x": 20.0,
-      "deviation_z": 20.0
+      "deviation_z": 20.0,
+      "vary_position": true
     }
   },
   "displacement_y": {
-    "min": -100.0,
+    "vary_displacement": true,
+    "fixed_value": 0,
+    "min": -10.0,
     "max": 0.0
+  },
+  "rotation_x": {
+    "vary_rotation": true,
+    "fixed_value": 0,
+    "min": -1.0,
+    "max": 1.0
+  },
+  "rotation_y": {
+    "vary_rotation": false,
+    "fixed_value": 0,
+    "min": -1.0,
+    "max": 1.0
+  },
+  "rotation_z": {
+    "vary_rotation": true,
+    "fixed_value": 0,
+    "min": -1.0,
+    "max": 1.0
   }
 }

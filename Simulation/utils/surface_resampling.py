@@ -8,6 +8,11 @@ from pathlib import Path
 import numpy as np
 from scipy.interpolate import LinearNDInterpolator
 
+try:
+    from .result_status import successful_npz_files
+except ImportError:
+    from utils.result_status import successful_npz_files
+
 
 @dataclass(frozen=True)
 class SurfaceGrid:
@@ -147,9 +152,7 @@ def load_resampled_snapshots(
 ) -> ResampledSnapshotSet:
     """Resample every result archive onto a grid derived from the first case."""
     results_path = Path(results_dir)
-    files = sorted(results_path.glob("simulation_*/simulation_*.npz"))
-    if not files:
-        raise FileNotFoundError(f"No simulation NPZ files found in {results_path}.")
+    files = successful_npz_files(results_path)
 
     with np.load(files[0]) as archive:
         grid = create_planar_grid(

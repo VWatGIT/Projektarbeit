@@ -1,7 +1,7 @@
 {
   "name": "TestStudy",
-  "results_dir": "Results/TestTest/FEA",
-  "output_dir": "Results/TestTest/TestStudy",
+  "results_dir": "Results/TestTest02/FEA",
+  "output_dir": "Results/TestTest02/TestStudy",
   "grid": {
     "nx": 51,
     "nz": 51
@@ -11,18 +11,13 @@
   "landmarks": [
     {
       "name": "landmark_001",
-      "x": -1000.0,
-      "z": -1000.0
+      "x": -200,
+      "z": -300.0
     },
     {
       "name": "landmark_002",
-      "x": -500.0,
+      "x": -400.0,
       "z": -500.0
-    },
-    {
-      "name": "landmark_003",
-      "x": 0.0,
-      "z": 0.0
     }
   ]
 }
