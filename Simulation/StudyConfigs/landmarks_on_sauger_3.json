@@ -1,0 +1,26 @@
+{
+  "name": "baseline",
+  "results_dir": "Results/baseline/FEA",
+  "output_dir": "Results/baseline/TestStudy",
+  "grid": {
+    "nx": 51,
+    "nz": 51
+  },
+  "energy_fraction": 0.999,
+  "landmark_tolerance": 5.0,
+  "landmarks": [
+    {
+      "x": -200.0,
+      "z": -200.0
+    },
+    {
+      "x": -800.0,
+      "z": -200.0
+    },
+    {
+      "x": -500.0,
+      "z": -800.0
+    }
+
+  ]
+}

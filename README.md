@@ -8,6 +8,16 @@ Parameter sweep configuration:
 - Set `vary_position` or `vary_rotation` to `false` to use zero deviations.
 - Generated CSV columns use `s1_x`, `s1_z`, `sauger_1_displacement`, and `sauger_1_rotation_x/y/z`, followed by the same pattern for each additional sauger.
 
+Study landmark grids:
+
+Use `Simulation/utils/create_study_configs.py` to create a study config without manually listing landmarks. For example:
+
+```powershell
+python Simulation/utils/create_study_configs.py --name landmarks_grid --x-min -800 --x-max -200 --x-count 4 --z-min -800 --z-max -200 --z-count 4 --energy-fraction 0.999
+```
+
+The generated landmarks contain only `x` and `z`. Customize the interpolation grid with `--nx` and `--nz`, reconstruction rank with `--rank` or `--energy-fraction`, paths with `--results-dir` and `--output-dir`, and the output file with `--output`.
+
 Also use Inventor 2023 + Nastran 2023
 
 Nastran Setup:

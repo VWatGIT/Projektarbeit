@@ -6,6 +6,6 @@ from utils.study_pipeline import evaluate_study, load_study_config
 
 
 if __name__ == "__main__":
-    config_path = Path(__file__).with_name("study_config.json")
+    config_path = Path(__file__).resolve().parents[0] / "StudyConfigs" / "grid_on_sauger_3.json" 
     results = evaluate_study(load_study_config(config_path))
     print(f"Evaluated {len(results)} held-out cases.")

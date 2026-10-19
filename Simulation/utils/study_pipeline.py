@@ -23,7 +23,6 @@ except ImportError:
 class Landmark:
     """A physical x/z landmark used as a displacement observation."""
 
-    name: str
     x: float
     z: float
 
@@ -57,7 +56,6 @@ def load_study_config(config_file: str | Path) -> StudyConfig:
     base_dir = path.parent
     landmarks = tuple(
         Landmark(
-            name=str(item["name"]),
             x=float(item["x"]),
             z=float(item["z"]),
         )
@@ -117,15 +115,16 @@ def _landmark_indices(
         distance = float(distances[index])
         if distance > tolerance:
             raise ValueError(
-                f"Landmark {landmark.name!r} is {distance:g} away from the "
+                f"Landmark ({landmark.x:g}, {landmark.z:g}) is {distance:g} away from the "
                 f"interpolation grid; tolerance is {tolerance:g}."
             )
         if not snapshot_set.valid_mask[index]:
-            raise ValueError(f"Landmark {landmark.name!r} is outside the valid grid.")
+            raise ValueError(
+                f"Landmark ({landmark.x:g}, {landmark.z:g}) is outside the valid grid."
+            )
         indices.append(index)
         metadata.append(
             {
-                "name": landmark.name,
                 "requested_x": landmark.x,
                 "requested_z": landmark.z,
                 "grid_index": index,
