@@ -14,7 +14,12 @@ from Simulation.utils.create_parameters import (
 from Simulation.utils.inventor_automation import SuctionPosition
 
 
-CONFIG_PATH = Path(__file__).parents[1] / "Simulation" / "parameter_sweep_config.json"
+CONFIG_PATH = (
+    Path(__file__).parents[1]
+    / "Simulation"
+    / "SweepConfigs"
+    / "Test_3_Sauger.json"
+)
 
 
 def config_data() -> dict:
@@ -25,6 +30,7 @@ class MultiSaugerTests(unittest.TestCase):
     def test_three_saugers_round_trip(self) -> None:
         data = config_data()
         data["number_of_simulations"] = 1
+        data["saugers"] = data["saugers"][:2]
         data["saugers"].append({"nominal_x": 600.0, "nominal_z": 700.0})
         with tempfile.TemporaryDirectory() as directory:
             temp_dir = Path(directory)
@@ -33,8 +39,10 @@ class MultiSaugerTests(unittest.TestCase):
             config_path.write_text(json.dumps(data), encoding="utf-8")
 
             config = load_study_config(config_path)
-            create_parameters(config, parameter_path)
-            parameters = load_parameter_cases(parameter_path)
+            experiment_name = create_parameters(config, temp_dir)
+            parameters = load_parameter_cases(
+                temp_dir / experiment_name / "parameters.csv"
+            )
 
             self.assertEqual(len(config.saugers), 3)
             self.assertEqual(list(parameters.columns), parameter_columns(3))
@@ -63,7 +71,11 @@ class MultiSaugerTests(unittest.TestCase):
 
             case = generate_cases(load_study_config(config_path))[0]
 
-            self.assertEqual((case["s1_x"], case["s1_z"]), (200.0, 300.0))
+            first_sauger = data["saugers"][0]
+            self.assertEqual(
+                (case["s1_x"], case["s1_z"]),
+                (first_sauger["nominal_x"], first_sauger["nominal_z"]),
+            )
             self.assertEqual(case["sauger_1_displacement"], 0.0)
             self.assertEqual(case["sauger_1_rotation_x"], 0.0)
             self.assertEqual(case["sauger_1_rotation_y"], 0.0)
@@ -101,6 +113,7 @@ class MultiSaugerTests(unittest.TestCase):
         self.assertEqual(
             name_value_map.values,
             {
+                "sauger_count": 3,
                 "s1_x": 100.0,
                 "s1_z": 200.0,
                 "s2_x": 300.0,

@@ -1,11 +1,15 @@
 ' External iLogic rule: update all named Inventor sauger parameters.
-' Expected arguments: s1_x, s1_z, s2_x, s2_z, ...
+' Expected arguments: sauger_count, s1_x, s1_z, s2_x, s2_z, ...
 
-If RuleArguments.Count = 0 OrElse RuleArguments.Count Mod 2 <> 0 Then
-    Throw New Exception("Expected paired sauger position arguments.")
+If Not RuleArguments.Exists("sauger_count") Then
+    Throw New Exception("Missing iLogic argument: sauger_count")
 End If
 
-Dim saugerCount As Integer = RuleArguments.Count \ 2
+Dim saugerCount As Integer = CInt(RuleArguments.Value("sauger_count"))
+If saugerCount < 1 Then
+    Throw New Exception("sauger_count must be positive.")
+End If
+
 For saugerIndex As Integer = 1 To saugerCount
     For Each axis As String In New String() {"x", "z"}
         Dim parameterName As String = "s" & saugerIndex & "_" & axis

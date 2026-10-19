@@ -188,10 +188,16 @@ def parameter_columns(sauger_count: int) -> list[str]:
 
 def create_parameters(
     config: ParameterStudyConfig,
-    output_file: str | Path,
-) -> None:
-    """Generate and write the concrete cases for a study."""
-    destination = Path(output_file).resolve()
+    results_dir: str | Path,
+) -> str:
+    """Generate a study CSV and return its experiment directory name."""
+    experiment_name = config.name.strip()
+    if not experiment_name or Path(experiment_name).name != experiment_name:
+        raise ValueError(
+            "The study name must be a non-empty directory name without path separators."
+        )
+
+    destination = Path(results_dir).resolve() / experiment_name / "parameters.csv"
     destination.parent.mkdir(parents=True, exist_ok=True)
     cases = generate_cases(config)
     columns = parameter_columns(len(config.saugers))
@@ -203,7 +209,7 @@ def create_parameters(
             writer.writerow(
                 {
                     column: (
-                        f"{case[column]:.6f}" # Format floats with 6 decimal places, unnecessary? trying to fix inventor COM ilogic rule error
+                        f"{case[column]:.6f}" # Format floats with 6 decimal places, unnecessary? trying to fix inventor COM ilogic rule error # Now done, could be removed
                         if column != "simulation_id"
                         else case[column]
                     )
@@ -215,9 +221,10 @@ def create_parameters(
         f"Created {destination} with {len(cases)} simulations "
         f"for study {config.name!r}."
     )
+    return experiment_name
 
 
-def detect_sauger_count(columns: list[str]) -> int:
+def detect_sauger_count(columns: list[str]) -> int: # TODO maybe add a simple sauger parameter to config file?
     """Infer and validate the contiguous sauger schema in CSV columns."""
     indices = set()
     for column in columns:
@@ -322,8 +329,8 @@ def load_parameter_cases(csv_file: Path) -> pd.DataFrame:
 if __name__ == "__main__":
 
     CONFIG_FILE = Path(__file__).parents[1] / "parameter_config.json"
-    DEFAULT_OUTPUT_FILE = Path(__file__).parents[1] / "Versuche" / "parameters.csv"
+    DEFAULT_OUTPUT_DIR = Path(__file__).parents[1] / "Versuche"
 
 
     study_config = load_study_config(CONFIG_FILE)
-    create_parameters(study_config, DEFAULT_OUTPUT_FILE)
+    create_parameters(study_config, DEFAULT_OUTPUT_DIR)

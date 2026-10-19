@@ -19,6 +19,7 @@ class SuctionPosition:
     def as_arguments(self, inventor_application: Any) -> Any:
         """Create an Inventor NameValueMap for an external iLogic rule."""
         arguments = inventor_application.TransientObjects.CreateNameValueMap()
+        arguments.Add("sauger_count", len(self.positions))
         for index, (position_x, position_z) in enumerate(self.positions, start=1):
             arguments.Add(f"s{index}_x", float(position_x))
             arguments.Add(f"s{index}_z", float(position_z))
@@ -89,11 +90,12 @@ def run_external_rule(
 def generate_case(
     project_root: str | Path,
     position: SuctionPosition,
+    inventor_model_path: str | Path,
 ) -> Path:
     """Generate a case and update its Nastran mesh and input file."""
     project_root = Path(project_root).resolve()
     generated_path = run_external_rule(
-        document_path=project_root / "Simulation"/ "Inventor" / "CFK_Platte.ipt",
+        document_path=inventor_model_path,
         rule_path=project_root / "Simulation" / "Inventor" / "iLogic" / "ChangeSaugerPositions.vb",
         position=position,
     )
@@ -112,5 +114,6 @@ if __name__ == "__main__":
         project_root=project_root,
         position=SuctionPosition(
             positions=((100, 400), (500, 800)),
-        )
+        ),
+        inventor_model_path=project_root / "Simulation" / "Inventor" / "CFK_Platte_2.ipt",
     )

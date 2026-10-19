@@ -30,21 +30,24 @@ from utils.result_status import write_simulation_status
 SOLVER_PATH = Path(r"C:\Program Files\Autodesk\Inventor Nastran 2025\Nastran\Nastran.exe") 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-PLATE_MODEL = REPO_ROOT / "Projektarbeit" / "Simulation"/ "Inventor" / "NastranExports" /"CFK_Platte.nas"
 RESULTS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "Results"
-SWEEP_CONFIG_PATH = REPO_ROOT / "Projektarbeit" / "Simulation" / "parameter_sweep_config.json" # Change this to the relevant one
+SWEEP_CONFIGS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "SweepConfigs"
+SWEEP_CONFIG_PATH = SWEEP_CONFIGS_DIR / "Test_3_Sauger.json" # Change this to the relevant one
 
-ExperimentName = "TestTest02" # Change this before starting a new FEA parameter sweep, otherwise the old results will be overwritten
 
-# Maybe first check parameters before creating the parameter file
-create_parameters(
-    config=load_study_config(SWEEP_CONFIG_PATH),
-    output_file=RESULTS_DIR / ExperimentName / "parameters.csv",
+study_config = load_study_config(SWEEP_CONFIG_PATH)
+sauger_count = len(study_config.saugers)
+MODEL_STEM = f"CFK_Platte_{sauger_count}"
+INVENTOR_MODEL = REPO_ROOT / "Projektarbeit" / "Simulation" / "Inventor" / f"{MODEL_STEM}.ipt"
+PLATE_MODEL = REPO_ROOT / "Projektarbeit" / "Simulation" / "Inventor" / "NastranExports" / f"{MODEL_STEM}.nas"
+experiment_name = create_parameters(
+    config=study_config,
+    results_dir=RESULTS_DIR,
 )
 
 
-PARAMETER_FILE = RESULTS_DIR / ExperimentName / "parameters.csv"
-OUTPUT_DIR = RESULTS_DIR / ExperimentName / "FEA"
+PARAMETER_FILE = RESULTS_DIR / experiment_name / "parameters.csv"
+OUTPUT_DIR = RESULTS_DIR / experiment_name / "FEA"
 
 
 
@@ -73,7 +76,12 @@ def suction_position_in_nastran_coordinates(
 
 def main() -> None:
     parameters = load_parameter_cases(PARAMETER_FILE)
-    sauger_count = detect_sauger_count(parameters.columns.tolist())
+    parameter_sauger_count = detect_sauger_count(parameters.columns.tolist())
+    if parameter_sauger_count != sauger_count:
+        raise ValueError(
+            "The generated parameter file contains a different number of saugers "
+            "than the loaded sweep configuration."
+        )
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     status_cases = []
     successful_count = 0
@@ -104,19 +112,20 @@ def main() -> None:
         try:
             generate_case(
                 project_root=REPO_ROOT / "Projektarbeit",
+                inventor_model_path=INVENTOR_MODEL,
                 position=SuctionPosition(
                     positions=tuple(
                         (
                             float(getattr(case, f"s{index}_x")),
                             float(getattr(case, f"s{index}_z")),
                         )
-                        for index in range(1, sauger_count + 1)
+                        for index in range(1, parameter_sauger_count + 1)
                     ),
                 ),
             )
 
             model = load_model(PLATE_MODEL)
-            for index in range(1, sauger_count + 1):
+            for index in range(1, parameter_sauger_count + 1):
                 position_x, position_z = suction_position_in_nastran_coordinates(
                     float(getattr(case, f"s{index}_x")),
                     float(getattr(case, f"s{index}_z")),
