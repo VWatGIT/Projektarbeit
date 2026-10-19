@@ -14,26 +14,33 @@ class SuctionStudyConfig:
 
     nominal_x: float
     nominal_z: float
-    position_deviation_x: float
-    position_deviation_z: float
-    vary_position: bool = True
 
 
 @dataclass(frozen=True)
-class RangeConfig:
-    """Inclusive bounds for a uniformly sampled value."""
+class DeviationVariationConfig:
+    """Global x/y/z deviation variation."""
 
-    minimum: float
-    maximum: float
+    deviation_x: float
+    deviation_y: float
+    deviation_z: float
     varies: bool = True
-    fixed_value: float | None = None
 
-    def sample(self, random_generator: random.Random) -> float:
+    def sample(
+        self,
+        deviation: float,
+        random_generator: random.Random,
+    ) -> float:
         if not self.varies:
-            if self.fixed_value is None:
-                raise ValueError("A disabled range requires a fixed value.")
-            return self.fixed_value
-        return random_generator.uniform(self.minimum, self.maximum)
+            return 0.0
+        return random_generator.uniform(-deviation, deviation)
+
+
+@dataclass(frozen=True)
+class VariationConfig:
+    """Shared variation settings for all suctions."""
+
+    position: DeviationVariationConfig
+    rotation: DeviationVariationConfig
 
 
 @dataclass(frozen=True)
@@ -43,14 +50,8 @@ class ParameterStudyConfig:
     name: str
     number_of_simulations: int
     random_seed: int
-    sauger_1: SuctionStudyConfig
-    sauger_2: SuctionStudyConfig
-    displacement_y: RangeConfig
-    rotation_x: RangeConfig
-    rotation_y: RangeConfig
-    rotation_z: RangeConfig
-    sauger_1_id: int = 1
-    sauger_2_id: int = 2
+    saugers: tuple[SuctionStudyConfig, ...]
+    variation: VariationConfig
 
 
 def load_study_config(config_file: str | Path) -> ParameterStudyConfig:
@@ -59,93 +60,62 @@ def load_study_config(config_file: str | Path) -> ParameterStudyConfig:
     with path.open(encoding="utf-8") as file:
         data: dict[str, Any] = json.load(file)
 
-    suction_data = data["suction_positions"]
-    displacement_data = data["displacement_y"]
-    rotation_data = {
-        axis: data[f"rotation_{axis}"]
-        for axis in ("x", "y", "z")
-    }
+    suction_data = data["saugers"]
+    variation_data = data["variation"]
+    position_data = variation_data["position"]
 
-    def suction(name: str) -> SuctionStudyConfig:
-        values = suction_data[name]
+    if not isinstance(suction_data, list) or not suction_data:
+        raise ValueError("saugers must be a non-empty JSON array.")
+
+    def suction(values: dict[str, Any]) -> SuctionStudyConfig:
         return SuctionStudyConfig(
             nominal_x=float(values["nominal_x"]),
             nominal_z=float(values["nominal_z"]),
-            position_deviation_x=float(values["deviation_x"]),
-            position_deviation_z=float(values["deviation_z"]),
-            vary_position=read_boolean(
-                values.get("vary_position", True),
-                f"suction_positions.{name}.vary_position",
+        )
+
+    variation = VariationConfig(
+        position=DeviationVariationConfig(
+            deviation_x=float(position_data["deviation_x"]),
+            deviation_y=float(position_data["deviation_y"]),
+            deviation_z=float(position_data["deviation_z"]),
+            varies=read_boolean(
+                position_data.get("vary_position", True),
+                "variation.position.vary_position",
             ),
-        )
-
-    def range_config(
-        values: dict[str, Any],
-        name: str,
-        variation_key: str,
-    ) -> RangeConfig:
-        deprecated_keys = {key for key in ("enabled", "value") if key in values}
-        if deprecated_keys:
-            raise ValueError(
-                f"{name} uses deprecated configuration keys: "
-                f"{sorted(deprecated_keys)}."
-            )
-        varies = read_boolean(
-            values.get(variation_key, True),
-            f"{name}.{variation_key}",
-        )
-        fixed_value = values.get("fixed_value")
-        if not varies and fixed_value is None:
-            raise ValueError(
-                f"{name}.fixed_value is required when "
-                f"{name}.{variation_key} is false."
-            )
-        return RangeConfig(
-            minimum=float(values["min"]),
-            maximum=float(values["max"]),
-            varies=varies,
-            fixed_value=(None if fixed_value is None else float(fixed_value)),
-        )
-
+        ),
+        rotation=DeviationVariationConfig(
+            deviation_x=float(variation_data["rotation"]["deviation_x"]),
+            deviation_y=float(variation_data["rotation"]["deviation_y"]),
+            deviation_z=float(variation_data["rotation"]["deviation_z"]),
+            varies=read_boolean(
+                variation_data["rotation"].get("vary_rotation", True),
+                "variation.rotation.vary_rotation",
+            ),
+        ),
+    )
     config = ParameterStudyConfig(
         name=str(data["name"]),
         number_of_simulations=int(data["number_of_simulations"]),
         random_seed=int(data["random_seed"]),
-        sauger_1=suction("s1"),
-        sauger_2=suction("s2"),
-        displacement_y=range_config(
-            displacement_data,
-            "displacement_y",
-            "vary_displacement",
-        ),
-        rotation_x=range_config(rotation_data["x"], "rotation_x", "vary_rotation"),
-        rotation_y=range_config(rotation_data["y"], "rotation_y", "vary_rotation"),
-        rotation_z=range_config(rotation_data["z"], "rotation_z", "vary_rotation"),
-        sauger_1_id=int(data.get("sauger_1_id", 26)),
-        sauger_2_id=int(data.get("sauger_2_id", 27)),
+        saugers=tuple(suction(values) for values in suction_data),
+        variation=variation,
     )
     if config.number_of_simulations < 1:
         raise ValueError("number_of_simulations must be positive.")
-    for name in ("displacement_y", "rotation_x", "rotation_y", "rotation_z"):
-        parameter_range = getattr(config, name)
-        if parameter_range.minimum > parameter_range.maximum:
-            raise ValueError(f"{name}.min must not exceed {name}.max.")
-    for axis in ("x", "y", "z"):
-        rotation_range = getattr(config, f"rotation_{axis}")
-        if rotation_range.minimum > rotation_range.maximum:
-            raise ValueError(
-                f"rotation_{axis}.min must not exceed rotation_{axis}.max."
-            )
-    for name, suction_config in (
-        ("s1", config.sauger_1),
-        ("s2", config.sauger_2),
+    for name, variation_settings in (
+        ("position", config.variation.position),
+        ("rotation", config.variation.rotation),
     ):
-        if (
-            suction_config.position_deviation_x < 0
-            or suction_config.position_deviation_z < 0
+        if any(
+            deviation < 0
+            for deviation in (
+                variation_settings.deviation_x,
+                variation_settings.deviation_y,
+                variation_settings.deviation_z,
+            )
         ):
             raise ValueError(
-                f"{name} position deviations must be non-negative."
+                f"variation.{name} deviations must be non-negative."
             )
     return config
 
@@ -163,44 +133,57 @@ def generate_cases(config: ParameterStudyConfig) -> list[dict[str, float | int]]
 
     random_generator = random.Random(config.random_seed)
 
-    def position(suction: SuctionStudyConfig) -> tuple[float, float]:
-        if not suction.vary_position:
-            return suction.nominal_x, suction.nominal_z
+    def position(suction: SuctionStudyConfig) -> tuple[float, float, float]:
+        position_variation = config.variation.position
         return (
-            random_generator.uniform(
-                suction.nominal_x - suction.position_deviation_x,
-                suction.nominal_x + suction.position_deviation_x,
+            suction.nominal_x
+            + position_variation.sample(
+                position_variation.deviation_x,
+                random_generator,
             ),
-            random_generator.uniform(
-                suction.nominal_z - suction.position_deviation_z,
-                suction.nominal_z + suction.position_deviation_z,
+            suction.nominal_z
+            + position_variation.sample(
+                position_variation.deviation_z,
+                random_generator,
+            ),
+            position_variation.sample(
+                position_variation.deviation_y,
+                random_generator,
             ),
         )
 
     cases: list[dict[str, float | int]] = []
     for simulation_id in range(1, config.number_of_simulations + 1):
-        s1_x, s1_z = position(config.sauger_1)
-        s2_x, s2_z = position(config.sauger_2)
-        cases.append(
-            {
-                "simulation_id": simulation_id,
-                "sauger_1_id": config.sauger_1_id,
-                "sauger_2_id": config.sauger_2_id,
-                "s1_x": s1_x,
-                "s1_z": s1_z,
-                "s2_x": s2_x,
-                "s2_z": s2_z,
-                "sauger_1_displacement": config.displacement_y.sample(random_generator),
-                "sauger_2_displacement": config.displacement_y.sample(random_generator),
-                "sauger_1_rotation_x": config.rotation_x.sample(random_generator),
-                "sauger_1_rotation_y": config.rotation_y.sample(random_generator),
-                "sauger_1_rotation_z": config.rotation_z.sample(random_generator),
-                "sauger_2_rotation_x": config.rotation_x.sample(random_generator),
-                "sauger_2_rotation_y": config.rotation_y.sample(random_generator),
-                "sauger_2_rotation_z": config.rotation_z.sample(random_generator),
-            }
-        )
+        case: dict[str, float | int] = {"simulation_id": simulation_id}
+        for index, suction in enumerate(config.saugers, start=1):
+            x, z, displacement_y = position(suction)
+            case[f"s{index}_x"] = x
+            case[f"s{index}_z"] = z
+            case[f"sauger_{index}_displacement"] = displacement_y
+            for axis, deviation in (
+                ("x", config.variation.rotation.deviation_x),
+                ("y", config.variation.rotation.deviation_y),
+                ("z", config.variation.rotation.deviation_z),
+            ):
+                case[f"sauger_{index}_rotation_{axis}"] = config.variation.rotation.sample(
+                    deviation,
+                    random_generator,
+                )
+        cases.append(case)
     return cases
+
+
+def parameter_columns(sauger_count: int) -> list[str]:
+    """Return the ordered CSV columns for a given sauger count."""
+    columns = ["simulation_id"]
+    for index in range(1, sauger_count + 1):
+        columns.extend((f"s{index}_x", f"s{index}_z"))
+        columns.append(f"sauger_{index}_displacement")
+        columns.extend(
+            f"sauger_{index}_rotation_{axis}"
+            for axis in ("x", "y", "z")
+        )
+    return columns
 
 
 def create_parameters(
@@ -211,7 +194,7 @@ def create_parameters(
     destination = Path(output_file).resolve()
     destination.parent.mkdir(parents=True, exist_ok=True)
     cases = generate_cases(config)
-    columns = REQUIRED_COLUMNS
+    columns = parameter_columns(len(config.saugers))
 
     with destination.open("w", newline="", encoding="utf-8") as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=columns)
@@ -221,7 +204,7 @@ def create_parameters(
                 {
                     column: (
                         f"{case[column]:.6f}" # Format floats with 6 decimal places, unnecessary? trying to fix inventor COM ilogic rule error
-                        if column in FLOAT_COLUMNS
+                        if column != "simulation_id"
                         else case[column]
                     )
                     for column in columns
@@ -234,38 +217,16 @@ def create_parameters(
     )
 
 
-REQUIRED_COLUMNS = [
-    "simulation_id",
-    "sauger_1_id",
-    "sauger_2_id",
-    "s1_x",
-    "s1_z",
-    "s2_x",
-    "s2_z",
-    "sauger_1_displacement",
-    "sauger_2_displacement",
-    "sauger_1_rotation_x",
-    "sauger_1_rotation_y",
-    "sauger_1_rotation_z",
-    "sauger_2_rotation_x",
-    "sauger_2_rotation_y",
-    "sauger_2_rotation_z",
-]
-
-FLOAT_COLUMNS = [
-    "s1_x",
-    "s1_z",
-    "s2_x",
-    "s2_z",
-    "sauger_1_displacement",
-    "sauger_2_displacement",
-    "sauger_1_rotation_x",
-    "sauger_1_rotation_y",
-    "sauger_1_rotation_z",
-    "sauger_2_rotation_x",
-    "sauger_2_rotation_y",
-    "sauger_2_rotation_z",
-]
+def detect_sauger_count(columns: list[str]) -> int:
+    """Infer and validate the contiguous sauger schema in CSV columns."""
+    indices = set()
+    for column in columns:
+        prefix, _, suffix = column.partition("_")
+        if prefix.startswith("s") and prefix[1:].isdigit() and suffix == "x":
+            indices.add(int(prefix[1:]))
+    if not indices or indices != set(range(1, max(indices) + 1)):
+        raise ValueError("CSV must contain contiguous sauger coordinate columns.")
+    return max(indices)
 
 
 def load_parameter_cases(csv_file: Path) -> pd.DataFrame:
@@ -284,10 +245,14 @@ def load_parameter_cases(csv_file: Path) -> pd.DataFrame:
     # Remove whitespace around column names.
     parameters.columns = parameters.columns.str.strip()
 
+    try:
+        sauger_count = detect_sauger_count(parameters.columns.tolist())
+    except ValueError as error:
+        raise ValueError(f"Invalid sauger CSV schema: {error}") from error
+
+    required_columns = parameter_columns(sauger_count)
     missing_columns = [
-        column
-        for column in REQUIRED_COLUMNS
-        if column not in parameters.columns
+        column for column in required_columns if column not in parameters.columns
     ]
 
     if missing_columns:
@@ -295,35 +260,26 @@ def load_parameter_cases(csv_file: Path) -> pd.DataFrame:
             f"Missing CSV columns: {missing_columns}"
         )
 
-    parameters = parameters[REQUIRED_COLUMNS].copy()
+    parameters = parameters[required_columns].copy()
 
     # Check for empty values before converting data types.
     if parameters.isna().any().any():
         raise ValueError("The parameter CSV contains empty values.")
 
-    integer_columns = [
-        "simulation_id",
-        "sauger_1_id",
-        "sauger_2_id",
-    ]
-
+    integer_columns = ["simulation_id"]
     displacement_columns = [
-        "sauger_1_displacement",
-        "sauger_2_displacement",
+        f"sauger_{index}_displacement"
+        for index in range(1, sauger_count + 1)
     ]
     rotation_columns = [
-        "sauger_1_rotation_x",
-        "sauger_1_rotation_y",
-        "sauger_1_rotation_z",
-        "sauger_2_rotation_x",
-        "sauger_2_rotation_y",
-        "sauger_2_rotation_z",
+        f"sauger_{index}_rotation_{axis}"
+        for index in range(1, sauger_count + 1)
+        for axis in ("x", "y", "z")
     ]
     position_columns = [
-        "s1_x",
-        "s1_z",
-        "s2_x",
-        "s2_z",
+        coordinate
+        for index in range(1, sauger_count + 1)
+        for coordinate in (f"s{index}_x", f"s{index}_z")
     ]
 
     for column in integer_columns:

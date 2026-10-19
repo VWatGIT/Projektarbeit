@@ -12,21 +12,16 @@ ILOGIC_ADDIN_ID = "{3BDD8D79-2179-4B11-8A5A-257B1C0263AC}"
 
 @dataclass(frozen=True)
 class SuctionPosition:
-    """Values passed to the four named Inventor parameters."""
+    """Ordered positions passed to Inventor named parameters."""
 
-    s1_x: float
-    s1_z: float
-    s2_x: float
-    s2_z: float
+    positions: tuple[tuple[float, float], ...]
 
     def as_arguments(self, inventor_application: Any) -> Any:
         """Create an Inventor NameValueMap for an external iLogic rule."""
         arguments = inventor_application.TransientObjects.CreateNameValueMap()
-        for name, value in zip(
-            ("s1_x", "s1_z", "s2_x", "s2_z"),
-            (self.s1_x, self.s1_z, self.s2_x, self.s2_z),
-        ):
-            arguments.Add(name, float(value))
+        for index, (position_x, position_z) in enumerate(self.positions, start=1):
+            arguments.Add(f"s{index}_x", float(position_x))
+            arguments.Add(f"s{index}_z", float(position_z))
         return arguments
 
 
@@ -113,17 +108,9 @@ if __name__ == "__main__":
 
     project_root = Path(__file__).resolve().parents[2]
 
-    s1_x = 100
-    s1_z = 400
-    s2_x = 500
-    s2_z = 800
-
     output = generate_case(
         project_root=project_root,
         position=SuctionPosition(
-            s1_x=s1_x,
-            s1_z=s1_z,
-            s2_x=s2_x,
-            s2_z=s2_z,
+            positions=((100, 400), (500, 800)),
         )
     )

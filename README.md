@@ -1,10 +1,12 @@
 Using python 3.12 because pynastran requires 3.9 - 3.12
 
-Parameter sweep variation controls:
+Parameter sweep configuration:
 
-- Set `vary_position` to `false` for `s1` or `s2` to use its nominal coordinates exactly.
-- Set `vary_displacement` to `false` for `displacement_y` or `vary_rotation` to `false` for a rotation axis, and provide its `fixed_value`.
-- Omitted flags retain the default varying behavior.
+- Add saugers to the `saugers` array with `nominal_x` and `nominal_z` coordinates. The array may contain any number of saugers.
+- Use `variation.position` for the global x/y/z settings: `vary_position`, `deviation_x`, `deviation_y`, and `deviation_z`. The y deviation produces displacement around zero.
+- Use `variation.rotation` for all rotation axes: `vary_rotation`, `deviation_x`, `deviation_y`, and `deviation_z`. Values are sampled independently for each sauger and symmetrically around zero.
+- Set `vary_position` or `vary_rotation` to `false` to use zero deviations.
+- Generated CSV columns use `s1_x`, `s1_z`, `sauger_1_displacement`, and `sauger_1_rotation_x/y/z`, followed by the same pattern for each additional sauger.
 
 Also use Inventor 2023 + Nastran 2023
 
@@ -31,3 +33,7 @@ POD-Zusammenfassung:
 https://www.sciencedirect.com/science/article/pii/S305051782600078X
 
 
+
+
+Mehr Sauger -> lokale Deformation (hochfrequent)
+Weniger Sauger -> Globale Deformation (niederfrequent)

@@ -13,6 +13,7 @@ from utils.NastranScripting.model import (
 from utils.NastranScripting.solver import run_nastran
 from utils.create_parameters import (
     create_parameters,
+    detect_sauger_count,
     load_parameter_cases,
     load_study_config,
 )
@@ -31,17 +32,13 @@ SOLVER_PATH = Path(r"C:\Program Files\Autodesk\Inventor Nastran 2025\Nastran\Nas
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PLATE_MODEL = REPO_ROOT / "Projektarbeit" / "Simulation"/ "Inventor" / "NastranExports" /"CFK_Platte.nas"
 RESULTS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "Results"
+SWEEP_CONFIG_PATH = REPO_ROOT / "Projektarbeit" / "Simulation" / "parameter_sweep_config.json" # Change this to the relevant one
 
 ExperimentName = "TestTest02" # Change this before starting a new FEA parameter sweep, otherwise the old results will be overwritten
 
 # Maybe first check parameters before creating the parameter file
 create_parameters(
-    config=load_study_config(
-        REPO_ROOT
-        / "Projektarbeit"
-        / "Simulation"
-        / "parameter_sweep_config.json"
-    ),
+    config=load_study_config(SWEEP_CONFIG_PATH),
     output_file=RESULTS_DIR / ExperimentName / "parameters.csv",
 )
 
@@ -76,6 +73,7 @@ def suction_position_in_nastran_coordinates(
 
 def main() -> None:
     parameters = load_parameter_cases(PARAMETER_FILE)
+    sauger_count = detect_sauger_count(parameters.columns.tolist())
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     status_cases = []
     successful_count = 0
@@ -107,49 +105,37 @@ def main() -> None:
             generate_case(
                 project_root=REPO_ROOT / "Projektarbeit",
                 position=SuctionPosition(
-                    s1_x=float(case.s1_x),
-                    s1_z=float(case.s1_z),
-                    s2_x=float(case.s2_x),
-                    s2_z=float(case.s2_z),
+                    positions=tuple(
+                        (
+                            float(getattr(case, f"s{index}_x")),
+                            float(getattr(case, f"s{index}_z")),
+                        )
+                        for index in range(1, sauger_count + 1)
+                    ),
                 ),
             )
 
             model = load_model(PLATE_MODEL)
-            sauger_1_nastran_x, sauger_1_nastran_z = suction_position_in_nastran_coordinates(
-                float(case.s1_x), float(case.s1_z)
-            )
-            change_forced_displacement_by_position(
-                model=model,
-                position_x=sauger_1_nastran_x,
-                position_z=sauger_1_nastran_z,
-                new_value=float(case.sauger_1_displacement),
-            )
-            for component, column in ((4, "sauger_1_rotation_x"), (5, "sauger_1_rotation_y"), (6, "sauger_1_rotation_z")):
-                change_forced_value_by_position(
-                    model=model,
-                    position_x=sauger_1_nastran_x,
-                    position_z=sauger_1_nastran_z,
-                    component=component,
-                    new_value=math.radians(float(getattr(case, column))),
+            for index in range(1, sauger_count + 1):
+                position_x, position_z = suction_position_in_nastran_coordinates(
+                    float(getattr(case, f"s{index}_x")),
+                    float(getattr(case, f"s{index}_z")),
                 )
-
-            sauger_2_nastran_x, sauger_2_nastran_z = suction_position_in_nastran_coordinates(
-                float(case.s2_x), float(case.s2_z)
-            )
-            change_forced_displacement_by_position(
-                model=model,
-                position_x=sauger_2_nastran_x,
-                position_z=sauger_2_nastran_z,
-                new_value=float(case.sauger_2_displacement),
-            )
-            for component, column in ((4, "sauger_2_rotation_x"), (5, "sauger_2_rotation_y"), (6, "sauger_2_rotation_z")):
-                change_forced_value_by_position(
+                change_forced_displacement_by_position(
                     model=model,
-                    position_x=sauger_2_nastran_x,
-                    position_z=sauger_2_nastran_z,
-                    component=component,
-                    new_value=math.radians(float(getattr(case, column))),
+                    position_x=position_x,
+                    position_z=position_z,
+                    new_value=float(getattr(case, f"sauger_{index}_displacement")),
                 )
+                for component, axis in ((4, "x"), (5, "y"), (6, "z")):
+                    rotation_column = f"sauger_{index}_rotation_{axis}"
+                    change_forced_value_by_position(
+                        model=model,
+                        position_x=position_x,
+                        position_z=position_z,
+                        component=component,
+                        new_value=math.radians(float(getattr(case, rotation_column))),
+                    )
 
             save_model(model=model, output_file=output_model)
             solver_result = run_nastran(solver_path=SOLVER_PATH, input_file=output_model)

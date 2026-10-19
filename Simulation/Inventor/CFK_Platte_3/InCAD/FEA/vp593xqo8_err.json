@@ -1,0 +1,27 @@
+{
+    "errors": {
+        "count": 0,
+        "data": []
+    },
+    "nastranVersion": "19.1.0.27",
+    "schemaVersion": "1.0.1",
+    "warnings": {
+        "count": 1,
+        "data": [
+            {
+                "code": "E5016",
+                "count": 1,
+                "entityType": "Card",
+                "info": [
+                    {
+                        "message": "WARNING E5016: LOAD SET 7 DOES NOT EXIST",
+                        "recommendation": [
+                            "LOAD"
+                        ]
+                    }
+                ],
+                "type": "Warning"
+            }
+        ]
+    }
+}

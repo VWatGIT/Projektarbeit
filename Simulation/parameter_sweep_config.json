@@ -2,46 +2,28 @@
   "name": "baseline",
   "number_of_simulations": 3,
   "random_seed": 42,
-  "sauger_1_id": 26,
-  "sauger_2_id": 27,
-  "suction_positions": {
-    "s1": {
+  "saugers": [
+    {
       "nominal_x": 200.0,
-      "nominal_z": 300.0,
-      "deviation_x": 20.0,
-      "deviation_z": 20.0,
-      "vary_position": true
+      "nominal_z": 300.0
     },
-    "s2": {
+    {
       "nominal_x": 400.0,
-      "nominal_z": 500.0,
-      "deviation_x": 20.0,
-      "deviation_z": 20.0,
-      "vary_position": true
+      "nominal_z": 500.0
     }
-  },
-  "displacement_y": {
-    "vary_displacement": true,
-    "fixed_value": 0,
-    "min": -10.0,
-    "max": 0.0
-  },
-  "rotation_x": {
-    "vary_rotation": true,
-    "fixed_value": 0,
-    "min": -1.0,
-    "max": 1.0
-  },
-  "rotation_y": {
-    "vary_rotation": false,
-    "fixed_value": 0,
-    "min": -1.0,
-    "max": 1.0
-  },
-  "rotation_z": {
-    "vary_rotation": true,
-    "fixed_value": 0,
-    "min": -1.0,
-    "max": 1.0
+  ],
+  "variation": {
+    "position": {
+      "vary_position": true,
+      "deviation_x": 1.0,
+      "deviation_y": 1.0,
+      "deviation_z": 1.0
+    },
+    "rotation": {
+      "vary_rotation": true,
+      "deviation_x": 1.0,
+      "deviation_y": 0.0,
+      "deviation_z": 1.0
+    }
   }
 }
