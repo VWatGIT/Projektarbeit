@@ -7,7 +7,6 @@
     "nz": 51
   },
   "energy_fraction": 0.999,
-  "landmark_tolerance": 5.0,
   "landmarks": [
     {
       "x": -200.0,

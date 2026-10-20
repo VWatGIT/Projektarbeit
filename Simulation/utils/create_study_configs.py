@@ -31,7 +31,6 @@ def create_study_config(
 	z_count: int,
 	nx: int,
 	nz: int,
-	landmark_tolerance: float,
 	energy_fraction: float | None,
 	rank: int | None,
 ) -> dict[str, object]:
@@ -40,8 +39,6 @@ def create_study_config(
 		raise ValueError("Grid minimums must not exceed their maximums.")
 	if nx < 1 or nz < 1:
 		raise ValueError("Interpolation grid dimensions must be positive.")
-	if landmark_tolerance < 0:
-		raise ValueError("landmark_tolerance must be non-negative.")
 	if energy_fraction is not None and not 0 < energy_fraction <= 1:
 		raise ValueError("energy_fraction must be greater than 0 and at most 1.")
 	if rank is not None and rank < 1:
@@ -62,7 +59,6 @@ def create_study_config(
 		"output_dir": output_dir,
 		"grid": {"nx": nx, "nz": nz},
 		"energy_fraction": 0.999 if energy_fraction is None else energy_fraction,
-		"landmark_tolerance": landmark_tolerance,
 		"landmark_grid": {"l_total": x_count * z_count, "lx": x_count, "lz": z_count},
 		"landmarks": landmarks,
 	}
@@ -86,7 +82,6 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
 	parser.add_argument("--z-count", type=int, default=11)
 	parser.add_argument("--nx", type=int, default=51) # specify interpolation grid size
 	parser.add_argument("--nz", type=int, default=51) # specify interpolation grid size
-	parser.add_argument("--landmark-tolerance", type=float, default=10.0) # TODO this is important, maybe later interpolate?
 	selection = parser.add_mutually_exclusive_group()
 	selection.add_argument("--energy-fraction", type=float)
 	selection.add_argument("--rank", type=int)
@@ -120,7 +115,6 @@ def main(arguments: Sequence[str] | None = None) -> Path:
 		z_count=args.z_count,
 		nx=args.nx,
 		nz=args.nz,
-		landmark_tolerance=args.landmark_tolerance,
 		energy_fraction=args.energy_fraction,
 		rank=args.rank,
 	)

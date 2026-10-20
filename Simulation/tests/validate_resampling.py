@@ -5,8 +5,8 @@ from pathlib import Path
 import numpy as np
 
 try:
-    from .gappy_pod import ObservationOperator, PODBasis, reconstruction_errors
-    from .surface_resampling import load_resampled_snapshots
+    from ..utils.gappy_pod import ObservationOperator, PODBasis, reconstruction_errors
+    from ..utils.surface_resampling import load_resampled_snapshots
 except ImportError:
     from utils.gappy_pod import ObservationOperator, PODBasis, reconstruction_errors
     from Simulation.utils.surface_resampling import load_resampled_snapshots

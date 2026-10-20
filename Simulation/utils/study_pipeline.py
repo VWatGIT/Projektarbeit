@@ -39,7 +39,6 @@ class StudyConfig:
     landmarks: tuple[Landmark, ...]
     energy_fraction: float | None = 0.999
     rank: int | None = None
-    landmark_tolerance: float = 1e-6
 
 
 def load_study_config(config_file: str | Path) -> StudyConfig:
@@ -88,60 +87,69 @@ def load_study_config(config_file: str | Path) -> StudyConfig:
         landmarks=landmarks,
         energy_fraction=None if energy_fraction is None else float(energy_fraction),
         rank=None if rank is None else int(rank),
-        landmark_tolerance=float(raw.get("landmark_tolerance", 1e-6)),
     )
 
 
-def _landmark_indices(
+def _landmark_operator(
     snapshot_set: ResampledSnapshotSet,
     landmarks: tuple[Landmark, ...],
-    tolerance: float,
-) -> tuple[np.ndarray, tuple[dict[str, Any], ...]]:
-    """Resolve physical x/z landmarks to common-grid point indices."""
-    axis_a, axis_b = snapshot_set.grid.axis_indices
-    grid_3d = np.zeros((snapshot_set.grid.point_count, 3), dtype=np.float64)
-    grid_3d[:, axis_a] = snapshot_set.grid.coordinates_2d[:, 0]
-    grid_3d[:, axis_b] = snapshot_set.grid.coordinates_2d[:, 1]
-    grid_3d[:, snapshot_set.grid.fixed_axis] = snapshot_set.grid.fixed_value
+) -> tuple[ObservationOperator, tuple[dict[str, Any], ...]]:
+    """Interpolate each landmark from its four nearest valid grid points."""
+    valid_indices = np.flatnonzero(snapshot_set.valid_mask)
+    if valid_indices.size < 4:
+        raise ValueError("At least four valid interpolation-grid points are required.")
 
-    indices: list[int] = []
+    valid_coordinates = snapshot_set.grid.coordinates_2d[valid_indices]
+    neighbor_indices: list[np.ndarray] = []
+    neighbor_weights: list[np.ndarray] = []
     metadata: list[dict[str, Any]] = []
     for landmark in landmarks:
         distances = np.linalg.norm(
-            grid_3d[:, (axis_a, axis_b)] - np.array([landmark.x, landmark.z]),
+            valid_coordinates - np.array([landmark.x, landmark.z]),
             axis=1,
         )
-        index = int(np.argmin(distances))
-        distance = float(distances[index])
-        if distance > tolerance:
-            raise ValueError(
-                f"Landmark ({landmark.x:g}, {landmark.z:g}) is {distance:g} away from the "
-                f"interpolation grid; tolerance is {tolerance:g}."
-            )
-        if not snapshot_set.valid_mask[index]:
-            raise ValueError(
-                f"Landmark ({landmark.x:g}, {landmark.z:g}) is outside the valid grid."
-            )
-        indices.append(index)
+        nearest = np.argsort(distances, kind="stable")[:4]
+        nearest_distances = distances[nearest]
+        if nearest_distances[0] == 0:
+            weights = np.zeros(4, dtype=np.float64)
+            weights[0] = 1.0
+        else:
+            inverse_distances = 1.0 / nearest_distances**2
+            weights = inverse_distances / inverse_distances.sum()
+
+        full_indices = valid_indices[nearest]
+        compact_indices = np.searchsorted(valid_indices, full_indices)
+        neighbor_indices.append(compact_indices)
+        neighbor_weights.append(weights)
         metadata.append(
             {
                 "requested_x": landmark.x,
                 "requested_z": landmark.z,
-                "grid_index": index,
-                "grid_x": float(grid_3d[index, axis_a]),
-                "grid_z": float(grid_3d[index, axis_b]),
-                "distance": distance,
+                "interpolation": "inverse_distance_weighted_4_nearest",
+                "neighbors": [
+                    {
+                        "grid_index": int(index),
+                        "grid_x": float(coordinate[0]),
+                        "grid_z": float(coordinate[1]),
+                        "distance": float(distance),
+                        "weight": float(weight),
+                    }
+                    for index, coordinate, distance, weight in zip(
+                        full_indices,
+                        valid_coordinates[nearest],
+                        nearest_distances,
+                        weights,
+                    )
+                ],
             }
         )
 
-    if len(set(indices)) != len(indices):
-        raise ValueError("Multiple landmarks resolve to the same grid point.")
-    valid_indices = np.flatnonzero(snapshot_set.valid_mask)
-    compact_indices = [
-        int(np.searchsorted(valid_indices, index))
-        for index in indices
-    ]
-    return np.asarray(compact_indices, dtype=np.int64), tuple(metadata)
+    operator = ObservationOperator.from_weighted_point_indices(
+        point_count=valid_indices.size,
+        point_indices=np.asarray(neighbor_indices, dtype=np.int64),
+        point_weights=np.asarray(neighbor_weights, dtype=np.float64),
+    )
+    return operator, tuple(metadata)
 
 
 def _state_to_field(
@@ -157,22 +165,21 @@ def _state_to_field(
     return field
 
 
-def evaluate_study(config: StudyConfig) -> list[dict[str, Any]]:
+def evaluate_study(
+    config: StudyConfig,
+    snapshots: ResampledSnapshotSet | None = None,
+) -> list[dict[str, Any]]:
     """Evaluate leave-one-out Gappy POD and persist all reconstructions."""
-    snapshots = load_resampled_snapshots(
-        config.results_dir,
-        nx=config.nx,
-        nz=config.nz,
-    )
-    landmark_indices, landmark_metadata = _landmark_indices(
+    if snapshots is None:
+        snapshots = load_resampled_snapshots(
+            config.results_dir,
+            nx=config.nx,
+            nz=config.nz,
+        )
+    observation_operator, landmark_metadata = _landmark_operator(
         snapshots,
         config.landmarks,
-        config.landmark_tolerance,
     )
-    observed_state_indices = np.concatenate(
-        [3 * landmark_indices[:, None] + component for component in range(3)],
-        axis=1,
-    ).reshape(-1)
     states = snapshots.state_matrix()
     config.output_dir.mkdir(parents=True, exist_ok=True)
     reconstructed_surfaces_dir = config.output_dir / "ReconstructedSurfaces"
@@ -184,7 +191,7 @@ def evaluate_study(config: StudyConfig) -> list[dict[str, Any]]:
         "grid": {"nx": config.nx, "nz": config.nz},
         "rank": config.rank,
         "energy_fraction": config.energy_fraction,
-        "landmark_tolerance": config.landmark_tolerance,
+        "landmark_interpolation": "inverse_distance_weighted_4_nearest_grid_points",
         "landmarks": list(landmark_metadata),
         "case_names": list(snapshots.case_names),
         "valid_grid_points": int(snapshots.valid_mask.sum()),
@@ -203,10 +210,10 @@ def evaluate_study(config: StudyConfig) -> list[dict[str, Any]]:
             rank=config.rank,
             energy_fraction=config.energy_fraction,
         )
-        observed = states[observed_state_indices, held_out_index]
+        observed = observation_operator.observe(states[:, held_out_index])
         reconstructed_state, diagnostics = basis.reconstruct(
             observed,
-            operator=ObservationOperator(observed_state_indices),
+            operator=observation_operator,
         )
         reference_state = states[:, held_out_index]
         errors = reconstruction_errors(reference_state, reconstructed_state)
@@ -235,7 +242,8 @@ def evaluate_study(config: StudyConfig) -> list[dict[str, Any]]:
             reference_deformed_coordinates=reference_deformed,
             reconstructed_deformed_coordinates=reconstructed_deformed,
             valid_mask=snapshots.valid_mask,
-            landmark_indices=landmark_indices,
+            landmark_neighbor_indices=observation_operator.point_indices,
+            landmark_weights=observation_operator.point_weights,
         )
         metrics.append(
             {

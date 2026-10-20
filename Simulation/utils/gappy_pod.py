@@ -130,9 +130,19 @@ def load_snapshots(results_dir: str | Path) -> SnapshotSet:
 
 @dataclass(frozen=True)
 class ObservationOperator:
-    """Select displacement components from a node or grid state."""
+    """Select or interpolate displacement components from a state."""
 
-    state_indices: np.ndarray
+    state_indices: np.ndarray | None = None
+    point_indices: np.ndarray | None = None
+    point_weights: np.ndarray | None = None
+
+    @property
+    def observation_count(self) -> int:
+        if self.state_indices is not None:
+            return self.state_indices.size
+        if self.point_indices is not None:
+            return self.point_indices.shape[0] * 3
+        raise ValueError("An observation operator requires point indices.")
 
     @classmethod
     def from_point_indices(
@@ -181,8 +191,47 @@ class ObservationOperator:
             raise ValueError("At least one observed node is required.")
         return cls(np.asarray(state_indices, dtype=np.int64))
 
+    @classmethod
+    def from_weighted_point_indices(
+        cls,
+        point_count: int,
+        point_indices: np.ndarray,
+        point_weights: np.ndarray,
+    ) -> "ObservationOperator":
+        indices = np.asarray(point_indices, dtype=np.int64)
+        weights = np.asarray(point_weights, dtype=np.float64)
+        if indices.ndim != 2 or indices.shape[1] != 4:
+            raise ValueError("point_indices must have shape (landmarks, 4).")
+        if weights.shape != indices.shape:
+            raise ValueError("point_weights must match point_indices shape.")
+        if indices.shape[0] == 0:
+            raise ValueError("At least one observed point is required.")
+        if np.any(indices < 0) or np.any(indices >= point_count):
+            raise ValueError("Observed point indices are outside the state point range.")
+        if not np.all(np.isfinite(weights)) or np.any(weights < 0):
+            raise ValueError("point_weights must be finite and non-negative.")
+        if not np.allclose(weights.sum(axis=1), 1.0):
+            raise ValueError("Each landmark's point weights must sum to 1.")
+        return cls(point_indices=indices, point_weights=weights)
+
     def observe(self, state: np.ndarray) -> np.ndarray:
-        return np.asarray(state)[self.state_indices]
+        state_array = np.asarray(state)
+        if self.state_indices is not None:
+            return state_array[self.state_indices]
+        if self.point_indices is None or self.point_weights is None:
+            raise ValueError("An observation operator requires point indices.")
+        if state_array.ndim not in (1, 2) or state_array.shape[0] % 3:
+            raise ValueError("State must have shape (point_count * 3,) or (point_count * 3, n).")
+
+        point_count = state_array.shape[0] // 3
+        point_state = state_array.reshape((point_count, 3) + state_array.shape[1:])
+        neighbor_values = point_state[self.point_indices]
+        observations = np.einsum(
+            "lk,lkc...->lc...",
+            self.point_weights,
+            neighbor_values,
+        )
+        return observations.reshape((self.observation_count,) + state_array.shape[1:])
 
 
 NodeObservationOperator = ObservationOperator
@@ -234,12 +283,12 @@ class PODBasis:
         operator: ObservationOperator,
     ) -> tuple[np.ndarray, dict[str, float]]:
         observed = np.asarray(observations, dtype=np.float64)
-        expected = operator.state_indices.size
+        expected = operator.observation_count
         if observed.shape != (expected,):
             raise ValueError(f"Expected {expected} observations, got {observed.shape}.")
 
-        sampled_modes = self.modes[operator.state_indices, :]
-        right_hand_side = observed - self.mean[operator.state_indices]
+        sampled_modes = operator.observe(self.modes)
+        right_hand_side = observed - operator.observe(self.mean)
         coefficients, residuals, matrix_rank, singular_values = np.linalg.lstsq(
             sampled_modes,
             right_hand_side,

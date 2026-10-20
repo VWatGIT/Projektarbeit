@@ -1,6 +1,6 @@
 {
-  "name": "baseline",
-  "number_of_simulations": 10,
+  "name": "Saugers3_1",
+  "number_of_simulations": 100,
   "random_seed": 42,
   "saugers": [
     {

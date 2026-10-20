@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 
 try:
-    from .gappy_pod import leave_one_out_evaluation, load_snapshots
+    from ..utils.gappy_pod import leave_one_out_evaluation, load_snapshots
 except ImportError:
     from utils.gappy_pod import leave_one_out_evaluation, load_snapshots
 

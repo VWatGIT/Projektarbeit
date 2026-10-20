@@ -304,7 +304,7 @@ if __name__ == "__main__":
 
 
     data = np.load(
-        r"C:\Users\val83626\Documents\GitLab\verformungsmodellierung_valentin\Projektarbeit\Simulation\Versuche\Results\simulation_001\simulation_001.npz"
+        r"C:\Users\val83626\Documents\GitLab\Projektarbeit\Simulation\Results\baseline\Study\ReconstructedSurfaces\simulation_001_reconstruction.npz"
     )
 
     original = data["original_coordinates"]
