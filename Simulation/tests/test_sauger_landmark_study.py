@@ -26,6 +26,7 @@ from Simulation.utils.sauger_landmark_study import (
 )
 from Simulation.run_sauger_landmark_study import (
     aggregate_trials,
+    select_best_worst_cases,
     write_true_surface_fem_metrics,
 )
 from Simulation.utils.study_pipeline import (
@@ -198,6 +199,25 @@ class SaugerLandmarkStudyTests(unittest.TestCase):
         self.assertAlmostEqual(summary["min_case_mean_relative_l2_error"], 0.2)
         self.assertAlmostEqual(summary["max_case_mean_relative_l2_error"], 0.6)
 
+    def test_best_worst_offset_cases_use_maximum_absolute_error(self) -> None:
+        cases = [
+            {
+                "case_name": "case_a",
+                "scenario_id": "scenario_1",
+                "maximum_absolute_error": 0.2,
+            },
+            {
+                "case_name": "case_b",
+                "scenario_id": "scenario_2",
+                "maximum_absolute_error": 0.9,
+            },
+        ]
+
+        best, worst = select_best_worst_cases(cases)
+
+        self.assertEqual(best["case_name"], "case_a")
+        self.assertEqual(worst["case_name"], "case_b")
+
     def test_true_surface_vs_fem_metrics_are_averaged_and_written(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output_file = Path(directory) / "true_vs_fem.json"
@@ -249,13 +269,51 @@ class SaugerLandmarkStudyTests(unittest.TestCase):
                 snapshots=snapshots,
                 persist=False,
             )
+            selected_case = snapshots.case_names[1]
+            captured_surfaces = {}
+            filtered_metrics = evaluate_study(
+                config,
+                snapshots=snapshots,
+                persist=False,
+                case_names={selected_case},
+                capture_surfaces=captured_surfaces,
+            )
             batch_metrics = evaluate_landmark_scenarios(
                 snapshots,
                 (("scenario", landmark_set),),
                 rank=1,
             )
+            selected_batch_surfaces = {}
+            selected_batch_metrics = evaluate_landmark_scenarios(
+                snapshots,
+                (("scenario", landmark_set),),
+                rank=1,
+                case_names_by_scenario={"scenario": {selected_case}},
+                capture_surfaces=selected_batch_surfaces,
+            )
 
         self.assertFalse(output_dir.exists())
+        self.assertEqual(len(filtered_metrics), 1)
+        self.assertEqual(filtered_metrics[0]["case_name"], selected_case)
+        expected_case = next(
+            row for row in single_metrics if row["case_name"] == selected_case
+        )
+        self.assertEqual(
+            filtered_metrics[0]["maximum_absolute_error"],
+            expected_case["maximum_absolute_error"],
+        )
+        self.assertEqual(set(captured_surfaces), {selected_case})
+        np.testing.assert_array_equal(
+            captured_surfaces[selected_case]["valid_mask"],
+            snapshots.valid_mask,
+        )
+        self.assertEqual(
+            captured_surfaces[selected_case]["reference_displacement"].shape,
+            (snapshots.grid.point_count, 3),
+        )
+        self.assertEqual(len(selected_batch_metrics), 1)
+        self.assertEqual(selected_batch_metrics[0]["case_name"], selected_case)
+        self.assertEqual(set(selected_batch_surfaces), {("scenario", selected_case)})
         self.assertEqual(len(single_metrics), len(batch_metrics))
         for single, batch in zip(single_metrics, batch_metrics):
             self.assertEqual(single["case_name"], batch["case_name"])

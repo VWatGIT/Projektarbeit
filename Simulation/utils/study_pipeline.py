@@ -169,14 +169,26 @@ def evaluate_study(
     config: StudyConfig,
     snapshots: ResampledSnapshotSet | None = None,
     persist: bool = True,
+    case_names: set[str] | None = None,
+    capture_surfaces: dict[str, dict[str, np.ndarray]] | None = None,
 ) -> list[dict[str, Any]]:
     """Evaluate leave-one-out Gappy POD, optionally without writing artifacts."""
+    if persist and case_names is not None:
+        raise ValueError("A filtered case evaluation cannot persist a partial study.")
     if snapshots is None:
         snapshots = load_resampled_snapshots(
             config.results_dir,
             nx=config.nx,
             nz=config.nz,
         )
+    available_case_names = set(snapshots.case_names)
+    if case_names is not None:
+        missing_case_names = case_names - available_case_names
+        if missing_case_names:
+            raise ValueError(
+                "Requested cases are not present in the snapshot set: "
+                f"{sorted(missing_case_names)}"
+            )
     observation_operator, landmark_metadata = _landmark_operator(
         snapshots,
         config.landmarks,
@@ -209,6 +221,8 @@ def evaluate_study(
     case_indices = np.arange(len(snapshots.case_names))
 
     for held_out_index, case_name in enumerate(snapshots.case_names):
+        if case_names is not None and case_name not in case_names:
+            continue
         basis = PODBasis.fit(
             states[:, np.delete(case_indices, held_out_index)],
             rank=config.rank,
@@ -232,6 +246,24 @@ def evaluate_study(
                 / max(np.linalg.norm(reference_deformed), 1e-12)
             ),
         }
+        if capture_surfaces is not None:
+            coordinates = _grid_coordinates_3d(snapshots)
+            reference_field = _state_to_field(
+                reference_state,
+                snapshots.valid_mask,
+                snapshots.grid.point_count,
+            )
+            reconstructed_field = _state_to_field(
+                reconstructed_state,
+                snapshots.valid_mask,
+                snapshots.grid.point_count,
+            )
+            capture_surfaces[case_name] = {
+                "coordinates": coordinates,
+                "reference_displacement": reference_field,
+                "reconstructed_displacement": reconstructed_field,
+                "valid_mask": snapshots.valid_mask.copy(),
+            }
         if persist:
             reference_field = _state_to_field(
                 reference_state,
@@ -281,10 +313,19 @@ def evaluate_landmark_scenarios(
     scenarios: tuple[tuple[str, tuple[Landmark, ...]], ...],
     rank: int | None = None,
     energy_fraction: float | None = 0.999,
+    case_names_by_scenario: dict[str, set[str]] | None = None,
+    capture_surfaces: dict[tuple[str, str], dict[str, np.ndarray]] | None = None,
 ) -> list[dict[str, Any]]:
-    """Evaluate many landmark sets while fitting one temporary basis per case."""
+    """Evaluate landmark sets, optionally filtering cases and capturing surfaces."""
     if not scenarios:
         raise ValueError("At least one landmark scenario is required.")
+    scenario_ids = {scenario_id for scenario_id, _ in scenarios}
+    if case_names_by_scenario is not None:
+        unknown_scenario_ids = set(case_names_by_scenario) - scenario_ids
+        if unknown_scenario_ids:
+            raise ValueError(
+                f"Unknown scenario IDs requested: {sorted(unknown_scenario_ids)}"
+            )
 
     operators = {
         scenario_id: _landmark_operator(snapshots, landmarks)[0]
@@ -293,9 +334,18 @@ def evaluate_landmark_scenarios(
     states = snapshots.state_matrix()
     case_indices = np.arange(len(snapshots.case_names))
     valid_coordinates = _grid_coordinates_3d(snapshots)[snapshots.valid_mask]
+    full_coordinates = _grid_coordinates_3d(snapshots)
     metric_rows: list[dict[str, Any]] = []
 
     for held_out_index, case_name in enumerate(snapshots.case_names):
+        selected_scenario_ids = [
+            scenario_id
+            for scenario_id, _ in scenarios
+            if case_names_by_scenario is None
+            or case_name in case_names_by_scenario.get(scenario_id, set())
+        ]
+        if not selected_scenario_ids:
+            continue
         basis = PODBasis.fit(
             states[:, np.delete(case_indices, held_out_index)],
             rank=rank,
@@ -303,7 +353,7 @@ def evaluate_landmark_scenarios(
         )
         reference_state = states[:, held_out_index]
         reference_deformed = valid_coordinates + reference_state.reshape(-1, 3)
-        for scenario_id, _ in scenarios:
+        for scenario_id in selected_scenario_ids:
             operator = operators[scenario_id]
             reconstructed_state, diagnostics = basis.reconstruct(
                 operator.observe(reference_state),
@@ -323,6 +373,21 @@ def evaluate_landmark_scenarios(
                     ),
                 }
             )
+            if capture_surfaces is not None:
+                capture_surfaces[(scenario_id, case_name)] = {
+                    "coordinates": full_coordinates,
+                    "reference_displacement": _state_to_field(
+                        reference_state,
+                        snapshots.valid_mask,
+                        snapshots.grid.point_count,
+                    ),
+                    "reconstructed_displacement": _state_to_field(
+                        reconstructed_state,
+                        snapshots.valid_mask,
+                        snapshots.grid.point_count,
+                    ),
+                    "valid_mask": snapshots.valid_mask.copy(),
+                }
     return metric_rows
 
 

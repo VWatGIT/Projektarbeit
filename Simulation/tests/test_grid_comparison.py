@@ -5,6 +5,8 @@ import numpy as np
 
 from Simulation.run_grid_comparison import (
     build_grid_landmarks,
+    format_sauger_coordinates,
+    select_best_worst_cases,
     summarize_metrics,
 )
 from Simulation.utils.gappy_pod import ObservationOperator
@@ -50,6 +52,35 @@ class GridComparisonTests(unittest.TestCase):
         landmarks = build_grid_landmarks(self.config, 5)
 
         self.assertEqual(landmarks[1].z, -750.0)
+
+    def test_best_and_worst_cases_use_maximum_absolute_error(self) -> None:
+        cases = [
+            {"case_name": "case_001", "maximum_absolute_error": 0.1},
+            {"case_name": "case_002", "maximum_absolute_error": 0.8},
+            {"case_name": "case_003", "maximum_absolute_error": 0.4},
+        ]
+
+        best, worst = select_best_worst_cases(cases)
+
+        self.assertEqual(best["case_name"], "case_001")
+        self.assertEqual(worst["case_name"], "case_002")
+
+    def test_sauger_image_label_uses_nastran_coordinates(self) -> None:
+        label = format_sauger_coordinates(
+            {
+                "s1_x": "200.0",
+                "s1_z": "800.0",
+                "sauger_1_displacement": "0.75",
+                "s2_x": "500.0",
+                "s2_z": "600.0",
+                "sauger_2_displacement": "-1.25",
+            }
+        )
+
+        self.assertIn("S1=(-200.0, -800.0)", label)
+        self.assertIn("S2=(-500.0, -600.0)", label)
+        self.assertIn("s1_y=0.750", label)
+        self.assertIn("s2_y=-1.250", label)
 
     def test_averages_errors_across_held_out_cases(self) -> None:
         summary = summarize_metrics(
