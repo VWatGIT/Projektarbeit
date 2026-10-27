@@ -47,3 +47,11 @@ https://www.sciencedirect.com/science/article/pii/S305051782600078X
 
 Mehr Sauger -> lokale Deformation (hochfrequent)
 Weniger Sauger -> Globale Deformation (niederfrequent)
+
+
+
+Anzahl der Moden ist bahängig von
+
+    - Anzahl der Sauger
+    - Displacment Größenordnung
+    - Materialverhalten (Eigensteifigkeit)

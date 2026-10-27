@@ -33,7 +33,7 @@ SOLVER_PATH = Path(r"C:\Program Files\Autodesk\Inventor Nastran 2025\Nastran\Nas
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RESULTS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "Results"
 SWEEP_CONFIGS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "SweepConfigs"
-SWEEP_CONFIG_PATH = SWEEP_CONFIGS_DIR / "Test_3_Sauger.json" # Change this to the relevant one
+SWEEP_CONFIG_PATH = SWEEP_CONFIGS_DIR / "Variation_and_rotation.json" # Change this to the relevant one
 
 
 study_config = load_study_config(SWEEP_CONFIG_PATH)

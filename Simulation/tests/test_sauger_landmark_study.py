@@ -253,9 +253,77 @@ class SaugerLandmarkStudyTests(unittest.TestCase):
 
         self.assertEqual(config.initial_positions_file, positions_file.resolve())
         self.assertEqual(
+            config.best_worst_selection_metric,
+            "maximum_absolute_error",
+        )
+        self.assertEqual(
             config.output_dir,
             (experiment_directory / "Study" / "offsets").resolve(),
         )
+
+    def test_sauger_config_loads_and_validates_selection_metric(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            config_file = Path(directory) / "study.json"
+            config_file.write_text(
+                json.dumps(
+                    {
+                        "name": "offsets",
+                        "landmarks_per_sauger": 1,
+                        "radii": [1.0],
+                        "trials_per_radius": 1,
+                        "random_seed": 10,
+                        "energy_fraction": 0.999,
+                        "best_worst_selection_metric": (
+                            "deformed_coordinate_relative_l2_error"
+                        ),
+                    }
+                ),
+                encoding="utf-8",
+            )
+            results_dir = Path(directory) / "Results" / "experiment"
+            results_dir.mkdir(parents=True)
+            (results_dir / "initial_sauger_positions.json").write_text(
+                json.dumps(
+                    {
+                        "saugers": [
+                            {
+                                "sauger_index": 1,
+                                "nastran_x": -1.0,
+                                "nastran_z": -2.0,
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            config = load_sauger_landmark_study_config(
+                config_file,
+                results_dir=results_dir,
+            )
+            self.assertEqual(
+                config.best_worst_selection_metric,
+                "deformed_coordinate_relative_l2_error",
+            )
+
+            config_file.write_text(
+                json.dumps(
+                    {
+                        "name": "offsets",
+                        "landmarks_per_sauger": 1,
+                        "radii": [1.0],
+                        "trials_per_radius": 1,
+                        "random_seed": 10,
+                        "best_worst_selection_metric": "unknown_metric",
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "best_worst_selection_metric"):
+                load_sauger_landmark_study_config(
+                    config_file,
+                    results_dir=results_dir,
+                )
 
     def test_radius_aggregation_uses_successful_trial_means(self) -> None:
         trials = [
@@ -308,6 +376,30 @@ class SaugerLandmarkStudyTests(unittest.TestCase):
         ]
 
         best, worst = select_best_worst_cases(cases)
+
+        self.assertEqual(best["case_name"], "case_a")
+        self.assertEqual(worst["case_name"], "case_b")
+
+    def test_best_worst_offset_cases_use_configured_metric(self) -> None:
+        cases = [
+            {
+                "case_name": "case_a",
+                "scenario_id": "scenario_1",
+                "maximum_absolute_error": 0.9,
+                "deformed_coordinate_relative_l2_error": 0.1,
+            },
+            {
+                "case_name": "case_b",
+                "scenario_id": "scenario_2",
+                "maximum_absolute_error": 0.2,
+                "deformed_coordinate_relative_l2_error": 0.8,
+            },
+        ]
+
+        best, worst = select_best_worst_cases(
+            cases,
+            metric="deformed_coordinate_relative_l2_error",
+        )
 
         self.assertEqual(best["case_name"], "case_a")
         self.assertEqual(worst["case_name"], "case_b")

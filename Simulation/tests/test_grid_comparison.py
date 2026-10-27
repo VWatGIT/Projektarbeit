@@ -8,6 +8,8 @@ import numpy as np
 from Simulation.run_grid_comparison import (
     build_grid_landmarks,
     format_sauger_coordinates,
+    load_best_worst_selection_metric,
+    maximum_absolute_component_error,
     select_best_worst_cases,
     summarize_metrics,
 )
@@ -139,6 +141,72 @@ class GridComparisonTests(unittest.TestCase):
 
         self.assertEqual(best["case_name"], "case_001")
         self.assertEqual(worst["case_name"], "case_002")
+
+    def test_best_and_worst_cases_use_configured_metric(self) -> None:
+        cases = [
+            {
+                "case_name": "case_001",
+                "maximum_absolute_error": 0.1,
+                "deformed_coordinate_relative_l2_error": 0.3,
+            },
+            {
+                "case_name": "case_002",
+                "maximum_absolute_error": 0.8,
+                "deformed_coordinate_relative_l2_error": 0.1,
+            },
+            {
+                "case_name": "case_003",
+                "maximum_absolute_error": 0.4,
+                "deformed_coordinate_relative_l2_error": 0.2,
+            },
+        ]
+
+        best, worst = select_best_worst_cases(
+            cases,
+            metric="deformed_coordinate_relative_l2_error",
+        )
+
+        self.assertEqual(best["case_name"], "case_002")
+        self.assertEqual(worst["case_name"], "case_001")
+
+    def test_heatmap_error_remains_maximum_absolute_component_error(self) -> None:
+        reference = np.array([[1.0, -2.0, 3.0], [-4.0, 2.0, 1.0]])
+        estimate = np.array([[0.0, 0.5, 1.0], [-1.0, 1.0, 1.5]])
+
+        errors = maximum_absolute_component_error(reference, estimate)
+
+        np.testing.assert_array_equal(errors, np.array([2.5, 3.0]))
+
+    def test_selection_metric_config_defaults_and_validates(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            config_file = Path(directory) / "grid.json"
+            config_file.write_text("{}", encoding="utf-8")
+            self.assertEqual(
+                load_best_worst_selection_metric(config_file),
+                "maximum_absolute_error",
+            )
+
+            config_file.write_text(
+                json.dumps(
+                    {
+                        "best_worst_selection_metric": (
+                            "deformed_coordinate_relative_l2_error"
+                        )
+                    }
+                ),
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                load_best_worst_selection_metric(config_file),
+                "deformed_coordinate_relative_l2_error",
+            )
+
+            config_file.write_text(
+                json.dumps({"best_worst_selection_metric": "unknown_metric"}),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "best_worst_selection_metric"):
+                load_best_worst_selection_metric(config_file)
 
     def test_sauger_image_label_uses_nastran_coordinates(self) -> None:
         label = format_sauger_coordinates(

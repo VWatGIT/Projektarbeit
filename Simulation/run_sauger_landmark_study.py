@@ -18,6 +18,9 @@ from scipy.spatial import Delaunay, QhullError
 try:
     from .utils.create_parameters import detect_sauger_count
     from .utils.sauger_landmark_study import (
+        GeneratedLandmark,
+        DEFAULT_BEST_WORST_SELECTION_METRIC,
+        STUDY_METRICS as METRICS,
         generate_landmarks,
         invalid_landmarks,
         load_sauger_centers,
@@ -35,6 +38,8 @@ except ImportError:
     from utils.create_parameters import detect_sauger_count
     from utils.sauger_landmark_study import (
         GeneratedLandmark,
+        DEFAULT_BEST_WORST_SELECTION_METRIC,
+        STUDY_METRICS as METRICS,
         generate_landmarks,
         invalid_landmarks,
         load_sauger_centers,
@@ -48,14 +53,6 @@ except ImportError:
         ResampledSnapshotSet,
         load_resampled_snapshots,
     )
-
-
-METRICS = (
-    "relative_l2_error",
-    "absolute_l2_error",
-    "maximum_absolute_error",
-    "deformed_coordinate_relative_l2_error",
-)
 
 
 def _parameter_sauger_count(parameter_file: Path) -> int:
@@ -123,19 +120,23 @@ def _mean_metric(rows: list[dict[str, Any]], metric: str) -> float | None:
 
 def select_best_worst_cases(
     case_rows: list[dict[str, Any]],
+    metric: str = DEFAULT_BEST_WORST_SELECTION_METRIC,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Select finite minimum and maximum maximum-absolute-error records."""
+    """Select finite minimum and maximum records for a per-case metric."""
+    if metric not in METRICS:
+        choices = ", ".join(METRICS)
+        raise ValueError(f"metric must be one of {choices}; got {metric!r}.")
     finite_rows = [
         row
         for row in case_rows
-        if math.isfinite(float(row["maximum_absolute_error"]))
+        if metric in row and math.isfinite(float(row[metric]))
     ]
     if not finite_rows:
-        raise ValueError("No cases have a finite maximum absolute error.")
+        raise ValueError(f"No cases have a finite {metric}.")
     best = min(
         finite_rows,
         key=lambda row: (
-            float(row["maximum_absolute_error"]),
+            float(row[metric]),
             str(row["case_name"]),
             str(row["scenario_id"]),
         ),
@@ -143,7 +144,7 @@ def select_best_worst_cases(
     worst = max(
         finite_rows,
         key=lambda row: (
-            float(row["maximum_absolute_error"]),
+            float(row[metric]),
             str(row["case_name"]),
             str(row["scenario_id"]),
         ),
@@ -592,7 +593,10 @@ def run_study(
             "radius": float(case_row["radius"]),
             "trial": int(case_row["trial"]),
             "seed": int(case_row["seed"]),
-            "selection_metric": "maximum_absolute_error",
+            "selection_metric": config.best_worst_selection_metric,
+            "selection_metric_value": float(
+                case_row[config.best_worst_selection_metric]
+            ),
             "maximum_absolute_error": float(case_row["maximum_absolute_error"]),
             "metrics": {
                 metric: float(case_row[metric])
@@ -617,7 +621,10 @@ def run_study(
                 {"radius": radius, "best": None, "worst": None}
             )
             continue
-        best_row, worst_row = select_best_worst_cases(radius_rows)
+        best_row, worst_row = select_best_worst_cases(
+            radius_rows,
+            metric=config.best_worst_selection_metric,
+        )
         best_record = selected_case_record(best_row)
         worst_record = selected_case_record(worst_row)
         per_radius_best_worst.append(
@@ -630,7 +637,10 @@ def run_study(
     if not case_rows:
         raise ValueError("No valid landmark trials produced case metrics.")
 
-    global_best_row, global_worst_row = select_best_worst_cases(case_rows)
+    global_best_row, global_worst_row = select_best_worst_cases(
+        case_rows,
+        metric=config.best_worst_selection_metric,
+    )
     global_best = selected_case_record(global_best_row)
     global_worst = selected_case_record(global_worst_row)
     for selected in (global_best, global_worst):
@@ -698,7 +708,7 @@ def run_study(
         worst_reconstructed_displacement=worst_surface["reconstructed_displacement"],
     )
     best_worst_metadata = {
-        "selection_metric": "maximum_absolute_error",
+        "selection_metric": config.best_worst_selection_metric,
         "results_dir": str(config.results_dir),
         "grid": {"nx": config.nx, "nz": config.nz},
         "landmarks_per_sauger": config.landmarks_per_sauger,
@@ -795,6 +805,7 @@ def run_study(
         "radii": list(config.radii),
         "trials_per_radius": config.trials_per_radius,
         "random_seed": config.random_seed,
+        "best_worst_selection_metric": config.best_worst_selection_metric,
         "coordinate_units": "same_as_source_model",
         "angle_sampling": "independent_uniform_0_to_2pi",
         "radius_sampling": "fixed_per_trial",

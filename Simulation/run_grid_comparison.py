@@ -39,6 +39,24 @@ METRICS = (
     "maximum_absolute_error",
     "deformed_coordinate_relative_l2_error",
 )
+DEFAULT_BEST_WORST_SELECTION_METRIC = "maximum_absolute_error"
+
+
+def load_best_worst_selection_metric(config_file: Path) -> str:
+    """Load and validate the configured best/worst ranking metric."""
+    with Path(config_file).open(encoding="utf-8") as file:
+        raw_config = json.load(file)
+    metric = raw_config.get(
+        "best_worst_selection_metric",
+        DEFAULT_BEST_WORST_SELECTION_METRIC,
+    )
+    if metric not in METRICS:
+        choices = ", ".join(METRICS)
+        raise ValueError(
+            "best_worst_selection_metric must be one of "
+            f"{choices}; got {metric!r}."
+        )
+    return metric
 
 
 def build_grid_landmarks(
@@ -83,22 +101,26 @@ def summarize_metrics(
 
 def select_best_worst_cases(
     case_metrics: list[dict[str, Any]],
+    metric: str = DEFAULT_BEST_WORST_SELECTION_METRIC,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Select the lowest and highest finite maximum absolute error cases."""
+    """Select the lowest and highest finite cases for a per-case metric."""
+    if metric not in METRICS:
+        choices = ", ".join(METRICS)
+        raise ValueError(f"metric must be one of {choices}; got {metric!r}.")
     finite_cases = [
         case
         for case in case_metrics
-        if math.isfinite(float(case["maximum_absolute_error"]))
+        if metric in case and math.isfinite(float(case[metric]))
     ]
     if not finite_cases:
-        raise ValueError("No cases have a finite maximum absolute error.")
+        raise ValueError(f"No cases have a finite {metric}.")
     best = min(
         finite_cases,
-        key=lambda case: (float(case["maximum_absolute_error"]), case["case_name"]),
+        key=lambda case: (float(case[metric]), case["case_name"]),
     )
     worst = max(
         finite_cases,
-        key=lambda case: (float(case["maximum_absolute_error"]), case["case_name"]),
+        key=lambda case: (float(case[metric]), case["case_name"]),
     )
     return best, worst
 
@@ -123,6 +145,7 @@ def case_record(
     nz: int,
     energy_fraction: float | None,
     rank: int | None,
+    selection_metric: str,
 ) -> dict[str, Any]:
     sauger_positions = sauger_plot_coordinates(simulation_parameters)
     return {
@@ -131,7 +154,8 @@ def case_record(
         "landmark_count": len(landmarks),
         "interpolation_grid": {"nx": nx, "nz": nz},
         "pod": {"rank": rank, "energy_fraction": energy_fraction},
-        "selection_metric": "maximum_absolute_error",
+        "selection_metric": selection_metric,
+        "selection_metric_value": float(case_metrics[selection_metric]),
         "maximum_absolute_error": float(case_metrics["maximum_absolute_error"]),
         "metrics": {
             metric: float(case_metrics[metric])
@@ -222,7 +246,7 @@ def plot_surface_comparison(
             (np.linalg.norm(reference, axis=1), panel_fields[0][1]),
             (np.linalg.norm(reconstructed, axis=1), panel_fields[1][1]),
             (
-                np.max(np.abs(reference - reconstructed), axis=1),
+                maximum_absolute_component_error(reference, reconstructed),
                 "Maximum component absolute error",
             ),
         ]
@@ -291,6 +315,14 @@ def plot_surface_comparison(
     plt.close(figure)
 
 
+def maximum_absolute_component_error(
+    reference: np.ndarray,
+    estimate: np.ndarray,
+) -> np.ndarray:
+    """Return each point's largest absolute displacement-component error."""
+    return np.max(np.abs(reference - estimate), axis=1)
+
+
 def write_summary_csv(
     output_file: Path,
     summaries: list[dict[str, int | float | None]],
@@ -300,9 +332,10 @@ def write_summary_csv(
         "landmark_count",
         "case_count",
         "best_case_name",
-        "best_maximum_absolute_error",
+        "best_worst_selection_metric",
+        "best_selection_metric_value",
         "worst_case_name",
-        "worst_maximum_absolute_error",
+        "worst_selection_metric_value",
     ]
     for metric in METRICS:
         fieldnames.extend(
@@ -429,6 +462,7 @@ def main(arguments: Sequence[str] | None = None) -> None:
         results_dir=results_dir,
         output_dir=args.output_dir,
     )
+    selection_metric = load_best_worst_selection_metric(args.config)
     results_dir = base_config.results_dir
     output_dir = base_config.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -464,13 +498,17 @@ def main(arguments: Sequence[str] | None = None) -> None:
             persist=False,
         )
         summaries.append(summarize_metrics(grid_size, case_metrics))
-        best_case, worst_case = select_best_worst_cases(case_metrics)
+        best_case, worst_case = select_best_worst_cases(
+            case_metrics,
+            metric=selection_metric,
+        )
         summaries[-1].update(
             {
                 "best_case_name": best_case["case_name"],
-                "best_maximum_absolute_error": best_case["maximum_absolute_error"],
+                "best_worst_selection_metric": selection_metric,
+                "best_selection_metric_value": best_case[selection_metric],
                 "worst_case_name": worst_case["case_name"],
-                "worst_maximum_absolute_error": worst_case["maximum_absolute_error"],
+                "worst_selection_metric_value": worst_case[selection_metric],
             }
         )
         selected_case_names = {best_case["case_name"], worst_case["case_name"]}
@@ -496,6 +534,7 @@ def main(arguments: Sequence[str] | None = None) -> None:
                 nz=base_config.nz,
                 energy_fraction=base_config.energy_fraction,
                 rank=base_config.rank,
+                selection_metric=selection_metric,
             )
             grid_records[label] = case_record_data
             captured = captured_surfaces[case_name]
@@ -521,11 +560,11 @@ def main(arguments: Sequence[str] | None = None) -> None:
     plot_summaries(plot_file, summaries)
     global_best = min(
         global_candidates,
-        key=lambda candidate: candidate[0]["maximum_absolute_error"],
+        key=lambda candidate: candidate[0]["selection_metric_value"],
     )
     global_worst = max(
         global_candidates,
-        key=lambda candidate: candidate[0]["maximum_absolute_error"],
+        key=lambda candidate: candidate[0]["selection_metric_value"],
     )
     global_records = {"best": global_best[0], "worst": global_worst[0]}
     with (output_dir / "global_best_worst_metadata.json").open(
@@ -534,7 +573,7 @@ def main(arguments: Sequence[str] | None = None) -> None:
     ) as file:
         json.dump(
             {
-                "selection_metric": "maximum_absolute_error",
+                "selection_metric": selection_metric,
                 "results_dir": str(results_dir),
                 "per_grid": per_grid_cases,
                 "global": global_records,

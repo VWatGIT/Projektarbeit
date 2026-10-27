@@ -1,0 +1,25 @@
+{
+  "name": "landmark_offsets_4",
+  "best_worst_selection_metric": "deformed_coordinate_relative_l2_error",
+  "grid": {
+    "nx": 51,
+    "nz": 51
+  },
+  "energy_fraction": 0.999,
+  "landmarks_per_sauger": 4,
+  "radii": [
+    0.1,
+    0.5,
+    1,
+    2,
+    5,
+    10,
+    25,
+    50,
+    100,
+    150
+  ],
+  "trials_per_radius": 20,
+  "random_seed": 20261027,
+  "coordinate_units": "same_as_source_model"
+}

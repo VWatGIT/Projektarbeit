@@ -20,6 +20,15 @@ except ImportError:
     from utils.surface_resampling import ResampledSnapshotSet
 
 
+STUDY_METRICS = (
+    "relative_l2_error",
+    "absolute_l2_error",
+    "maximum_absolute_error",
+    "deformed_coordinate_relative_l2_error",
+)
+DEFAULT_BEST_WORST_SELECTION_METRIC = "maximum_absolute_error"
+
+
 @dataclass(frozen=True)
 class SaugerCenter:
     """One fixed, nominal suction center in Nastran x/z coordinates."""
@@ -52,6 +61,7 @@ class SaugerLandmarkStudyConfig:
     radii: tuple[float, ...]
     trials_per_radius: int
     random_seed: int
+    best_worst_selection_metric: str = DEFAULT_BEST_WORST_SELECTION_METRIC
     energy_fraction: float | None = 0.999
     rank: int | None = None
 
@@ -84,6 +94,17 @@ def load_sauger_landmark_study_config(
         raise ValueError("landmarks_per_sauger must be positive.")
     if trials_per_radius < 1:
         raise ValueError("trials_per_radius must be positive.")
+
+    best_worst_selection_metric = raw.get(
+        "best_worst_selection_metric",
+        DEFAULT_BEST_WORST_SELECTION_METRIC,
+    )
+    if best_worst_selection_metric not in STUDY_METRICS:
+        choices = ", ".join(STUDY_METRICS)
+        raise ValueError(
+            "best_worst_selection_metric must be one of "
+            f"{choices}; got {best_worst_selection_metric!r}."
+        )
 
     rank = raw.get("rank")
     energy_fraction = raw.get("energy_fraction")
@@ -120,6 +141,7 @@ def load_sauger_landmark_study_config(
         radii=radii,
         trials_per_radius=trials_per_radius,
         random_seed=int(raw["random_seed"]),
+        best_worst_selection_metric=best_worst_selection_metric,
         energy_fraction=(
             None if energy_fraction is None else float(energy_fraction)
         ),

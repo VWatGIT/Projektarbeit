@@ -1,5 +1,6 @@
 {
   "name": "grid_comparison",
+  "best_worst_selection_metric": "deformed_coordinate_relative_l2_error",
   "grid": {
     "nx": 51,
     "nz": 51
