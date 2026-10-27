@@ -402,10 +402,9 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
         help="Study config providing the domain, interpolation grid, and POD settings.",
     )
     parser.add_argument(
-        "--results-dir",
-        type=Path,
-        default=None,
-        help="Override the FEA results directory from the study config.",
+        "--experiment",
+        required=True,
+        help="Experiment folder name under Simulation/Results.",
     )
     parser.add_argument("--min-grid", type=int, default=2)
     parser.add_argument("--max-grid", type=int, default=11)
@@ -413,7 +412,7 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
         "--output-dir",
         type=Path,
         default=None,
-        help="Override the directory for per-grid studies, CSV, and plot.",
+        help="Optional override; defaults to Results/Experiment/Study/grid_comparison.",
     )
     return parser.parse_args(arguments)
 
@@ -423,17 +422,15 @@ def main(arguments: Sequence[str] | None = None) -> None:
     if args.min_grid < 1 or args.max_grid < args.min_grid:
         raise ValueError("Grid range must satisfy 1 <= min-grid <= max-grid.")
 
-    base_config = load_study_config(args.config)
-    results_dir = (
-        args.results_dir.resolve()
-        if args.results_dir is not None
-        else base_config.results_dir
+    simulation_dir = Path(__file__).resolve().parent
+    results_dir = simulation_dir / "Results" / args.experiment
+    base_config = load_study_config(
+        args.config,
+        results_dir=results_dir,
+        output_dir=args.output_dir,
     )
-    output_dir = (
-        args.output_dir.resolve()
-        if args.output_dir is not None
-        else results_dir.parent / "Study" / "grid_comparison"
-    )
+    results_dir = base_config.results_dir
+    output_dir = base_config.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
     snapshots = load_resampled_snapshots(
         results_dir,
@@ -441,7 +438,7 @@ def main(arguments: Sequence[str] | None = None) -> None:
         nz=base_config.nz,
     )
     simulation_parameters = load_case_parameters(
-        results_dir.parent / "parameters.csv"
+        results_dir / "parameters.csv"
     )
     summaries = []
     per_grid_cases = []

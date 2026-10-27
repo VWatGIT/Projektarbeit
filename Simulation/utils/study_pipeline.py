@@ -41,13 +41,13 @@ class StudyConfig:
     rank: int | None = None
 
 
-def load_study_config(config_file: str | Path) -> StudyConfig:
-    """Load and validate a JSON study configuration.
-
-    ``results_dir`` is the FEA result directory. The study output directory
-    must be its sibling, for example ``Results/Experiment/FEA`` and
-    ``Results/Experiment/MyStudy``.
-    """
+def load_study_config(
+    config_file: str | Path,
+    *,
+    results_dir: str | Path,
+    output_dir: str | Path | None = None,
+) -> StudyConfig:
+    """Load study settings and resolve I/O directories supplied by the caller."""
     path = Path(config_file).resolve()
     with path.open(encoding="utf-8") as file:
         raw = json.load(file)
@@ -70,18 +70,22 @@ def load_study_config(config_file: str | Path) -> StudyConfig:
     if rank is not None and energy_fraction is not None:
         raise ValueError("Configure either rank or energy_fraction, not both.")
 
-    output_dir = (base_dir / raw["output_dir"]).resolve()
-    results_dir = (base_dir / raw["results_dir"]).resolve()
-    if output_dir.parent != results_dir.parent:
+    results_path = Path(results_dir).resolve()
+    if output_dir is None:
+        output_path = results_path / "Study" / str(raw["name"])
+    else:
+        output_path = Path(output_dir).resolve()
+    study_root = results_path / "Study"
+    if output_path != study_root and study_root not in output_path.parents:
         raise ValueError(
-            "output_dir must be next to results_dir under the same experiment "
-            f"directory: {results_dir.parent}"
+            "output_dir must be the experiment's Study directory or one of its "
+            f"descendants: {study_root}"
         )
 
     return StudyConfig(
         name=str(raw["name"]),
-        results_dir=results_dir,
-        output_dir=output_dir,
+        results_dir=results_path,
+        output_dir=output_path,
         nx=int(raw.get("grid", {}).get("nx", 50)),
         nz=int(raw.get("grid", {}).get("nz", 50)),
         landmarks=landmarks,

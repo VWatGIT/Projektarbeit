@@ -21,8 +21,6 @@ def grid_values(start: float, stop: float, count: int) -> list[float]:
 def create_study_config(
 	*,
 	name: str,
-	results_dir: str,
-	output_dir: str,
 	x_min: float,
 	x_max: float,
 	x_count: int,
@@ -55,8 +53,6 @@ def create_study_config(
 	]
 	config: dict[str, object] = {
 		"name": name,
-		"results_dir": results_dir,
-		"output_dir": output_dir,
 		"grid": {"nx": nx, "nz": nz},
 		"energy_fraction": 0.999 if energy_fraction is None else energy_fraction,
 		"landmark_grid": {"l_total": x_count * z_count, "lx": x_count, "lz": z_count},
@@ -72,8 +68,6 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
 	)
 	parser.add_argument("--name", default="study_config")
 	parser.add_argument("--output", type=Path, default=None)
-	parser.add_argument("--results-dir", default=None)
-	parser.add_argument("--output-dir", default=None)
 	parser.add_argument("--x-min", type=float, default=-1000.0)
 	parser.add_argument("--x-max", type=float, default=0.0)
 	parser.add_argument("--x-count", type=int, default=11)
@@ -101,12 +95,8 @@ def main(arguments: Sequence[str] | None = None) -> Path:
 	elif output.suffix.lower() != ".json":
 		output = output / f"{args.name}.json"
 
-	results_dir = args.results_dir or f"../Results/{args.name}/FEA"
-	output_dir = args.output_dir or f"../Results/{args.name}/Study"
 	config = create_study_config(
 		name=args.name,
-		results_dir=results_dir,
-		output_dir=output_dir,
 		x_min=args.x_min,
 		x_max=args.x_max,
 		x_count=args.x_count,

@@ -147,9 +147,6 @@ class SaugerLandmarkStudyTests(unittest.TestCase):
                 json.dumps(
                     {
                         "name": "invalid",
-                        "results_dir": "results/FEA",
-                        "output_dir": "results/Study",
-                        "initial_positions_file": "positions.json",
                         "landmarks_per_sauger": 1,
                         "radii": [0],
                         "trials_per_radius": 1,
@@ -161,7 +158,104 @@ class SaugerLandmarkStudyTests(unittest.TestCase):
             )
 
             with self.assertRaisesRegex(ValueError, "finite positive"):
-                load_sauger_landmark_study_config(path)
+                load_sauger_landmark_study_config(
+                    path,
+                    results_dir=Path(directory) / "Results" / "experiment",
+                    output_dir=Path(directory) / "Results" / "experiment" / "Study" / "offsets",
+                )
+
+    def test_sauger_config_uses_caller_supplied_directories(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "study.json"
+            path.write_text(
+                json.dumps(
+                    {
+                        "name": "offsets",
+                        "landmarks_per_sauger": 1,
+                        "radii": [1.0],
+                        "trials_per_radius": 1,
+                        "random_seed": 10,
+                        "energy_fraction": 0.999,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            results_dir = Path(directory) / "Results" / "experiment"
+            position_file = results_dir / "initial_sauger_positions.json"
+            position_file.parent.mkdir(parents=True)
+            position_file.write_text(
+                json.dumps(
+                    {
+                        "saugers": [
+                            {
+                                "sauger_index": 1,
+                                "nastran_x": -1.0,
+                                "nastran_z": -2.0,
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            output_dir = Path(directory) / "Results" / "experiment" / "Study" / "offsets"
+
+            config = load_sauger_landmark_study_config(
+                path,
+                results_dir=results_dir,
+                output_dir=output_dir,
+            )
+
+        self.assertEqual(config.results_dir, results_dir.resolve())
+        self.assertEqual(config.output_dir, output_dir.resolve())
+
+    def test_sauger_config_defaults_paths_from_name_and_results_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_directory = root / "StudyConfigs"
+            experiment_directory = root / "Results" / "experiment"
+            config_directory.mkdir(parents=True)
+            experiment_directory.mkdir(parents=True)
+            positions_file = experiment_directory / "initial_sauger_positions.json"
+            positions_file.write_text(
+                json.dumps(
+                    {
+                        "saugers": [
+                            {
+                                "sauger_index": index,
+                                "nastran_x": -float(index),
+                                "nastran_z": -float(index),
+                            }
+                            for index in range(1, 4)
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            config_file = config_directory / "study.json"
+            config_file.write_text(
+                json.dumps(
+                    {
+                        "name": "offsets",
+                        "landmarks_per_sauger": 1,
+                        "radii": [1.0],
+                        "trials_per_radius": 1,
+                        "random_seed": 10,
+                        "energy_fraction": 0.999,
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            config = load_sauger_landmark_study_config(
+                config_file,
+                results_dir=experiment_directory,
+            )
+
+        self.assertEqual(config.initial_positions_file, positions_file.resolve())
+        self.assertEqual(
+            config.output_dir,
+            (experiment_directory / "Study" / "offsets").resolve(),
+        )
 
     def test_radius_aggregation_uses_successful_trial_means(self) -> None:
         trials = [

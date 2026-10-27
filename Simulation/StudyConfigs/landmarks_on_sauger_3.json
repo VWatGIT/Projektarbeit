@@ -1,7 +1,5 @@
 {
-  "name": "baseline",
-  "results_dir": "Results/baseline/FEA",
-  "output_dir": "Results/baseline/TestStudy",
+  "name": "specified_landmarks",
   "grid": {
     "nx": 51,
     "nz": 51

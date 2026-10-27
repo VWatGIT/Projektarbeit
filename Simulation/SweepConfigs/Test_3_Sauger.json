@@ -1,6 +1,6 @@
 {
-  "name": "Saugers3_1",
-  "number_of_simulations": 100,
+  "name": "Saugers3_1_fixedmeshissue_final",
+  "number_of_simulations": 10,
   "random_seed": 42,
   "saugers": [
     {

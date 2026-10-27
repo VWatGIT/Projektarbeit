@@ -58,6 +58,9 @@ class SaugerLandmarkStudyConfig:
 
 def load_sauger_landmark_study_config(
     config_file: str | Path,
+    *,
+    results_dir: str | Path,
+    output_dir: str | Path | None = None,
 ) -> SaugerLandmarkStudyConfig:
     path = Path(config_file).resolve()
     with path.open(encoding="utf-8") as file:
@@ -93,12 +96,24 @@ def load_sauger_landmark_study_config(
     if energy_fraction is not None and not 0 < float(energy_fraction) <= 1:
         raise ValueError("energy_fraction must be in (0, 1].")
 
-    base_dir = path.parent
+    results_path = Path(results_dir).resolve()
+    initial_positions_file = results_path / "initial_sauger_positions.json"
+    if output_dir is None:
+        output_path = results_path / "Study" / str(raw["name"])
+    else:
+        output_path = Path(output_dir).resolve()
+    study_root = results_path / "Study"
+    if output_path != study_root and study_root not in output_path.parents:
+        raise ValueError(
+            "output_dir must be the experiment's Study directory or one of its "
+            f"descendants: {study_root}"
+        )
+
     return SaugerLandmarkStudyConfig(
         name=str(raw["name"]),
-        results_dir=(base_dir / raw["results_dir"]).resolve(),
-        output_dir=(base_dir / raw["output_dir"]).resolve(),
-        initial_positions_file=(base_dir / raw["initial_positions_file"]).resolve(),
+        results_dir=results_path,
+        output_dir=output_path,
+        initial_positions_file=initial_positions_file,
         nx=nx,
         nz=nz,
         landmarks_per_sauger=landmarks_per_sauger,

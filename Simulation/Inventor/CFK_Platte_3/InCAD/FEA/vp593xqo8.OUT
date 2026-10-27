@@ -1,5 +1,5 @@
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      1
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      1
  
  
  
@@ -75,7 +75,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      2
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      2
  
  
  
@@ -88,9 +88,9 @@
  [FILE MANAGEMENT DIRECTIVES]
  
  DATABASE         = vp593xqo8.NDB
- FILESIGNATURE    = D66D017200
+ FILESIGNATURE    = KY5K004420
  FILEBUFFERSIZE   = 1000
- FILESPEC         = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBD66D017200.TMP\
+ FILESPEC         = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBKY5K004420.TMP\
  NFILEBUFFER      = 1
  PURGE            = ON
  RSLTFILEPURGE    = ON
@@ -124,7 +124,7 @@
  PCHFILETYPE      = NASTRAN
  RSLTFILECOMP     = AUTO
  RSLTFILEDBLEPRCS = OFF
- RSLTFILETYPE     = NASTRAN BINARY
+ RSLTFILETYPE     = FEMAP BINARY
  SECONDS          = ON
  SYSTEMSTATUS     = OFF
  TRSLDISPDATA     = OFF
@@ -150,7 +150,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      3
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      3
  
  
  
@@ -182,7 +182,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      4
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      4
  
  
  
@@ -200,7 +200,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      5
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      5
  
  
  
@@ -218,7 +218,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      6
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      6
  
  
  
@@ -236,7 +236,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      7
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      7
  
  
  
@@ -254,7 +254,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      8
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      8
  
  
  
@@ -272,7 +272,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE      9
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE      9
  
  
  
@@ -290,7 +290,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     10
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     10
  
  
  
@@ -308,7 +308,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     11
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     11
  
  
  
@@ -326,7 +326,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     12
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     12
  
  
  
@@ -370,7 +370,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     13
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     13
  
  
  
@@ -383,12 +383,12 @@
  MODEL DATABASE SIZE
  
  SUBCASES                     =        1
- GRID POINTS                  =     1337
- ELEMENTS                     =      422
+ GRID POINTS                  =     1411
+ ELEMENTS                     =      449
  ELEMENT PROPERTIES           =        1
  MATERIAL PROPERTIES          =        1
- SINGLE POINT CONSTRAINTS     =       16
- MULTIPOINT CONSTRAINTS       =      673
+ SINGLE POINT CONSTRAINTS     =       15
+ MULTIPOINT CONSTRAINTS       =     1009
  SETS                         =        1
  SURFACES                     =        1
  
@@ -398,7 +398,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     14
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     14
  
  
  
@@ -408,44 +408,44 @@
  
  
  
- MODEL SIZE    =        8022 DEGREES OF FREEDOM
- MATRIX SIZE   =      463734 WORDS        3.5 MEGABYTES
+ MODEL SIZE    =        8466 DEGREES OF FREEDOM
+ MATRIX SIZE   =      491292 WORDS        3.7 MEGABYTES
  SEMIBANDWIDTH =         155 WORDS
  
  ELEMENT GEOMETRY STATISTICS
  
- MAXIMUM QUAD ELEMENT WARPING ANGLE        =   0.00 DEGREES ON ELEMENT 422
- MAXIMUM QUAD ELEMENT SKEW ANGLE           =  29.62 DEGREES ON ELEMENT 250
- MAXIMUM QUAD ELEMENT EDGE POINT DEVIATION =   0.00 DEGREES ON ELEMENT 422
- MAXIMUM QUAD ELEMENT INTERIOR ANGLE       = 136.50 DEGREES ON ELEMENT 339
- MINIMUM QUAD ELEMENT INTERIOR ANGLE       =  54.39 DEGREES ON ELEMENT 36
+ MAXIMUM QUAD ELEMENT WARPING ANGLE        =   0.00 DEGREES ON ELEMENT 449
+ MAXIMUM QUAD ELEMENT SKEW ANGLE           =  39.65 DEGREES ON ELEMENT 24
+ MAXIMUM QUAD ELEMENT EDGE POINT DEVIATION =   0.00 DEGREES ON ELEMENT 449
+ MAXIMUM QUAD ELEMENT INTERIOR ANGLE       = 146.50 DEGREES ON ELEMENT 53
+ MINIMUM QUAD ELEMENT INTERIOR ANGLE       =  45.10 DEGREES ON ELEMENT 24
  
- MAXIMUM QUAD ELEMENT TAPER RATIO             =   0.53 ON ELEMENT 339
- MAXIMUM QUAD ELEMENT ASPECT RATIO            =   1.78 ON ELEMENT 60
- MINIMUM QUAD ELEMENT EDGE POINT LENGTH RATIO =   1.00 ON ELEMENT 422
+ MAXIMUM QUAD ELEMENT TAPER RATIO             =   0.57 ON ELEMENT 45
+ MAXIMUM QUAD ELEMENT ASPECT RATIO            =   1.69 ON ELEMENT 367
+ MINIMUM QUAD ELEMENT EDGE POINT LENGTH RATIO =   1.00 ON ELEMENT 449
  
- MAXIMUM TRI ELEMENT SKEW ANGLE           =  39.69 DEGREES ON ELEMENT 33
- MAXIMUM TRI ELEMENT EDGE POINT DEVIATION =   0.00 DEGREES ON ELEMENT 341
- MAXIMUM TRI ELEMENT INTERIOR ANGLE       =  88.09 DEGREES ON ELEMENT 12
- MINIMUM TRI ELEMENT INTERIOR ANGLE       =  28.39 DEGREES ON ELEMENT 33
+ MAXIMUM TRI ELEMENT SKEW ANGLE           =  28.65 DEGREES ON ELEMENT 267
+ MAXIMUM TRI ELEMENT EDGE POINT DEVIATION =   0.00 DEGREES ON ELEMENT 270
+ MAXIMUM TRI ELEMENT INTERIOR ANGLE       =  90.91 DEGREES ON ELEMENT 267
+ MINIMUM TRI ELEMENT INTERIOR ANGLE       =  41.73 DEGREES ON ELEMENT 18
  
- MAXIMUM TRI ELEMENT ASPECT RATIO            =   2.27 ON ELEMENT 33
- MINIMUM TRI ELEMENT EDGE POINT LENGTH RATIO =   1.00 ON ELEMENT 341
+ MAXIMUM TRI ELEMENT ASPECT RATIO            =   1.76 ON ELEMENT 267
+ MINIMUM TRI ELEMENT EDGE POINT LENGTH RATIO =   1.00 ON ELEMENT 270
  
  GLOBAL STIFFNESS MATRIX ASSEMBLY STATISTICS
  
- SPARSE MATRIX SIZE =     463734 WORDS        3.5 MEGABYTES
- MEMORY ALLOCATED   =     695601 WORDS        5.3 MEGABYTES
+ SPARSE MATRIX SIZE =     491292 WORDS        3.7 MEGABYTES
+ MEMORY ALLOCATED   =     736938 WORDS        5.6 MEGABYTES
  
- ASSEMBLY TIME FOR 422 ELEMENTS = 0.03 SECONDS
- 
- 
+ ASSEMBLY TIME FOR 449 ELEMENTS = 0.03 SECONDS
  
  
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     15
+ 
+ 
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     15
  
  
  
@@ -458,12 +458,12 @@
                                                           REFERENCE POINT = 0
  
                                                                  M O
-                         2.855358E-03  0.000000E+00  0.000000E+00  0.000000E+00 -1.426344E+00  0.000000E+00
-                         0.000000E+00  2.855358E-03  0.000000E+00  1.426344E+00  0.000000E+00 -1.427656E+00
-                         0.000000E+00  0.000000E+00  2.855358E-03  0.000000E+00  1.427656E+00  0.000000E+00
-                         0.000000E+00  1.426344E+00  0.000000E+00  9.512505E+02  0.000000E+00 -7.131403E+02
-                        -1.426344E+00  0.000000E+00  1.427656E+00  0.000000E+00  1.904236E+03  0.000000E+00
-                         0.000000E+00 -1.427656E+00  0.000000E+00 -7.131403E+02  0.000000E+00  9.529854E+02
+                         2.860000E-03  0.000000E+00  0.000000E+00  0.000000E+00 -1.430021E+00  0.000000E+00
+                         0.000000E+00  2.860000E-03  0.000000E+00  1.430021E+00  0.000000E+00 -1.430019E+00
+                         0.000000E+00  0.000000E+00  2.860000E-03  0.000000E+00  1.430019E+00  0.000000E+00
+                         0.000000E+00  1.430021E+00  0.000000E+00  9.540876E+02  0.000000E+00 -7.150307E+02
+                        -1.430021E+00  0.000000E+00  1.430019E+00  0.000000E+00  1.908191E+03  0.000000E+00
+                         0.000000E+00 -1.430019E+00  0.000000E+00 -7.150307E+02  0.000000E+00  9.541032E+02
  
  
                                                                   S
@@ -474,27 +474,27 @@
  
                               DIRECTION                                        CENTER OF MASS
                          MASS AXIS SYSTEM (S)     MASS                 X             Y             Z
-                                  X           2.855358E-03        0.00000E+00   0.00000E+00  -4.99533E+02
-                                  Y           2.855358E-03       -4.99992E+02   0.00000E+00  -4.99533E+02
-                                  Z           2.855358E-03       -4.99992E+02   0.00000E+00   0.00000E+00
+                                  X           2.860000E-03        0.00000E+00   0.00000E+00  -5.00007E+02
+                                  Y           2.860000E-03       -5.00007E+02   0.00000E+00  -5.00007E+02
+                                  Z           2.860000E-03       -5.00007E+02   0.00000E+00   0.00000E+00
  
  
                                                                  I(S)
-                                              2.387449E+02  0.000000E+00 -2.019607E-02
-                                              0.000000E+00  4.779143E+02  0.000000E+00
-                                             -2.019607E-02  0.000000E+00  2.391694E+02
+                                              2.390670E+02  0.000000E+00  1.065118E-02
+                                              0.000000E+00  4.781507E+02  0.000000E+00
+                                              1.065118E-02  0.000000E+00  2.390837E+02
  
  
                                                                  I(Q)
-                                              4.779143E+02
-                                                            2.387440E+02
-                                                                          2.391703E+02
+                                              4.781507E+02
+                                                            2.390618E+02
+                                                                          2.390889E+02
  
  
                                                                   Q
-                                              0.000000E+00 -1.000000E+00  0.000000E+00
-                                              9.988748E-01  0.000000E+00  4.742422E-02
-                                              4.742422E-02  0.000000E+00 -9.988748E-01
+                                              0.000000E+00  1.000000E+00  0.000000E+00
+                                             -8.991615E-01  0.000000E+00  4.376169E-01
+                                             -4.376169E-01  0.000000E+00 -8.991615E-01
  
  
  
@@ -502,7 +502,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     16
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     16
  
  
  
@@ -511,19 +511,19 @@
  
    PROPERTY     MATERIAL       PROPERTY           BOUNDING DIMENSIONS                MASS       VOLUME          GRID      ELEMENTS
       ID           ID            TYPE          D1          D2          D3                                      POINTS
-        1            2          SHELL      1.0000E+03  0.0000E+00  1.0000E+03     2.8554E-03  1.9968E+06        1334          422
+        1            2          SHELL      1.0000E+03  0.0000E+00  1.0000E+03     2.8600E-03  2.0000E+06        1408          449
  
  
-    TOTAL                                  1.0000E+03  0.0000E+00  1.0000E+03     2.8554E-03  1.9968E+06        1334          422
- 
- 
- 
+    TOTAL                                  1.0000E+03  0.0000E+00  1.0000E+03     2.8600E-03  2.0000E+06        1408          449
  
  
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     17
+ 
+ 
+ 
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     17
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -536,8 +536,8 @@
  
  
  
- MAXIMUM STIFFNESS MATRIX DIAGONAL =  1.1450E+08  AT GRID 535 COMPONENT 6
- MINIMUM STIFFNESS MATRIX DIAGONAL =  8.8508E+04  AT GRID 454 COMPONENT 2
+ MAXIMUM STIFFNESS MATRIX DIAGONAL =  1.0228E+08  AT GRID 562 COMPONENT 4
+ MINIMUM STIFFNESS MATRIX DIAGONAL =  8.7278E+04  AT GRID 477 COMPONENT 2
  
  
  
@@ -545,7 +545,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     18
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     18
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -563,7 +563,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     19
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     19
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -575,30 +575,24 @@
  
  GLOBAL STIFFNESS MATRIX FACTORIZATION STATISTICS
  
- THE FOLLOWING DEGREES OF FREEDOM HAVE FACTOR DIAGONAL RATIOS GREATER THAN  1.000000E+05
- OR HAVE NEGATIVE TERMS ON THE FACTOR DIAGONAL
- 
-    GRID ID                COMPONENT        FACTOR DIAGONAL RATIO           MATRIX DIAGONAL
-      1334                     6                 3.746755E+05                 3.55584E+05
- 
  NUMBER OF NEGATIVE TERMS ON FACTOR DIAGONAL = 0
- MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 3.747E+05 AT GRID 1334 COMPONENT 6
+ MAXIMUM MATRIX FACTOR DIAGONAL RATIO = 6.065E+04 AT GRID 1408 COMPONENT 3
  
  REORDERING METHOD REQUESTED = AUTO
  REORDERING METHOD USED      = VRM7
  
- FACTORED SPARSE MATRIX SIZE =         977202 WORDS       14.9 MEGABYTES
- ADDITIONAL MEMORY ALLOCATED =        2120064 WORDS       16.2 MEGABYTES
+ FACTORED SPARSE MATRIX SIZE =        1030634 WORDS       15.7 MEGABYTES
+ ADDITIONAL MEMORY ALLOCATED =        2195584 WORDS       16.8 MEGABYTES
  
- FACTORIZATION TIME FOR 977202 WORDS = 0.15 SECONDS
- 
- 
+ FACTORIZATION TIME FOR 1030634 WORDS = 0.15 SECONDS
  
  
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     20
+ 
+ 
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     20
  
  
  LOAD INCREMENT = 1  LOAD = 1.000000E-02                             SUBCASE 1
@@ -607,8 +601,8 @@
  
   ITERATION   DISPLACEMENT          LOAD              WORK        ENIC              LINE SEARCH                 DIVERGENCE   KUPDATE
     NUMBER   ERROR   PERCENT   ERROR   PERCENT   ERROR   PERCENT          FACTOR    E-FIRST    E-FINAL   NLS   FACTOR  TOTAL  TOTAL
-       1    4.93E-01    2.0   4.49E-03  100.0   4.49E-03   22.3          1.00E+00   0.00E+00   0.00E+00   0   0.00E+00   0      0
-       2    4.54E-04  100.0   4.55E-03  100.0   2.30E-05  100.0          1.00E+00   0.00E+00   0.00E+00   0  -7.24E-03   0      0
+       1    4.93E-01    2.0   2.08E-03  100.0   2.08E-03   48.0          1.00E+00   0.00E+00   0.00E+00   0   0.00E+00   0      0
+       2    1.27E-04  100.0   2.06E-03  100.0   5.82E-06  100.0          1.00E+00   0.00E+00   0.00E+00   0  -4.36E-03   0      0
  
  
  
@@ -616,7 +610,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     21
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     21
  
  
  LOAD INCREMENT = 2  LOAD = 3.000000E-02                             SUBCASE 1
@@ -625,8 +619,8 @@
  
   ITERATION   DISPLACEMENT          LOAD              WORK        ENIC              LINE SEARCH                 DIVERGENCE   KUPDATE
     NUMBER   ERROR   PERCENT   ERROR   PERCENT   ERROR   PERCENT          FACTOR    E-FIRST    E-FINAL   NLS   FACTOR  TOTAL  TOTAL
-       1    3.29E-01    3.0   3.82E-02   26.2   2.39E-02    4.2          1.00E+00   0.00E+00   0.00E+00   0  -2.49E+01   1      0
-       2    1.55E-04  100.0   1.45E-04  100.0   4.08E-06  100.0          1.00E+00   0.00E+00   0.00E+00   0  -6.14E-07   1      1
+       1    3.28E-01    3.0   1.76E-02   56.7   1.12E-02    9.0          1.00E+00   0.00E+00   0.00E+00   0  -2.51E+01   1      0
+       2    7.52E-05  100.0   5.96E-05  100.0   6.39E-07  100.0          1.00E+00   0.00E+00   0.00E+00   0  -1.50E-06   1      1
  
  
  
@@ -634,7 +628,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     22
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     22
  
  
  LOAD INCREMENT = 3  LOAD = 7.000000E-02                             SUBCASE 1
@@ -643,8 +637,8 @@
  
   ITERATION   DISPLACEMENT          LOAD              WORK        ENIC              LINE SEARCH                 DIVERGENCE   KUPDATE
     NUMBER   ERROR   PERCENT   ERROR   PERCENT   ERROR   PERCENT          FACTOR    E-FIRST    E-FINAL   NLS   FACTOR  TOTAL  TOTAL
-       1    2.78E-01    3.6   9.10E-02   11.0   5.68E-02    1.8          1.00E+00   0.00E+00   0.00E+00   0   6.00E+03   2      0
-       2    1.71E-03  100.0   1.65E-03  100.0   1.42E-04  100.0          1.00E+00   0.00E+00   0.00E+00   0   6.99E-04   2      1
+       1    2.81E-01    3.6   4.24E-02   23.6   2.62E-02    3.8          1.00E+00   0.00E+00   0.00E+00   0   1.16E+04   2      0
+       2    4.64E-04  100.0   4.72E-04  100.0   2.42E-05  100.0          1.00E+00   0.00E+00   0.00E+00   0   3.38E-04   2      1
  
  
  
@@ -652,7 +646,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     23
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     23
  
  
  LOAD INCREMENT = 4  LOAD = 1.500000E-01                             SUBCASE 1
@@ -661,8 +655,8 @@
  
   ITERATION   DISPLACEMENT          LOAD              WORK        ENIC              LINE SEARCH                 DIVERGENCE   KUPDATE
     NUMBER   ERROR   PERCENT   ERROR   PERCENT   ERROR   PERCENT          FACTOR    E-FIRST    E-FINAL   NLS   FACTOR  TOTAL  TOTAL
-       1    2.56E-01    3.9   3.91E-01    2.6   2.28E-01    0.4          1.00E+00   0.00E+00   0.00E+00   0  -6.23E+02   1      0
-       2    1.97E-03  100.0   7.93E-03  100.0   6.37E-04  100.0          1.00E+00   0.00E+00   0.00E+00   0   1.18E-03   1      1
+       1    2.61E-01    3.8   1.87E-01    5.3   1.08E-01    0.9          1.00E+00   0.00E+00   0.00E+00   0  -1.00E+03   1      0
+       2    8.47E-04  100.0   2.70E-03  100.0   1.58E-04  100.0          1.00E+00   0.00E+00   0.00E+00   0   8.38E-04   1      1
  
  
  
@@ -670,7 +664,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     24
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     24
  
  
  LOAD INCREMENT = 5  LOAD = 3.100000E-01                             SUBCASE 1
@@ -679,10 +673,9 @@
  
   ITERATION   DISPLACEMENT          LOAD              WORK        ENIC              LINE SEARCH                 DIVERGENCE   KUPDATE
     NUMBER   ERROR   PERCENT   ERROR   PERCENT   ERROR   PERCENT          FACTOR    E-FIRST    E-FINAL   NLS   FACTOR  TOTAL  TOTAL
-       1    2.31E-01    4.3   1.14E+00    0.9   6.30E-01    0.2          1.00E+00   0.00E+00   0.00E+00   0  -3.97E+02   1      0
-       2    5.81E-03  100.0   5.83E-02   17.1   5.67E-03   17.6          1.00E+00   0.00E+00   0.00E+00   0   8.24E-03   1      1
-       3    4.81E-03  100.0   1.46E-02   68.6   1.37E-04  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   2.80E-01   1      1
-       4    3.94E-03  100.0   1.85E-03  100.0   6.96E-06  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   2.14E-02   1      1
+       1    2.48E-01    4.0   6.22E-01    1.6   3.44E-01    0.3          1.00E+00   0.00E+00   0.00E+00   0  -5.75E+02   1      0
+       2    2.92E-03  100.0   2.37E-02   42.2   2.05E-03   48.9          1.00E+00   0.00E+00   0.00E+00   0   6.91E-03   1      1
+       3    8.97E-04  100.0   4.93E-03  100.0   4.22E-05  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   2.69E-01   1      1
  
  
  
@@ -690,7 +683,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     25
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     25
  
  
  LOAD INCREMENT = 6  LOAD = 6.100000E-01                             SUBCASE 1
@@ -699,11 +692,11 @@
  
   ITERATION   DISPLACEMENT          LOAD              WORK        ENIC              LINE SEARCH                 DIVERGENCE   KUPDATE
     NUMBER   ERROR   PERCENT   ERROR   PERCENT   ERROR   PERCENT          FACTOR    E-FIRST    E-FINAL   NLS   FACTOR  TOTAL  TOTAL
-       1    1.83E-01    5.5   2.02E+00    0.5   1.02E+00    0.1          1.00E+00   0.00E+00   0.00E+00   0   6.60E+03   2      0
-       2    1.06E-02   94.1   1.98E-01    5.0   2.16E-02    4.6          1.00E+00   0.00E+00   0.00E+00   0   3.38E-02   2      1
-       3    1.73E-02   57.7   7.34E-02   13.6   1.75E-03   57.1     1    1.00E+00   0.00E+00   0.00E+00   0   3.91E-01   2      1
-       4    2.96E-02   33.7   2.65E-02   37.7   3.91E-04  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   2.60E-02   2      1
-       5    2.77E-04  100.0   4.27E-03  100.0   2.84E-06  100.0     0    1.00E+00   0.00E+00   0.00E+00   0  -3.38E-03   2      1
+       1    2.22E-01    4.5   1.33E+00    0.8   6.77E-01    0.1          1.00E+00   0.00E+00   0.00E+00   0  -5.74E+02   1      0
+       2    8.07E-03  100.0   1.10E-01    9.1   1.28E-02    7.8          1.00E+00   0.00E+00   0.00E+00   0   3.04E-02   1      1
+       3    5.20E-03  100.0   4.15E-02   24.1   1.23E-03   81.1     0    1.00E+00   0.00E+00   0.00E+00   0   4.13E-01   1      1
+       4    1.44E-02   69.2   2.07E-02   48.3   3.83E-04  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   6.17E-02   1      1
+       5    3.06E-04  100.0   4.07E-03  100.0   6.73E-06  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   1.50E-01   1      1
  
  
  
@@ -711,7 +704,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     26
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     26
  
  
  LOAD INCREMENT = 7  LOAD = 9.100000E-01                             SUBCASE 1
@@ -720,12 +713,12 @@
  
   ITERATION   DISPLACEMENT          LOAD              WORK        ENIC              LINE SEARCH                 DIVERGENCE   KUPDATE
     NUMBER   ERROR   PERCENT   ERROR   PERCENT   ERROR   PERCENT          FACTOR    E-FIRST    E-FINAL   NLS   FACTOR  TOTAL  TOTAL
-       1    8.57E-02   11.7   1.29E+00    0.8   4.15E-01    0.2          1.00E+00   0.00E+00   0.00E+00   0   8.32E+02   2      0
-       2    3.22E-02   31.0   3.48E-01    2.9   3.27E-02    3.1          1.00E+00   0.00E+00   0.00E+00   0   1.20E-01   2      1
-       3    1.22E-02   82.2   1.16E-01    8.6   3.31E-03   30.3     1    1.00E+00   0.00E+00   0.00E+00   0   3.04E-01   2      1
-       4    5.95E-03  100.0   3.39E-02   29.5   3.06E-04  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   1.14E-01   2      1
-       5    3.03E-04  100.0   1.16E-02   86.4   2.62E-05  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   7.53E-02   2      1
-       6    1.20E-04  100.0   3.51E-03  100.0   5.77E-07  100.0     0    1.00E+00   0.00E+00   0.00E+00   0  -9.65E-02   2      1
+       1    1.27E-01    7.8   9.72E-01    1.0   3.16E-01    0.3          1.00E+00   0.00E+00   0.00E+00   0   3.24E+02   2      0
+       2    1.43E-02   70.0   2.21E-01    4.5   2.29E-02    4.4          1.00E+00   0.00E+00   0.00E+00   0   1.11E-01   2      1
+       3    6.69E-03  100.0   7.83E-02   12.8   2.69E-03   37.2     1    1.00E+00   0.00E+00   0.00E+00   0   3.25E-01   2      1
+       4    5.13E-03  100.0   2.87E-02   34.9   3.57E-04  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   1.43E-01   2      1
+       5    1.12E-03  100.0   1.47E-02   68.0   1.08E-04  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   9.89E-02   2      1
+       6    5.84E-05  100.0   4.76E-03  100.0   3.01E-06  100.0     0    1.00E+00   0.00E+00   0.00E+00   0  -1.64E-01   2      1
  
  
  
@@ -733,7 +726,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     27
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     27
  
  
  LOAD INCREMENT = 8  LOAD = 1.000000E+00                             SUBCASE 1
@@ -742,9 +735,9 @@
  
   ITERATION   DISPLACEMENT          LOAD              WORK        ENIC              LINE SEARCH                 DIVERGENCE   KUPDATE
     NUMBER   ERROR   PERCENT   ERROR   PERCENT   ERROR   PERCENT          FACTOR    E-FIRST    E-FINAL   NLS   FACTOR  TOTAL  TOTAL
-       1    2.14E-02   46.7   4.76E-01    2.1   4.21E-02    2.4          1.00E+00   0.00E+00   0.00E+00   0   8.05E+01   2      0
-       2    9.12E-03  100.0   9.65E-02   10.4   2.22E-03   45.0          1.00E+00   0.00E+00   0.00E+00   0   7.55E-02   2      1
-       3    6.45E-04  100.0   6.64E-03  100.0   2.32E-05  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   9.46E-02   2      1
+       1    3.33E-02   30.0   3.51E-01    2.9   3.13E-02    3.2          1.00E+00   0.00E+00   0.00E+00   0   9.42E+01   2      0
+       2    4.63E-03  100.0   7.28E-02   13.7   2.04E-03   49.1          1.00E+00   0.00E+00   0.00E+00   0   7.68E-02   2      1
+       3    5.64E-04  100.0   6.82E-03  100.0   4.01E-05  100.0     0    1.00E+00   0.00E+00   0.00E+00   0   1.27E-01   2      1
  
  
  
@@ -752,7 +745,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     28
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     28
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -776,7 +769,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     29
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     29
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -785,14 +778,14 @@
  
       LOAD        LOAD              T1            T2            T3            R1            R2            R3
     INCREMENT    FACTOR
-        1     1.000000E-02     2.626363E-06  4.203110E-05 -2.456176E-06 -1.979821E-01  1.909523E-03  7.803185E-02
-        2     3.000000E-02     8.232407E-06  3.343397E-06 -3.770682E-06 -1.122929E-01  2.857298E-02  2.373581E-01
-        3     7.000000E-02     7.036330E-04  3.248488E-05  1.071266E-03 -1.663030E+00  2.673625E-01  3.010248E+00
-        4     1.500000E-01     5.455541E-03  3.015569E-04  6.913463E-03 -1.636903E+01  8.284406E+00  2.966165E+01
-        5     3.100000E-01     5.078159E-03 -2.539027E-05  3.796909E-03 -1.255180E+02 -3.506515E+00  2.513404E+02
-        6     6.100000E-01     4.026418E-02 -6.304268E-04  6.809888E-03 -9.314046E+02 -7.362219E+00  1.787982E+03
-        7     9.100000E-01    -6.529621E-02  2.787720E-03 -1.214661E-02 -3.021139E+03  3.216184E+01  5.543150E+03
-        8     1.000000E+00    -1.712827E-01  3.798243E-03 -1.370745E-01 -3.989716E+03 -1.013738E+01  7.218679E+03
+        1     1.000000E-02     1.014579E-04  9.135091E-05  5.386968E-06  8.538390E-02 -5.361711E-02  2.065751E-01
+        2     3.000000E-02    -1.619006E-04 -3.818314E-06  6.495534E-05 -1.760343E-02  1.874908E-01  3.805562E-01
+        3     7.000000E-02    -6.920250E-03  4.016913E-06  6.167974E-04 -1.308132E-01  6.026748E+00  4.935167E+00
+        4     1.500000E-01    -8.540229E-02  2.942710E-05  1.687633E-02 -1.087344E+00  8.308941E+01  4.866355E+01
+        5     3.100000E-01    -1.370542E-01  1.417587E-03  1.368779E-02 -9.086500E+00  1.062485E+02  4.150759E+02
+        6     6.100000E-01     1.877382E-01 -2.649288E-03  7.862073E-02 -7.394439E+01 -7.683884E+01  2.937834E+03
+        7     9.100000E-01     9.868997E-02 -9.018755E-04  5.574878E-02 -1.856146E+02 -3.518225E+01  9.241261E+03
+        8     1.000000E+00    -4.515135E-01  5.980029E-03  1.102026E-01 -2.336317E+02  3.278071E+02  1.207853E+04
  
  
  
@@ -800,7 +793,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     30
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     30
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -824,7 +817,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     31
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     31
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -833,14 +826,14 @@
  
       LOAD        LOAD              T1            T2            T3            R1            R2            R3
     INCREMENT    FACTOR
-        1     1.000000E-02     5.961233E-06  7.669239E-02  5.310602E-06  2.045623E-04  1.572677E-08  2.044706E-04
-        2     3.000000E-02     5.361399E-05  2.309536E-01  4.770640E-05  6.144382E-04  1.424203E-07  6.138272E-04
-        3     7.000000E-02     2.914178E-04  5.357088E-01  2.573407E-04  1.431216E-03  7.740302E-07  1.430155E-03
-        4     1.500000E-01     1.329205E-03  1.128270E+00  1.157393E-03  3.044926E-03  3.513987E-06  3.045391E-03
-        5     3.100000E-01     5.573505E-03  2.316609E+00  4.843854E-03  6.166765E-03  1.453313E-05  6.164268E-03
-        6     6.100000E-01     2.053832E-02  4.475642E+00  1.771854E-02  1.151066E-02  5.144698E-05  1.149121E-02
-        7     9.100000E-01     4.366383E-02  6.569894E+00  3.753817E-02  1.642077E-02  1.053494E-04  1.629232E-02
-        8     1.000000E+00     5.201621E-02  7.185568E+00  4.469477E-02  1.783346E-02  1.269291E-04  1.765775E-02
+        1     1.000000E-02     6.402603E-06  7.228464E-02  4.076108E-06  1.745300E-04  1.186075E-08  2.047701E-04
+        2     3.000000E-02     5.758833E-05  2.170564E-01  3.667838E-05  5.235900E-04  1.074662E-07  6.146428E-04
+        3     7.000000E-02     3.130693E-04  5.062708E-01  1.993161E-04  1.221710E-03  5.849166E-07  1.432553E-03
+        4     1.500000E-01     1.428923E-03  1.083012E+00  9.075426E-04  2.617950E-03  2.667753E-06  3.054935E-03
+        5     3.100000E-01     5.980012E-03  2.226119E+00  3.770502E-03  5.410430E-03  1.111952E-05  6.203699E-03
+        6     6.100000E-01     2.206893E-02  4.333624E+00  1.379796E-02  1.064633E-02  4.099586E-05  1.167310E-02
+        7     9.100000E-01     4.642095E-02  6.377540E+00  2.917137E-02  1.588223E-02  9.804436E-05  1.659816E-02
+        8     1.000000E+00     5.503928E-02  6.974038E+00  3.496868E-02  1.745300E-02  1.220806E-04  1.798379E-02
  
  
  
@@ -848,7 +841,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     32
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     32
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -857,14 +850,14 @@
  
       LOAD        LOAD              T1            T2            T3            R1            R2            R3
     INCREMENT    FACTOR
-        1     1.000000E-02     2.559969E-01  3.151827E-02  7.117330E-03  3.319450E+01  4.301023E+00  3.450351E+01
-        2     3.000000E-02     2.302126E+00  9.432733E-02  6.584765E-02  9.920491E+01  3.889484E+01  1.033297E+02
-        3     7.000000E-02     1.249307E+01  2.171239E-01  3.612772E-01  2.335831E+02  2.109459E+02  2.432062E+02
-        4     1.500000E-01     5.657461E+01  4.374639E-01  1.631515E+00  5.198558E+02  9.482777E+02  5.406078E+02
-        5     3.100000E-01     2.300746E+02  6.794668E-01  6.655817E+00  1.219821E+03  3.778797E+03  1.268286E+03
-        6     6.100000E-01     7.819370E+02  2.244094E-02  2.238008E+01  3.380817E+03  1.201189E+04  3.483710E+03
-        7     9.100000E-01     1.519463E+03  2.617123E+00  4.286570E+01  7.212909E+03  2.158523E+04  7.354900E+03
-        8     1.000000E+00     1.765086E+03  3.791780E+00  4.967609E+01  8.786466E+03  2.447292E+04  8.933447E+03
+        1     1.000000E-02     3.068958E-01  1.640852E-01  2.792250E-01  5.620420E+01  4.153980E+00  5.837093E+01
+        2     3.000000E-02     2.760239E+00  4.924437E-01  2.510812E+00  1.685248E+02  3.833920E+01  1.749454E+02
+        3     7.000000E-02     1.498250E+01  1.147060E+00  1.362596E+01  3.952516E+02  2.097731E+02  4.099122E+02
+        4     1.500000E-01     6.790785E+01  2.439551E+00  6.174617E+01  8.659619E+02  9.572597E+02  8.944164E+02
+        5     3.100000E-01     2.763301E+02  4.894038E+00  2.517216E+02  1.946512E+03  3.958407E+03  1.980173E+03
+        6     6.100000E-01     9.333071E+02  8.740711E+00  8.547696E+02  4.871845E+03  1.392942E+04  4.779201E+03
+        7     9.100000E-01     1.788369E+03  1.129439E+01  1.650300E+03  9.602670E+03  2.775274E+04  9.181564E+03
+        8     1.000000E+00     2.068281E+03  1.178932E+01  1.912668E+03  1.147027E+04  3.244577E+04  1.090815E+04
  
  
  
@@ -872,7 +865,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     33
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     33
  
  
  SUBCASE 1                                                           SUBCASE 1
@@ -896,7 +889,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     34
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     34
  
  
  
@@ -910,11 +903,11 @@
  
  NUMBER OF LOAD INCREMENTS          = 8
  NUMBER OF LOAD BISECTIONS          = 0
- NUMBER OF EQUILIBRIUM ITERATIONS   = 26
+ NUMBER OF EQUILIBRIUM ITERATIONS   = 25
  NUMBER OF LINE SEARCHES            = 0
  NUMBER OF STIFFNESS MATRIX UPDATES = 7
  
- SOLUTION TIME FOR 8022 DEGREES OF FREEDOM = 4.31 SECONDS
+ SOLUTION TIME FOR 8466 DEGREES OF FREEDOM = 4.06 SECONDS
  
  
  
@@ -922,7 +915,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     35
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     35
  
  
  
@@ -948,11 +941,11 @@
  FILEBUFFERSIZE2  = 1000
  FILEBUFFERSIZE3  = 1000
  FILEBUFFERSIZE4  = 1000
- FILESIGNATURE    = D66D017200
- FILESPEC1        = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBD66D017200.TMP\
- FILESPEC2        = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBD66D017200.TMP\
- FILESPEC3        = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBD66D017200.TMP\
- FILESPEC4        = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBD66D017200.TMP\
+ FILESIGNATURE    = KY5K004420
+ FILESPEC1        = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBKY5K004420.TMP\
+ FILESPEC2        = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBKY5K004420.TMP\
+ FILESPEC3        = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBKY5K004420.TMP\
+ FILESPEC4        = C:\ProgramData\Autodesk\Nastran 2025\Temp\NDBKY5K004420.TMP\
  GPWEIGHTMETHOD   = VECTOR
  INCRGEOMOUT      = OFF
  INCRRSLTOUT      = ON
@@ -997,7 +990,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     36
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     36
  
  
  
@@ -1010,7 +1003,7 @@
  RSLTFILEDBLEPRCS = OFF
  RSLTFILEFORMAT   = PLATFORM
  RSLTFILEPURGE    = ON
- RSLTFILETYPE     = NASTRAN BINARY
+ RSLTFILETYPE     = FEMAP BINARY
  RSLTLABEL        = 1
  RSPECDISPMETHOD  = NODAL
  RSPECVECTMETHOD  = OFF
@@ -1044,7 +1037,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     37
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     37
  
  
  
@@ -1119,7 +1112,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     38
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     38
  
  
  
@@ -1194,7 +1187,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     39
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     39
  
  
  
@@ -1269,7 +1262,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     40
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     40
  
  
  
@@ -1344,7 +1337,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     41
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     41
  
  
  
@@ -1419,7 +1412,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     42
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     42
  
  
  
@@ -1494,7 +1487,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     43
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     43
  
  
  
@@ -1517,7 +1510,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     44
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     44
  
  
  
@@ -1534,7 +1527,7 @@
  
  
  
-                                                                        10/27/26  12:01  ADS NASTRAN VERSION 19.1.0.27   PAGE     45
+                                                                        10/27/26  13:26  ADS NASTRAN VERSION 19.1.0.27   PAGE     45
  
  
  
@@ -1546,8 +1539,8 @@
  
  MODEL ANALYSIS TIME SUMMARY
  
- TOTAL CPU TIME = 44.00 SECONDS
- WALLCLOCK TIME = 14.44 SECONDS
+ TOTAL CPU TIME = 44.03 SECONDS
+ WALLCLOCK TIME = 11.40 SECONDS
  
  EXECUTION TERMINATED NORMALLY
  

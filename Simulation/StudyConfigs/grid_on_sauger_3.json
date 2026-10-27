@@ -1,7 +1,5 @@
 {
-  "name": "study_config",
-  "results_dir": "../Results/baseline/FEA",
-  "output_dir": "../Results/baseline/Study",
+  "name": "grid_comparison",
   "grid": {
     "nx": 51,
     "nz": 51

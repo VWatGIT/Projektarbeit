@@ -12,6 +12,10 @@ from Simulation.utils.create_parameters import (
     parameter_columns,
 )
 from Simulation.utils.inventor_automation import SuctionPosition
+from Simulation.utils.result_status import (
+    successful_npz_files,
+    write_simulation_status,
+)
 
 
 CONFIG_PATH = (
@@ -27,6 +31,48 @@ def config_data() -> dict:
 
 
 class MultiSaugerTests(unittest.TestCase):
+    def test_simulation_status_is_stored_at_experiment_root(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            experiment_dir = Path(directory) / "experiment"
+            npz_file = experiment_dir / "FEA" / "simulation_001" / "simulation_001.npz"
+            npz_file.parent.mkdir(parents=True)
+            npz_file.touch()
+
+            status_file = write_simulation_status(
+                experiment_dir,
+                [
+                    {
+                        "case_name": "simulation_001",
+                        "status": "success",
+                        "npz_file": "FEA/simulation_001/simulation_001.npz",
+                    }
+                ],
+            )
+
+            self.assertEqual(status_file, experiment_dir / "simulation_status.json")
+            self.assertFalse((experiment_dir / "FEA" / "simulation_status.json").exists())
+            self.assertEqual(successful_npz_files(experiment_dir), [npz_file.resolve()])
+
+    def test_existing_fea_status_manifest_remains_readable(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            experiment_dir = Path(directory) / "experiment"
+            fea_dir = experiment_dir / "FEA"
+            npz_file = fea_dir / "simulation_001" / "simulation_001.npz"
+            npz_file.parent.mkdir(parents=True)
+            npz_file.touch()
+            write_simulation_status(
+                fea_dir,
+                [
+                    {
+                        "case_name": "simulation_001",
+                        "status": "success",
+                        "npz_file": "simulation_001/simulation_001.npz",
+                    }
+                ],
+            )
+
+            self.assertEqual(successful_npz_files(experiment_dir), [npz_file.resolve()])
+
     def test_three_saugers_round_trip(self) -> None:
         data = config_data()
         data["number_of_simulations"] = 1

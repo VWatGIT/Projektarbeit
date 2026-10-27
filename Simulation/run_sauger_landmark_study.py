@@ -430,11 +430,17 @@ def plot_surface_comparison(
 
 def run_study(
     config_path: str | Path,
+    *,
+    results_dir: str | Path,
+    output_dir: str | Path | None = None,
     radii_override: tuple[float, ...] | None = None,
     trials_per_radius_override: int | None = None,
-    output_dir_override: Path | None = None,
 ) -> Path:
-    config = load_sauger_landmark_study_config(config_path)
+    config = load_sauger_landmark_study_config(
+        config_path,
+        results_dir=results_dir,
+        output_dir=output_dir,
+    )
     if radii_override is not None:
         if not radii_override or any(
             not math.isfinite(radius) or radius <= 0 for radius in radii_override
@@ -447,11 +453,8 @@ def run_study(
         if trials_per_radius_override < 1:
             raise ValueError("trials_per_radius override must be positive.")
         config = replace(config, trials_per_radius=trials_per_radius_override)
-    if output_dir_override is not None:
-        config = replace(config, output_dir=output_dir_override.resolve())
-
     centers = load_sauger_centers(config.initial_positions_file)
-    parameter_file = config.results_dir.parent / "parameters.csv"
+    parameter_file = config.results_dir / "parameters.csv"
     expected_sauger_count = _parameter_sauger_count(parameter_file)
     case_parameters = _load_case_parameters(parameter_file)
     if len(centers) != expected_sauger_count:
@@ -836,6 +839,17 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
         default=simulation_dir / "StudyConfigs" / "sauger_landmark_offsets.json",
     )
     parser.add_argument(
+        "--experiment",
+        required=True,
+        help="Experiment folder name under Simulation/Results.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Optional override; defaults to Study/<config name>.",
+    )
+    parser.add_argument(
         "--radii",
         type=float,
         nargs="+",
@@ -848,22 +862,18 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
         default=None,
         help="Override the configured trial count, useful for a smoke run.",
     )
-    parser.add_argument(
-        "--output-dir",
-        type=Path,
-        default=None,
-        help="Override the configured output directory.",
-    )
     return parser.parse_args(arguments)
 
 
 def main(arguments: Sequence[str] | None = None) -> None:
     args = parse_args(arguments)
+    simulation_dir = Path(__file__).resolve().parent
     run_study(
         args.config,
+        results_dir=simulation_dir / "Results" / args.experiment,
+        output_dir=args.output_dir,
         radii_override=None if args.radii is None else tuple(args.radii),
         trials_per_radius_override=args.trials_per_radius,
-        output_dir_override=args.output_dir,
     )
 
 

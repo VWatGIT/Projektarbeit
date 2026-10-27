@@ -1,3 +1,5 @@
+import json
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -14,6 +16,7 @@ from Simulation.utils.study_pipeline import (
     Landmark,
     StudyConfig,
     _landmark_operator,
+    load_study_config,
 )
 from Simulation.utils.surface_resampling import (
     ResampledSnapshotSet,
@@ -52,6 +55,78 @@ class GridComparisonTests(unittest.TestCase):
         landmarks = build_grid_landmarks(self.config, 5)
 
         self.assertEqual(landmarks[1].z, -750.0)
+
+    def test_study_loader_takes_paths_from_caller(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_file = root / "StudyConfigs" / "grid.json"
+            config_file.parent.mkdir()
+            config_file.write_text(
+                json.dumps(
+                    {
+                        "name": "grid",
+                        "grid": {"nx": 51, "nz": 51},
+                        "energy_fraction": 0.999,
+                        "landmarks": [{"x": -1000.0, "z": -1000.0}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            results_dir = root / "Results" / "experiment"
+            output_dir = root / "Results" / "experiment" / "Study" / "grid"
+
+            config = load_study_config(
+                config_file,
+                results_dir=results_dir,
+                output_dir=output_dir,
+            )
+
+        self.assertEqual(config.results_dir, results_dir.resolve())
+        self.assertEqual(config.output_dir, output_dir.resolve())
+
+    def test_study_loader_defaults_output_to_config_name_under_study(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_file = root / "StudyConfigs" / "grid.json"
+            config_file.parent.mkdir()
+            config_file.write_text(
+                json.dumps(
+                    {
+                        "name": "named_grid",
+                        "landmarks": [{"x": 0.0, "z": 0.0}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            results_dir = root / "Results" / "experiment"
+
+            config = load_study_config(config_file, results_dir=results_dir)
+
+        self.assertEqual(
+            config.output_dir,
+            (results_dir / "Study" / "named_grid").resolve(),
+        )
+
+    def test_study_loader_rejects_output_outside_study_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_file = root / "grid.json"
+            config_file.write_text(
+                json.dumps(
+                    {
+                        "name": "grid",
+                        "landmarks": [{"x": 0.0, "z": 0.0}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with self.assertRaisesRegex(ValueError, "Study directory"):
+                load_study_config(
+                    config_file,
+                    results_dir=root / "Results" / "experiment",
+                    output_dir=root / "Other" / "grid",
+                )
 
     def test_best_and_worst_cases_use_maximum_absolute_error(self) -> None:
         cases = [

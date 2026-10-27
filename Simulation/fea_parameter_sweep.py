@@ -47,8 +47,9 @@ experiment_name = create_parameters(
 )
 
 
-PARAMETER_FILE = RESULTS_DIR / experiment_name / "parameters.csv"
-OUTPUT_DIR = RESULTS_DIR / experiment_name / "FEA"
+EXPERIMENT_DIR = RESULTS_DIR / experiment_name
+PARAMETER_FILE = EXPERIMENT_DIR / "parameters.csv"
+OUTPUT_DIR = EXPERIMENT_DIR / "FEA"
 
 
 
@@ -88,7 +89,7 @@ def main() -> None:
             "simulation_id": simulation_id,
             "case_name": case_name,
             "status": "failed",
-            "npz_file": str(npy_file.relative_to(OUTPUT_DIR)),
+            "npz_file": str(npy_file.relative_to(EXPERIMENT_DIR)),
             "returncode": None,
             "error": None,
         }
@@ -157,7 +158,7 @@ def main() -> None:
             print(f"{case_name} failed: {error}")
 
         status_cases.append(status)
-        write_simulation_status(OUTPUT_DIR, status_cases)
+        write_simulation_status(EXPERIMENT_DIR, status_cases)
 
     print(
         f"\nSweep finished: {successful_count} successful, "
