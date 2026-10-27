@@ -168,8 +168,9 @@ def _state_to_field(
 def evaluate_study(
     config: StudyConfig,
     snapshots: ResampledSnapshotSet | None = None,
+    persist: bool = True,
 ) -> list[dict[str, Any]]:
-    """Evaluate leave-one-out Gappy POD and persist all reconstructions."""
+    """Evaluate leave-one-out Gappy POD, optionally without writing artifacts."""
     if snapshots is None:
         snapshots = load_resampled_snapshots(
             config.results_dir,
@@ -181,32 +182,35 @@ def evaluate_study(
         config.landmarks,
     )
     states = snapshots.state_matrix()
-    config.output_dir.mkdir(parents=True, exist_ok=True)
     reconstructed_surfaces_dir = config.output_dir / "ReconstructedSurfaces"
-    reconstructed_surfaces_dir.mkdir(parents=True, exist_ok=True)
-    manifest = {
-        "name": config.name,
-        "results_dir": str(config.results_dir),
-        "output_dir": str(config.output_dir),
-        "grid": {"nx": config.nx, "nz": config.nz},
-        "rank": config.rank,
-        "energy_fraction": config.energy_fraction,
-        "landmark_interpolation": "inverse_distance_weighted_4_nearest_grid_points",
-        "landmarks": list(landmark_metadata),
-        "case_names": list(snapshots.case_names),
-        "valid_grid_points": int(snapshots.valid_mask.sum()),
-    }
-    with (config.output_dir / "study_manifest.json").open(
-        "w",
-        encoding="utf-8",
-    ) as file:
-        json.dump(manifest, file, indent=2)
+    if persist:
+        config.output_dir.mkdir(parents=True, exist_ok=True)
+        reconstructed_surfaces_dir.mkdir(parents=True, exist_ok=True)
+        manifest = {
+            "name": config.name,
+            "results_dir": str(config.results_dir),
+            "output_dir": str(config.output_dir),
+            "grid": {"nx": config.nx, "nz": config.nz},
+            "rank": config.rank,
+            "energy_fraction": config.energy_fraction,
+            "landmark_interpolation": "inverse_distance_weighted_4_nearest_grid_points",
+            "landmarks": list(landmark_metadata),
+            "case_names": list(snapshots.case_names),
+            "valid_grid_points": int(snapshots.valid_mask.sum()),
+        }
+        with (config.output_dir / "study_manifest.json").open(
+            "w",
+            encoding="utf-8",
+        ) as file:
+            json.dump(manifest, file, indent=2)
+
     metrics: list[dict[str, Any]] = []
+    valid_coordinates = _grid_coordinates_3d(snapshots)[snapshots.valid_mask]
+    case_indices = np.arange(len(snapshots.case_names))
 
     for held_out_index, case_name in enumerate(snapshots.case_names):
-        training_indices = np.delete(np.arange(len(snapshots.case_names)), held_out_index)
         basis = PODBasis.fit(
-            states[:, training_indices],
+            states[:, np.delete(case_indices, held_out_index)],
             rank=config.rank,
             energy_fraction=config.energy_fraction,
         )
@@ -217,69 +221,109 @@ def evaluate_study(
         )
         reference_state = states[:, held_out_index]
         errors = reconstruction_errors(reference_state, reconstructed_state)
-        reference_field = _state_to_field(
-            reference_state,
-            snapshots.valid_mask,
-            snapshots.grid.point_count,
-        )
-        reconstructed_field = _state_to_field(
-            reconstructed_state,
-            snapshots.valid_mask,
-            snapshots.grid.point_count,
-        )
-        reference_deformed = (
-            _grid_coordinates_3d(snapshots) + reference_field
-        )
-        reconstructed_deformed = (
-            _grid_coordinates_3d(snapshots) + reconstructed_field
-        )
-        output_file = reconstructed_surfaces_dir / f"{case_name}_reconstruction.npz"
-        np.savez_compressed(
-            output_file,
-            coordinates=_grid_coordinates_3d(snapshots),
-            reference_displacement=reference_field,
-            reconstructed_displacement=reconstructed_field,
-            reference_deformed_coordinates=reference_deformed,
-            reconstructed_deformed_coordinates=reconstructed_deformed,
-            valid_mask=snapshots.valid_mask,
-            landmark_neighbor_indices=observation_operator.point_indices,
-            landmark_weights=observation_operator.point_weights,
-        )
-        metrics.append(
-            {
-                "case_name": case_name,
-                "pod_rank": int(basis.modes.shape[1]),
-                **errors,
-                **diagnostics,
-                "deformed_coordinate_relative_l2_error": float(
-                    np.linalg.norm(
-                        (reference_deformed - reconstructed_deformed)[
-                            snapshots.valid_mask
-                        ]
-                    )
-                    / max(
-                        np.linalg.norm(reference_deformed[snapshots.valid_mask]),
-                        1e-12,
-                    )
-                ),
-                "reconstruction_file": str(output_file),
-            }
-        )
+        reference_deformed = valid_coordinates + reference_state.reshape(-1, 3)
+        metric_row: dict[str, Any] = {
+            "case_name": case_name,
+            "pod_rank": int(basis.modes.shape[1]),
+            **errors,
+            **diagnostics,
+            "deformed_coordinate_relative_l2_error": float(
+                errors["absolute_l2_error"]
+                / max(np.linalg.norm(reference_deformed), 1e-12)
+            ),
+        }
+        if persist:
+            reference_field = _state_to_field(
+                reference_state,
+                snapshots.valid_mask,
+                snapshots.grid.point_count,
+            )
+            reconstructed_field = _state_to_field(
+                reconstructed_state,
+                snapshots.valid_mask,
+                snapshots.grid.point_count,
+            )
+            output_file = reconstructed_surfaces_dir / f"{case_name}_reconstruction.npz"
+            coordinates = _grid_coordinates_3d(snapshots)
+            np.savez_compressed(
+                output_file,
+                coordinates=coordinates,
+                reference_displacement=reference_field,
+                reconstructed_displacement=reconstructed_field,
+                reference_deformed_coordinates=coordinates + reference_field,
+                reconstructed_deformed_coordinates=coordinates + reconstructed_field,
+                valid_mask=snapshots.valid_mask,
+                landmark_neighbor_indices=observation_operator.point_indices,
+                landmark_weights=observation_operator.point_weights,
+            )
+            metric_row["reconstruction_file"] = str(output_file)
+        metrics.append(metric_row)
 
-    serializable_metrics = _json_safe(metrics)
-    with (config.output_dir / "metrics.json").open("w", encoding="utf-8") as file:
-        json.dump(serializable_metrics, file, indent=2)
-    with (config.output_dir / "metrics.csv").open(
-        "w",
-        newline="",
-        encoding="utf-8",
-    ) as file:
-        writer = csv.DictWriter(file, fieldnames=metrics[0].keys())
-        writer.writeheader()
-        writer.writerows(serializable_metrics)
-    with (config.output_dir / "landmarks.json").open("w", encoding="utf-8") as file:
-        json.dump(list(landmark_metadata), file, indent=2)
+    if persist:
+        serializable_metrics = _json_safe(metrics)
+        with (config.output_dir / "metrics.json").open("w", encoding="utf-8") as file:
+            json.dump(serializable_metrics, file, indent=2)
+        with (config.output_dir / "metrics.csv").open(
+            "w",
+            newline="",
+            encoding="utf-8",
+        ) as file:
+            writer = csv.DictWriter(file, fieldnames=metrics[0].keys())
+            writer.writeheader()
+            writer.writerows(serializable_metrics)
+        with (config.output_dir / "landmarks.json").open("w", encoding="utf-8") as file:
+            json.dump(list(landmark_metadata), file, indent=2)
     return metrics
+
+
+def evaluate_landmark_scenarios(
+    snapshots: ResampledSnapshotSet,
+    scenarios: tuple[tuple[str, tuple[Landmark, ...]], ...],
+    rank: int | None = None,
+    energy_fraction: float | None = 0.999,
+) -> list[dict[str, Any]]:
+    """Evaluate many landmark sets while fitting one temporary basis per case."""
+    if not scenarios:
+        raise ValueError("At least one landmark scenario is required.")
+
+    operators = {
+        scenario_id: _landmark_operator(snapshots, landmarks)[0]
+        for scenario_id, landmarks in scenarios
+    }
+    states = snapshots.state_matrix()
+    case_indices = np.arange(len(snapshots.case_names))
+    valid_coordinates = _grid_coordinates_3d(snapshots)[snapshots.valid_mask]
+    metric_rows: list[dict[str, Any]] = []
+
+    for held_out_index, case_name in enumerate(snapshots.case_names):
+        basis = PODBasis.fit(
+            states[:, np.delete(case_indices, held_out_index)],
+            rank=rank,
+            energy_fraction=energy_fraction,
+        )
+        reference_state = states[:, held_out_index]
+        reference_deformed = valid_coordinates + reference_state.reshape(-1, 3)
+        for scenario_id, _ in scenarios:
+            operator = operators[scenario_id]
+            reconstructed_state, diagnostics = basis.reconstruct(
+                operator.observe(reference_state),
+                operator,
+            )
+            errors = reconstruction_errors(reference_state, reconstructed_state)
+            metric_rows.append(
+                {
+                    "scenario_id": scenario_id,
+                    "case_name": case_name,
+                    "pod_rank": int(basis.modes.shape[1]),
+                    **errors,
+                    **diagnostics,
+                    "deformed_coordinate_relative_l2_error": float(
+                        errors["absolute_l2_error"]
+                        / max(np.linalg.norm(reference_deformed), 1e-12)
+                    ),
+                }
+            )
+    return metric_rows
 
 
 def _grid_coordinates_3d(snapshot_set: ResampledSnapshotSet) -> np.ndarray:

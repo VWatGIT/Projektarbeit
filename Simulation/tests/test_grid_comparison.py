@@ -5,7 +5,6 @@ import numpy as np
 
 from Simulation.run_grid_comparison import (
     build_grid_landmarks,
-    calculate_undeformed_baseline,
     summarize_metrics,
 )
 from Simulation.utils.gappy_pod import ObservationOperator
@@ -69,51 +68,17 @@ class GridComparisonTests(unittest.TestCase):
                     "deformed_coordinate_relative_l2_error": 0.3,
                 },
             ],
-            {
-                "relative_l2_error": 1.0,
-                "absolute_l2_error": 5.0,
-                "maximum_absolute_error": 2.0,
-                "deformed_coordinate_relative_l2_error": 0.1,
-            },
         )
 
         self.assertEqual(summary["case_count"], 2)
         self.assertEqual(summary["landmark_count"], 4)
         self.assertAlmostEqual(summary["mean_relative_l2_error"], 0.3)
+        self.assertAlmostEqual(summary["min_case_relative_l2_error"], 0.2)
+        self.assertAlmostEqual(summary["max_case_relative_l2_error"], 0.4)
         self.assertAlmostEqual(summary["mean_absolute_l2_error"], 20.0)
         self.assertAlmostEqual(summary["mean_maximum_absolute_error"], 4.0)
         self.assertAlmostEqual(
             summary["mean_deformed_coordinate_relative_l2_error"], 0.2
-        )
-        self.assertEqual(summary["undeformed_mean_relative_l2_error"], 1.0)
-
-    def test_undeformed_baseline_compares_zero_displacement_to_fem(self) -> None:
-        snapshots = ResampledSnapshotSet(
-            case_names=("case",),
-            grid=SurfaceGrid(
-                axis_indices=(0, 2),
-                fixed_axis=1,
-                fixed_value=0.0,
-                coordinates_2d=np.array(
-                    [[0.0, 0.0], [0.0, 1.0], [1.0, 0.0], [1.0, 1.0]],
-                    dtype=np.float64,
-                ),
-                shape=(2, 2),
-            ),
-            displacements=np.tile(
-                np.array([1.0, 0.0, 0.0], dtype=np.float64),
-                (1, 4, 1),
-            ),
-            valid_mask=np.ones(4, dtype=bool),
-        )
-
-        baseline = calculate_undeformed_baseline(snapshots)
-
-        self.assertAlmostEqual(baseline["relative_l2_error"], 1.0)
-        self.assertAlmostEqual(baseline["absolute_l2_error"], 2.0)
-        self.assertAlmostEqual(baseline["maximum_absolute_error"], 1.0)
-        self.assertGreater(
-            baseline["deformed_coordinate_relative_l2_error"], 0.0
         )
 
     def test_non_finite_case_errors_are_excluded_from_the_mean(self) -> None:
@@ -123,17 +88,13 @@ class GridComparisonTests(unittest.TestCase):
                 {"relative_l2_error": 0.25},
                 {"relative_l2_error": float("inf")},
             ],
-            {
-                "relative_l2_error": 0.0,
-                "absolute_l2_error": 0.0,
-                "maximum_absolute_error": 0.0,
-                "deformed_coordinate_relative_l2_error": 0.0,
-            },
         )
 
         self.assertEqual(summary["case_count"], 2)
         self.assertEqual(summary["mean_relative_l2_error"], 0.25)
         self.assertEqual(summary["finite_case_count_relative_l2_error"], 1)
+        self.assertAlmostEqual(summary["min_case_relative_l2_error"], 0.25)
+        self.assertAlmostEqual(summary["max_case_relative_l2_error"], 0.25)
         self.assertIsNone(summary["mean_absolute_l2_error"])
 
     def test_landmark_observation_uses_four_inverse_distance_weights(self) -> None:

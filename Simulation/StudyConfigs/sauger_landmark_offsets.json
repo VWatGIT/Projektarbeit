@@ -1,0 +1,25 @@
+{
+  "name": "Saugers3_1_landmark_offsets_3",
+  "results_dir": "../Results/Saugers3_1/FEA",
+  "output_dir": "../Results/Saugers3_1/Study/sauger_landmark_offsets_3",
+  "initial_positions_file": "../Results/Saugers3_1/initial_sauger_positions.json",
+  "grid": {
+    "nx": 51,
+    "nz": 51
+  },
+  "energy_fraction": 0.999,
+  "landmarks_per_sauger": 3,
+  "radii": [
+    0.1,
+    0.5,
+    1,
+    2,
+    5,
+    10,
+    25,
+    50
+  ],
+  "trials_per_radius": 20,
+  "random_seed": 20261027,
+  "coordinate_units": "same_as_source_model"
+}

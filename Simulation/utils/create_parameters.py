@@ -7,6 +7,11 @@ from typing import Any
 
 import pandas as pd
 
+try:
+    from .coordinate_transforms import suction_position_in_nastran_coordinates
+except ImportError:
+    from utils.coordinate_transforms import suction_position_in_nastran_coordinates
+
 
 @dataclass(frozen=True)
 class SuctionStudyConfig:
@@ -186,6 +191,49 @@ def parameter_columns(sauger_count: int) -> list[str]:
     return columns
 
 
+def write_initial_sauger_positions(
+    config: ParameterStudyConfig,
+    experiment_directory: str | Path,
+) -> tuple[Path, Path]:
+    """Write fixed nominal sauger positions in Inventor and Nastran coordinates."""
+    destination = Path(experiment_directory)
+    destination.mkdir(parents=True, exist_ok=True)
+    positions = []
+    for index, sauger in enumerate(config.saugers, start=1):
+        nastran_x, nastran_z = suction_position_in_nastran_coordinates(
+            sauger.nominal_x,
+            sauger.nominal_z,
+        )
+        positions.append(
+            {
+                "sauger_index": index,
+                "inventor_x": sauger.nominal_x,
+                "inventor_z": sauger.nominal_z,
+                "nastran_x": nastran_x,
+                "nastran_z": nastran_z,
+            }
+        )
+
+    json_file = destination / "initial_sauger_positions.json"
+    csv_file = destination / "initial_sauger_positions.csv"
+    with json_file.open("w", encoding="utf-8") as file:
+        json.dump(
+            {
+                "experiment": config.name,
+                "coordinate_units": "same_as_source_model",
+                "saugers": positions,
+            },
+            file,
+            indent=2,
+        )
+        file.write("\n")
+    with csv_file.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=positions[0].keys())
+        writer.writeheader()
+        writer.writerows(positions)
+    return json_file, csv_file
+
+
 def create_parameters(
     config: ParameterStudyConfig,
     results_dir: str | Path,
@@ -199,6 +247,7 @@ def create_parameters(
 
     destination = Path(results_dir).resolve() / experiment_name / "parameters.csv"
     destination.parent.mkdir(parents=True, exist_ok=True)
+    write_initial_sauger_positions(config, destination.parent)
     cases = generate_cases(config)
     columns = parameter_columns(len(config.saugers))
 

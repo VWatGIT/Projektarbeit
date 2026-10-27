@@ -8,8 +8,6 @@ import math
 from pathlib import Path
 from typing import Any, Sequence
 
-import numpy as np
-
 try:
     from .utils.create_study_configs import grid_values
     from .utils.study_pipeline import (
@@ -18,7 +16,6 @@ try:
         evaluate_study,
         load_study_config,
     )
-    from .utils.gappy_pod import reconstruction_errors
     from .utils.surface_resampling import load_resampled_snapshots
 except ImportError:
     from utils.create_study_configs import grid_values
@@ -28,7 +25,6 @@ except ImportError:
         evaluate_study,
         load_study_config,
     )
-    from utils.gappy_pod import reconstruction_errors
     from utils.surface_resampling import load_resampled_snapshots
 
 
@@ -58,7 +54,6 @@ def build_grid_landmarks(
 def summarize_metrics(
     grid_size: int,
     case_metrics: list[dict[str, Any]],
-    undeformed_metrics: dict[str, float],
 ) -> dict[str, int | float | None]:
     """Average each finite per-case error, retaining its valid case count."""
     summary: dict[str, int | float | None] = {
@@ -76,39 +71,9 @@ def summarize_metrics(
             sum(finite_values) / len(finite_values) if finite_values else None
         )
         summary[f"finite_case_count_{metric}"] = len(finite_values)
-        summary[f"undeformed_mean_{metric}"] = undeformed_metrics[metric]
+        summary[f"min_case_{metric}"] = min(finite_values) if finite_values else None
+        summary[f"max_case_{metric}"] = max(finite_values) if finite_values else None
     return summary
-
-
-def calculate_undeformed_baseline(snapshots: Any) -> dict[str, float]:
-    """Average each metric for zero displacement versus the FEM cases."""
-    coordinates = np.zeros((snapshots.grid.point_count, 3), dtype=np.float64)
-    axis_a, axis_b = snapshots.grid.axis_indices
-    coordinates[:, axis_a] = snapshots.grid.coordinates_2d[:, 0]
-    coordinates[:, axis_b] = snapshots.grid.coordinates_2d[:, 1]
-    coordinates[:, snapshots.grid.fixed_axis] = snapshots.grid.fixed_value
-    valid_coordinates = coordinates[snapshots.valid_mask]
-
-    baseline_cases = []
-    for case_displacement in snapshots.displacements:
-        valid_displacement = case_displacement[snapshots.valid_mask]
-        reference_state = valid_displacement.reshape(-1)
-        errors = reconstruction_errors(
-            reference_state,
-            np.zeros_like(reference_state),
-        )
-        reference_deformed = valid_coordinates + valid_displacement
-        errors["deformed_coordinate_relative_l2_error"] = float(
-            np.linalg.norm(reference_deformed - valid_coordinates)
-            / max(np.linalg.norm(reference_deformed), 1e-12)
-        )
-        baseline_cases.append(errors)
-
-    return {
-        metric: sum(float(case[metric]) for case in baseline_cases)
-        / len(baseline_cases)
-        for metric in METRICS
-    }
 
 
 def write_summary_csv(
@@ -121,7 +86,8 @@ def write_summary_csv(
             (
                 f"mean_{metric}",
                 f"finite_case_count_{metric}",
-                f"undeformed_mean_{metric}",
+                f"min_case_{metric}",
+                f"max_case_{metric}",
             )
         )
 
@@ -134,7 +100,6 @@ def write_summary_csv(
 def plot_summaries(
     output_file: Path,
     summaries: list[dict[str, int | float | None]],
-    undeformed_metrics: dict[str, float],
 ) -> None:
     import matplotlib
 
@@ -156,14 +121,24 @@ def plot_summaries(
         ]
         x_values = [int(row["landmark_count"]) for row in plotted_rows]
         y_values = [float(row[f"mean_{metric}"]) for row in plotted_rows]
-        axis.plot(x_values, y_values, marker="o", linewidth=1.8)
-        axis.axhline(
-            undeformed_metrics[metric],
-            color="black",
-            linestyle="--",
-            linewidth=1.2,
-            label="Undeformed vs. FEM",
-        )
+        line = axis.plot(
+            x_values,
+            y_values,
+            marker="o",
+            linewidth=1.8,
+            label="Mean across held-out cases",
+        )[0]
+        case_min = [row[f"min_case_{metric}"] for row in plotted_rows]
+        case_max = [row[f"max_case_{metric}"] for row in plotted_rows]
+        if all(value is not None for value in case_min + case_max):
+            axis.fill_between(
+                x_values,
+                [float(value) for value in case_min],
+                [float(value) for value in case_max],
+                color=line.get_color(),
+                alpha=0.18,
+                label="Min-max across held-out cases",
+            )
         axis.set_title(title)
         axis.set_ylabel(
             "Mean relative error"
@@ -173,7 +148,7 @@ def plot_summaries(
         axis.grid(True, alpha=0.3)
         if "relative" in metric:
             axis.yaxis.set_major_formatter(PercentFormatter(xmax=1.0))
-        axis.legend(fontsize=8)
+        axis.legend(fontsize=7)
 
     for axis in axes[-1]:
         axis.set_xlabel("Number of landmarks")
@@ -236,8 +211,6 @@ def main(arguments: Sequence[str] | None = None) -> None:
         nx=base_config.nx,
         nz=base_config.nz,
     )
-    undeformed_metrics = calculate_undeformed_baseline(snapshots)
-
     summaries = []
     for grid_size in range(args.min_grid, args.max_grid + 1):
         grid_config = StudyConfig(
@@ -254,16 +227,18 @@ def main(arguments: Sequence[str] | None = None) -> None:
             f"Evaluating {grid_size}x{grid_size} grid "
             f"({grid_size * grid_size} landmarks)..."
         )
-        case_metrics = evaluate_study(grid_config, snapshots=snapshots)
-        summaries.append(
-            summarize_metrics(grid_size, case_metrics, undeformed_metrics)
+        case_metrics = evaluate_study(
+            grid_config,
+            snapshots=snapshots,
+            persist=False,
         )
+        summaries.append(summarize_metrics(grid_size, case_metrics))
         print(f"  averaged {len(case_metrics)} held-out cases")
 
     summary_file = output_dir / "grid_comparison.csv"
     plot_file = output_dir / "grid_comparison.png"
     write_summary_csv(summary_file, summaries)
-    plot_summaries(plot_file, summaries, undeformed_metrics)
+    plot_summaries(plot_file, summaries)
     print(f"Wrote {summary_file}")
     print(f"Wrote {plot_file}")
 

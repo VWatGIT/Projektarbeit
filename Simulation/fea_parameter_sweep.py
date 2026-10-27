@@ -17,6 +17,7 @@ from utils.create_parameters import (
     load_parameter_cases,
     load_study_config,
 )
+from utils.coordinate_transforms import suction_position_in_nastran_coordinates
 from utils.postprocess import export_displacement_field_to_numpy
 from utils.inventor_automation import SuctionPosition, generate_case
 from utils.result_status import write_simulation_status
@@ -51,28 +52,11 @@ OUTPUT_DIR = RESULTS_DIR / experiment_name / "FEA"
 
 
 
-# Inventor's suction parameters use a different coordinate system from the
-# generated Nastran GRID coordinates. --> Results from the dimensioning in the Inventor Sketch
-NASTRAN_POSITION_SCALE = -1.0
-
-
 #Solver_Arguments = ["INMEMORYIO=AUS", "BUFFEREDDECKREAD=OFF"] # TODO check out potentially useful solver arguments
 
 # ============================================================
 # HAUPTPROGRAMM
 # ============================================================
-
-def suction_position_in_nastran_coordinates(
-    position_x: float,
-    position_z: float,
-) -> tuple[float, float]:
-    """Convert an Inventor suction position to Nastran x/z coordinates."""
-
-    return (
-        NASTRAN_POSITION_SCALE * position_x,
-        NASTRAN_POSITION_SCALE * position_z,
-    )
-
 
 def main() -> None:
     parameters = load_parameter_cases(PARAMETER_FILE)

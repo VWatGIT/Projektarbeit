@@ -239,7 +239,7 @@ NodeObservationOperator = ObservationOperator
 
 @dataclass(frozen=True)
 class PODBasis:
-    """Mean-centered, orthonormal POD basis."""
+    """Zero-reference, orthonormal POD basis for displacement snapshots."""
 
     mean: np.ndarray
     modes: np.ndarray
@@ -256,13 +256,18 @@ class PODBasis:
         snapshot_matrix = np.asarray(states, dtype=np.float64)
         if snapshot_matrix.ndim != 2:
             raise ValueError("states must have shape (state_size, snapshot_count).")
-        mean = snapshot_matrix.mean(axis=1)
-        centered = snapshot_matrix - mean[:, None]
-        modes, singular_values, _ = np.linalg.svd(centered, full_matrices=False)
+        mean = np.zeros(snapshot_matrix.shape[0], dtype=np.float64)
+        modes, singular_values, _ = np.linalg.svd(
+            snapshot_matrix,
+            full_matrices=False,
+        )
         if singular_values.size == 0:
             raise ValueError("At least two non-identical snapshots are required.")
 
-        energy = np.cumsum(singular_values**2) / np.sum(singular_values**2)
+        total_energy = float(np.sum(singular_values**2))
+        if total_energy == 0:
+            raise ValueError("Cannot fit a POD basis with zero displacement energy.")
+        energy = np.cumsum(singular_values**2) / total_energy
         if rank is None:
             if energy_fraction is None or not 0 < energy_fraction <= 1:
                 raise ValueError("energy_fraction must be in (0, 1].")

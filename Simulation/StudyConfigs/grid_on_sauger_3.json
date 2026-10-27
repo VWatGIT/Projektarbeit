@@ -3,8 +3,8 @@
   "results_dir": "../Results/baseline/FEA",
   "output_dir": "../Results/baseline/Study",
   "grid": {
-    "nx": 101,
-    "nz": 101
+    "nx": 51,
+    "nz": 51
   },
   "energy_fraction": 0.999,
   "landmark_grid": {
