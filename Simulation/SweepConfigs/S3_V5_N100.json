@@ -1,0 +1,33 @@
+{
+  "name": "S3_V5_N100",
+  "number_of_simulations": 100,
+  "random_seed": 42,
+  "saugers": [
+    {
+      "nominal_x": 200.0,
+      "nominal_z": 200.0
+    },
+    {
+      "nominal_x": 800.0,
+      "nominal_z": 200.0
+    },
+    {
+      "nominal_x": 500.0,
+      "nominal_z": 800.0
+    }
+  ],
+  "variation": {
+    "position": {
+      "vary_position": true,
+      "deviation_x": 5.0,
+      "deviation_y": 5.0,
+      "deviation_z": 5.0
+    },
+    "rotation": {
+      "vary_rotation": false,
+      "deviation_x": 2.0,
+      "deviation_y": 0.0,
+      "deviation_z": 2.0
+    }
+  }
+}

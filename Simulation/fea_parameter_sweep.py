@@ -1,4 +1,5 @@
 import math
+import time
 from pathlib import Path
 import json
 
@@ -33,7 +34,7 @@ SOLVER_PATH = Path(r"C:\Program Files\Autodesk\Inventor Nastran 2025\Nastran\Nas
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RESULTS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "Results"
 SWEEP_CONFIGS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "SweepConfigs"
-SWEEP_CONFIG_PATH = SWEEP_CONFIGS_DIR / "Variation_and_rotation.json" # Change this to the relevant one
+SWEEP_CONFIG_PATH = SWEEP_CONFIGS_DIR / "S2_V5_N100.json" # Change this to the relevant one
 
 
 study_config = load_study_config(SWEEP_CONFIG_PATH)
@@ -59,6 +60,14 @@ OUTPUT_DIR = EXPERIMENT_DIR / "FEA"
 # HAUPTPROGRAMM
 # ============================================================
 
+def format_duration(seconds: float) -> str:
+    hours, remainder = divmod(int(seconds), 3600)
+    minutes, secs = divmod(remainder, 60)
+    if hours:
+        return f"{hours}h{minutes:02d}m{secs:02d}s"
+    return f"{minutes}m{secs:02d}s"
+
+
 def main() -> None:
     parameters = load_parameter_cases(PARAMETER_FILE)
     parameter_sauger_count = detect_sauger_count(parameters.columns.tolist())
@@ -71,8 +80,9 @@ def main() -> None:
     status_cases = []
     successful_count = 0
     failed_count = 0
-
-    for case in parameters.itertuples(index=False):
+    total_cases = len(parameters)
+    sweep_start = time.monotonic()
+    for position, case in enumerate(parameters.itertuples(index=False), start=1):
         simulation_id = int(case.simulation_id)
 
         case_name = f"simulation_{simulation_id:03d}"
@@ -82,7 +92,19 @@ def main() -> None:
         pch_file = case_directory / f"{case_name}.pch"
         npy_file = case_directory / f"{case_name}.npz" # Displacement field
 
-        print(f"\nRunning {case_name}")
+        elapsed = time.monotonic() - sweep_start
+        completed = position - 1
+        eta_text = (
+            format_duration(elapsed / completed * (total_cases - completed))
+            if completed
+            else "?"
+        )
+        print(
+            f"\n[{position}/{total_cases}] {completed / total_cases:.0%} done | "
+            f"elapsed {format_duration(elapsed)} | ETA ~{eta_text} | "
+            f"{successful_count} ok, {failed_count} failed"
+        )
+        print(f"Running {case_name}")
         npy_file.unlink(missing_ok=True)
         pch_file.unlink(missing_ok=True)
         status = {
@@ -162,7 +184,8 @@ def main() -> None:
 
     print(
         f"\nSweep finished: {successful_count} successful, "
-        f"{failed_count} failed, {len(status_cases)} total."
+        f"{failed_count} failed, {len(status_cases)} total "
+        f"in {format_duration(time.monotonic() - sweep_start)}."
     )
 
 

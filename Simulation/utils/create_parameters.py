@@ -222,6 +222,23 @@ def write_initial_sauger_positions(
                 "experiment": config.name,
                 "coordinate_units": "same_as_source_model",
                 "saugers": positions,
+                "variation": {
+                    "random_seed": config.random_seed,
+                    "number_of_simulations": config.number_of_simulations,
+                    "displacement": {
+                        "varies": config.variation.position.varies,
+                        "deviation_x": config.variation.position.deviation_x,
+                        "deviation_y": config.variation.position.deviation_y,
+                        "deviation_z": config.variation.position.deviation_z,
+                    },
+                    "rotation": {
+                        "unit": "degrees",
+                        "varies": config.variation.rotation.varies,
+                        "deviation_x": config.variation.rotation.deviation_x,
+                        "deviation_y": config.variation.rotation.deviation_y,
+                        "deviation_z": config.variation.rotation.deviation_z,
+                    },
+                },
             },
             file,
             indent=2,
