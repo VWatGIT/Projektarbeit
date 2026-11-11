@@ -19,7 +19,7 @@ from typing import Any, Sequence
 import numpy as np
 
 try:
-    from .run_grid_comparison import METRICS, build_grid_landmarks
+    from .study_landmarks_grid import METRICS, build_grid_landmarks
     from .utils.gappy_pod import PODBasis, reconstruction_errors
     from .utils.study_pipeline import (
         _grid_coordinates_3d,
@@ -28,7 +28,7 @@ try:
     )
     from .utils.surface_resampling import load_resampled_snapshots
 except ImportError:
-    from run_grid_comparison import METRICS, build_grid_landmarks
+    from study_landmarks_grid import METRICS, build_grid_landmarks
     from utils.gappy_pod import PODBasis, reconstruction_errors
     from utils.study_pipeline import (
         _grid_coordinates_3d,
@@ -254,7 +254,7 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--config",
         type=Path,
-        default=simulation_dir / "StudyConfigs" / "grid_on_sauger_3.json",
+        default=simulation_dir / "StudyConfigs" / "config_landmarks_grid_3.json",
         help="Study config providing domain bounds, interpolation grid and POD settings.",
     )
     parser.add_argument("--experiment", required=True)

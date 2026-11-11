@@ -1,12 +1,12 @@
 {
-  "name": "landmark_offsets_4",
+  "name": "landmarks_offset_1",
   "best_worst_selection_metric": "deformed_coordinate_relative_l2_error",
   "grid": {
     "nx": 51,
     "nz": 51
   },
   "energy_fraction": 0.999,
-  "landmarks_per_sauger": 4,
+  "landmarks_per_sauger": 1,
   "radii": [
     0.1,
     0.5,

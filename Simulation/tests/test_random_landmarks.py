@@ -6,7 +6,7 @@ from pathlib import Path
 
 import numpy as np
 
-from Simulation.run_random_landmarks import (
+from Simulation.study_landmarks_random import (
     _sauger_positions_nastran,
     aggregate_amount_metrics,
     derive_trial_seed,

@@ -431,7 +431,7 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--config",
         type=Path,
-        default=simulation_dir / "StudyConfigs" / "grid_on_sauger_3.json",
+        default=simulation_dir / "StudyConfigs" / "config_landmarks_grid_3.json",
         help="Study config providing the domain, interpolation grid, and POD settings.",
     )
     parser.add_argument(

@@ -24,7 +24,7 @@ from Simulation.utils.sauger_landmark_study import (
     load_sauger_landmark_study_config,
     trial_seed,
 )
-from Simulation.run_sauger_landmark_study import (
+from Simulation.study_landmarks_offset import (
     aggregate_trials,
     select_best_worst_cases,
     write_true_surface_fem_metrics,

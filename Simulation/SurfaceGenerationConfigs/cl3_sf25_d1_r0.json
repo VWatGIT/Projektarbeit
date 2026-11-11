@@ -1,6 +1,6 @@
 {
-  "name": "Variation_10mm_100N",
-  "number_of_simulations": 100,
+  "name": "cl3_sf25_d1_r0",
+  "number_of_simulations": 25,
   "random_seed": 42,
   "saugers": [
     {
@@ -19,15 +19,15 @@
   "variation": {
     "position": {
       "vary_position": true,
-      "deviation_x": 10.0,
-      "deviation_y": 10.0,
-      "deviation_z": 10.0
+      "deviation_x": 1.0,
+      "deviation_y": 1.0,
+      "deviation_z": 1.0
     },
     "rotation": {
       "vary_rotation": false,
-      "deviation_x": 2.0,
+      "deviation_x": 0.0,
       "deviation_y": 0.0,
-      "deviation_z": 2.0
+      "deviation_z": 0.0
     }
   }
 }

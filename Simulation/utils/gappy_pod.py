@@ -256,11 +256,26 @@ class PODBasis:
         snapshot_matrix = np.asarray(states, dtype=np.float64)
         if snapshot_matrix.ndim != 2:
             raise ValueError("states must have shape (state_size, snapshot_count).")
-        mean = np.zeros(snapshot_matrix.shape[0], dtype=np.float64)
         modes, singular_values, _ = np.linalg.svd(
             snapshot_matrix,
             full_matrices=False,
         )
+        return cls.from_svd(
+            modes,
+            singular_values,
+            rank=rank,
+            energy_fraction=energy_fraction,
+        )
+
+    @classmethod
+    def from_svd(
+        cls,
+        modes: np.ndarray,
+        singular_values: np.ndarray,
+        rank: int | None = None,
+        energy_fraction: float | None = 0.999,
+    ) -> "PODBasis":
+        """Build a basis from a precomputed SVD of the snapshot matrix."""
         if singular_values.size == 0:
             raise ValueError("At least two non-identical snapshots are required.")
 
@@ -271,12 +286,12 @@ class PODBasis:
         if rank is None:
             if energy_fraction is None or not 0 < energy_fraction <= 1:
                 raise ValueError("energy_fraction must be in (0, 1].")
-            rank = int(np.searchsorted(energy, energy_fraction) + 1)
+            rank = min(int(np.searchsorted(energy, energy_fraction) + 1), modes.shape[1])
         if not 1 <= rank <= modes.shape[1]:
             raise ValueError(f"rank must be between 1 and {modes.shape[1]}.")
 
         return cls(
-            mean=mean,
+            mean=np.zeros(modes.shape[0], dtype=np.float64),
             modes=modes[:, :rank],
             singular_values=singular_values,
             energy=energy,

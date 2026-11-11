@@ -1,19 +1,11 @@
 {
-  "name": "Test",
-  "number_of_simulations": 3,
+  "name": "cl1_sf25_d1_r0",
+  "number_of_simulations": 25,
   "random_seed": 42,
   "saugers": [
     {
-      "nominal_x": 300.0,
-      "nominal_z": 200.0
-    },
-    {
-      "nominal_x": 800.0,
-      "nominal_z": 200.0
-    },
-    {
-      "nominal_x": 400.0,
-      "nominal_z": 800.0
+      "nominal_x": 500.0,
+      "nominal_z": 500.0
     }
   ],
   "variation": {
@@ -25,9 +17,9 @@
     },
     "rotation": {
       "vary_rotation": false,
-      "deviation_x": 1.0,
+      "deviation_x": 0.0,
       "deviation_y": 0.0,
-      "deviation_z": 1.0
+      "deviation_z": 0.0
     }
   }
 }

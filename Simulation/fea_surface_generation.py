@@ -1,3 +1,5 @@
+import argparse
+import csv
 import math
 import time
 from pathlib import Path
@@ -33,25 +35,7 @@ SOLVER_PATH = Path(r"C:\Program Files\Autodesk\Inventor Nastran 2025\Nastran\Nas
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 RESULTS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "Results"
-SWEEP_CONFIGS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "SweepConfigs"
-SWEEP_CONFIG_PATH = SWEEP_CONFIGS_DIR / "S2_V5_N100.json" # Change this to the relevant one
-
-
-study_config = load_study_config(SWEEP_CONFIG_PATH)
-sauger_count = len(study_config.saugers)
-MODEL_STEM = f"CFK_Platte_{sauger_count}"
-INVENTOR_MODEL = REPO_ROOT / "Projektarbeit" / "Simulation" / "Inventor" / f"{MODEL_STEM}.ipt"
-PLATE_MODEL = REPO_ROOT / "Projektarbeit" / "Simulation" / "Inventor" / "NastranExports" / f"{MODEL_STEM}.nas"
-experiment_name = create_parameters(
-    config=study_config,
-    results_dir=RESULTS_DIR,
-)
-
-
-EXPERIMENT_DIR = RESULTS_DIR / experiment_name
-PARAMETER_FILE = EXPERIMENT_DIR / "parameters.csv"
-OUTPUT_DIR = EXPERIMENT_DIR / "FEA"
-
+SURFACE_GENERATION_CONFIGS_DIR = REPO_ROOT / "Projektarbeit" / "Simulation" / "SurfaceGenerationConfigs"
 
 
 #Solver_Arguments = ["INMEMORYIO=AUS", "BUFFEREDDECKREAD=OFF"] # TODO check out potentially useful solver arguments
@@ -68,15 +52,46 @@ def format_duration(seconds: float) -> str:
     return f"{minutes}m{secs:02d}s"
 
 
-def main() -> None:
-    parameters = load_parameter_cases(PARAMETER_FILE)
+def resolve_config_path(argument: str) -> Path:
+    path = Path(argument)
+    if path.suffix != ".json":
+        path = SURFACE_GENERATION_CONFIGS_DIR / f"{argument}.json"
+    return path.resolve()
+
+
+def read_batch_file(batch_file: Path) -> list[str]:
+    with batch_file.open(newline="", encoding="utf-8-sig") as file:
+        reader = csv.DictReader(file)
+        if reader.fieldnames is None or "config" not in reader.fieldnames:
+            raise ValueError(f"{batch_file} must contain a 'config' column.")
+        return [row["config"].strip() for row in reader if row["config"].strip()]
+
+
+def run_surface_generation(config_path: Path) -> bool:
+    study_config = load_study_config(config_path)
+    sauger_count = len(study_config.saugers)
+    model_stem = f"CFK_Platte_{sauger_count}"
+    inventor_model = REPO_ROOT / "Projektarbeit" / "Simulation" / "Inventor" / f"{model_stem}.ipt"
+    plate_model = REPO_ROOT / "Projektarbeit" / "Simulation" / "Inventor" / "NastranExports" / f"{model_stem}.nas"
+    experiment_name = create_parameters(
+        config=study_config,
+        results_dir=RESULTS_DIR,
+    )
+    experiment_dir = RESULTS_DIR / experiment_name
+    parameter_file = experiment_dir / "parameters.csv"
+    output_dir = experiment_dir / "FEA"
+
+    def log(message: str) -> None:
+        print(f"[{study_config.name}] {message}")
+
+    parameters = load_parameter_cases(parameter_file)
     parameter_sauger_count = detect_sauger_count(parameters.columns.tolist())
     if parameter_sauger_count != sauger_count:
         raise ValueError(
             "The generated parameter file contains a different number of saugers "
             "than the loaded sweep configuration."
         )
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     status_cases = []
     successful_count = 0
     failed_count = 0
@@ -86,7 +101,7 @@ def main() -> None:
         simulation_id = int(case.simulation_id)
 
         case_name = f"simulation_{simulation_id:03d}"
-        case_directory = OUTPUT_DIR / f"{case_name}"
+        case_directory = output_dir / f"{case_name}"
         output_model = case_directory / f"{case_name}.nas"
         
         pch_file = case_directory / f"{case_name}.pch"
@@ -99,19 +114,19 @@ def main() -> None:
             if completed
             else "?"
         )
-        print(
+        log(
             f"\n[{position}/{total_cases}] {completed / total_cases:.0%} done | "
             f"elapsed {format_duration(elapsed)} | ETA ~{eta_text} | "
             f"{successful_count} ok, {failed_count} failed"
         )
-        print(f"Running {case_name}")
+        log(f"Running {case_name}")
         npy_file.unlink(missing_ok=True)
         pch_file.unlink(missing_ok=True)
         status = {
             "simulation_id": simulation_id,
             "case_name": case_name,
             "status": "failed",
-            "npz_file": str(npy_file.relative_to(EXPERIMENT_DIR)),
+            "npz_file": str(npy_file.relative_to(experiment_dir)),
             "returncode": None,
             "error": None,
         }
@@ -119,7 +134,7 @@ def main() -> None:
         try:
             generate_case(
                 project_root=REPO_ROOT / "Projektarbeit",
-                inventor_model_path=INVENTOR_MODEL,
+                inventor_model_path=inventor_model,
                 position=SuctionPosition(
                     positions=tuple(
                         (
@@ -130,8 +145,7 @@ def main() -> None:
                     ),
                 ),
             )
-
-            model = load_model(PLATE_MODEL)
+            model = load_model(plate_model)
             for index in range(1, parameter_sauger_count + 1):
                 position_x, position_z = suction_position_in_nastran_coordinates(
                     float(getattr(case, f"s{index}_x")),
@@ -173,20 +187,54 @@ def main() -> None:
 
             status["status"] = "success"
             successful_count += 1
-            print(f"{case_name} succeeded")
+            log(f"{case_name} succeeded")
         except Exception as error:
             failed_count += 1
             status["error"] = str(error)
-            print(f"{case_name} failed: {error}")
+            log(f"{case_name} failed: {error}")
 
         status_cases.append(status)
-        write_simulation_status(EXPERIMENT_DIR, status_cases)
+        write_simulation_status(experiment_dir, status_cases)
 
-    print(
+    log(
         f"\nSweep finished: {successful_count} successful, "
         f"{failed_count} failed, {len(status_cases)} total "
         f"in {format_duration(time.monotonic() - sweep_start)}."
     )
+    return failed_count == 0
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Generate surface data for one or more configs, one after another."
+    )
+    parser.add_argument(
+        "configs",
+        nargs="*",
+        help=(
+            "Config names (without .json) or paths. Names are resolved in "
+            f"{SURFACE_GENERATION_CONFIGS_DIR}. If omitted, the batch file is used."
+        ),
+    )
+    parser.add_argument(
+        "--batch",
+        type=Path,
+        default=SURFACE_GENERATION_CONFIGS_DIR / "batch.csv",
+        help="CSV file with a 'config' column listing the configs to run.",
+    )
+    arguments = parser.parse_args()
+    config_names = arguments.configs or read_batch_file(arguments.batch)
+    if not config_names:
+        raise SystemExit("No configs given and the batch file is empty.")
+    config_paths = [resolve_config_path(name) for name in config_names]
+
+    failed = [
+        config_path.stem
+        for config_path in config_paths
+        if not run_surface_generation(config_path)
+    ]
+    if failed:
+        raise SystemExit(f"Surface generation failed for: {', '.join(failed)}")
 
 
 if __name__ == "__main__":

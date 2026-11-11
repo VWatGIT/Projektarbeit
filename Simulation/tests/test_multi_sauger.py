@@ -18,16 +18,31 @@ from Simulation.utils.result_status import (
 )
 
 
-CONFIG_PATH = (
-    Path(__file__).parents[1]
-    / "Simulation"
-    / "SweepConfigs"
-    / "Test_3_Sauger.json"
-)
-
-
 def config_data() -> dict:
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    return {
+        "name": "Test",
+        "number_of_simulations": 3,
+        "random_seed": 42,
+        "saugers": [
+            {"nominal_x": 300.0, "nominal_z": 200.0},
+            {"nominal_x": 800.0, "nominal_z": 200.0},
+            {"nominal_x": 400.0, "nominal_z": 800.0},
+        ],
+        "variation": {
+            "position": {
+                "vary_position": True,
+                "deviation_x": 1.0,
+                "deviation_y": 1.0,
+                "deviation_z": 1.0,
+            },
+            "rotation": {
+                "vary_rotation": False,
+                "deviation_x": 1.0,
+                "deviation_y": 0.0,
+                "deviation_z": 1.0,
+            },
+        },
+    }
 
 
 class MultiSaugerTests(unittest.TestCase):

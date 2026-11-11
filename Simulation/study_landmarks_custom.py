@@ -14,7 +14,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--config",
         type=Path,
-        default=simulation_dir / "StudyConfigs" / "grid_on_sauger_3.json",
+        default=simulation_dir / "StudyConfigs" / "config_landmarks_custom.json",
     )
     parser.add_argument("--experiment", required=True)
     parser.add_argument("--output-dir", type=Path, default=None)

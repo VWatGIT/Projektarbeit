@@ -1,0 +1,52 @@
+{
+  "name": "landmarks_grid_3",
+  "best_worst_selection_metric": "deformed_coordinate_relative_l2_error",
+  "grid": {
+    "nx": 51,
+    "nz": 51
+  },
+  "energy_fraction": 0.999,
+  "landmark_grid": {
+    "l_total": 9,
+    "lx": 3,
+    "lz": 3
+  },
+  "landmarks": [
+    {
+      "x": -1000.0,
+      "z": -1000.0
+    },
+    {
+      "x": -1000.0,
+      "z": -500.0
+    },
+    {
+      "x": -1000.0,
+      "z": 0.0
+    },
+    {
+      "x": -500.0,
+      "z": -1000.0
+    },
+    {
+      "x": -500.0,
+      "z": -500.0
+    },
+    {
+      "x": -500.0,
+      "z": 0.0
+    },
+    {
+      "x": 0.0,
+      "z": -1000.0
+    },
+    {
+      "x": 0.0,
+      "z": -500.0
+    },
+    {
+      "x": 0.0,
+      "z": 0.0
+    }
+  ]
+}

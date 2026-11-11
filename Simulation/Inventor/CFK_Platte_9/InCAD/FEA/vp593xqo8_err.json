@@ -1,0 +1,125 @@
+{
+    "errors": {
+        "count": 0,
+        "data": []
+    },
+    "nastranVersion": "19.1.0.27",
+    "schemaVersion": "1.0.1",
+    "warnings": {
+        "count": 5,
+        "data": [
+            {
+                "code": "E5016",
+                "count": 1,
+                "entityType": "Card",
+                "info": [
+                    {
+                        "message": "WARNING E5016: LOAD SET 13 DOES NOT EXIST",
+                        "recommendation": [
+                            "LOAD"
+                        ]
+                    }
+                ],
+                "type": "Warning"
+            },
+            {
+                "code": "E5049",
+                "count": 4,
+                "entityType": "Node",
+                "info": [
+                    {
+                        "entityID": 946,
+                        "location": [
+                            -502.624303274,
+                            0.0,
+                            -705.985376063
+                        ],
+                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 946 COMPONENT 5"
+                    },
+                    {
+                        "entityID": 946,
+                        "location": [
+                            -502.624303274,
+                            0.0,
+                            -705.985376063
+                        ],
+                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 946 COMPONENT 4"
+                    },
+                    {
+                        "entityID": 214,
+                        "location": [
+                            -480.299843497,
+                            0.0,
+                            -432.678810256
+                        ],
+                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 214 COMPONENT 1"
+                    },
+                    {
+                        "entityID": 449,
+                        "location": [
+                            -839.028373871,
+                            0.0,
+                            -485.066946483
+                        ],
+                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 449 COMPONENT 6"
+                    }
+                ],
+                "type": "Warning"
+            },
+            {
+                "code": "E5077",
+                "count": 4,
+                "entityType": "Unknown",
+                "info": [
+                    {
+                        "message": "WARNING E5077: DIFFERENTIAL STIFFNESS MATRIX IGNORED FOR THIS ITERATION"
+                    },
+                    {
+                        "message": "WARNING E5077: DIFFERENTIAL STIFFNESS MATRIX IGNORED FOR THIS ITERATION"
+                    },
+                    {
+                        "message": "WARNING E5077: DIFFERENTIAL STIFFNESS MATRIX IGNORED FOR THIS ITERATION"
+                    },
+                    {
+                        "message": "WARNING E5077: DIFFERENTIAL STIFFNESS MATRIX IGNORED FOR THIS ITERATION"
+                    }
+                ],
+                "type": "Warning"
+            },
+            {
+                "code": "E5078",
+                "count": 3,
+                "entityType": "Unknown",
+                "info": [
+                    {
+                        "message": "WARNING E5078: SOLUTION HAS DIVERGED"
+                    },
+                    {
+                        "message": "WARNING E5078: SOLUTION HAS DIVERGED"
+                    },
+                    {
+                        "message": "WARNING E5078: SOLUTION HAS DIVERGED"
+                    }
+                ],
+                "type": "Warning"
+            },
+            {
+                "code": "E5075",
+                "count": 3,
+                "entityType": "Unknown",
+                "info": [
+                    {
+                        "message": "WARNING E5075: BISECTING CURRENT LOAD INCREMENT"
+                    },
+                    {
+                        "message": "WARNING E5075: BISECTING CURRENT LOAD INCREMENT"
+                    },
+                    {
+                        "message": "WARNING E5075: BISECTING CURRENT LOAD INCREMENT"
+                    }
+                ],
+                "type": "Warning"
+            }
+        ]
+    }
+}

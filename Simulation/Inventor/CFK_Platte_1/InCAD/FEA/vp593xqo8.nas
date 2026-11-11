@@ -1,5 +1,5 @@
 NASTRAN RSLTFILETYPE=NASTRANBINARY
-ID 5E3EF723-6119-4572-81B3-6C844B0F1084
+ID E2326697-D991-48B1-93B9-C3D650D34DC9
 SOL NONLINEAR STATIC
 CEND
 ECHO = NONE
@@ -17,7 +17,7 @@ $ Version    : 2025-SP0 -- Database V15
 $ Translator : Autodesk Nastran
 $ From Model : C:\Users\val83626\Documents\GitLab\Projektarbeit\Simulation\Inventor\CFK_Platte_1.ipt
 $ Analysis   : Analyse 1
-$ Date       : Tuesday, Tue Oct 27 10:01:34 2026 
+$ Date       : Wednesday, Wed Nov 11 11:17:03 2026 
 $ ******************************************************************************************
 $ 
 PARAM,UNITS,MM

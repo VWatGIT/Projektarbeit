@@ -5,7 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
-from Simulation.run_grid_comparison import (
+from Simulation.study_landmarks_grid import (
     build_grid_landmarks,
     format_sauger_coordinates,
     load_best_worst_selection_metric,
