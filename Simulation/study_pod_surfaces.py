@@ -21,6 +21,7 @@ import numpy as np
 try:
     from .study_landmarks_grid import METRICS, build_grid_landmarks
     from .utils.gappy_pod import PODBasis, reconstruction_errors
+    from .utils.script_defaults import POD_STUDY_CONFIG, load_script_defaults
     from .utils.study_pipeline import (
         _grid_coordinates_3d,
         _landmark_operator,
@@ -30,6 +31,7 @@ try:
 except ImportError:
     from study_landmarks_grid import METRICS, build_grid_landmarks
     from utils.gappy_pod import PODBasis, reconstruction_errors
+    from utils.script_defaults import POD_STUDY_CONFIG, load_script_defaults
     from utils.study_pipeline import (
         _grid_coordinates_3d,
         _landmark_operator,
@@ -249,29 +251,25 @@ def plot_mode_count(
 
 
 def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
-    simulation_dir = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--config",
-        type=Path,
-        default=simulation_dir / "StudyConfigs" / "config_landmarks_grid_3.json",
-        help="Study config providing domain bounds, interpolation grid and POD settings.",
+        "--settings",
+        default="config_pod_surfaces.json",
+        help="Default arguments file in StudyConfigs, or a path to one.",
     )
     parser.add_argument("--experiment", required=True)
-    parser.add_argument("--grid-size", type=int, default=3)
-    parser.add_argument("--min-training", type=int, default=1)
+    parser.add_argument("--grid-size", type=int)
+    parser.add_argument("--min-training", type=int)
     parser.add_argument(
         "--max-training",
         type=int,
-        default=None,
-        help="Defaults to 2 x the number of landmarks, capped at the number of cases minus one.",
+        help="Defaults to unlimited, i.e. the number of cases minus one.",
     )
-    parser.add_argument("--trials", type=int, default=10)
-    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--trials", type=int)
+    parser.add_argument("--seed", type=int)
     parser.add_argument(
         "--energy-fraction",
         type=float,
-        default=None,
         help=(
             "Cumulative POD energy in (0, 1] that determines the number of modes. "
             "Overrides the config's energy_fraction or fixed rank."
@@ -281,17 +279,18 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
         "--output-dir",
         type=Path,
         default=None,
-        help="Defaults to Study/training_size_comparison_<N>x<N>_e<energy>.",
+        help="Defaults to Study/<name> from the settings file.",
     )
+    pre_args, _ = parser.parse_known_args(arguments)
+    parser.set_defaults(**load_script_defaults(pre_args.settings))
     return parser.parse_args(arguments)
 
 
-def main(arguments: Sequence[str] | None = None) -> None:
-    args = parse_args(arguments)
+def run_study(args: argparse.Namespace) -> None:
     simulation_dir = Path(__file__).resolve().parent
     results_dir = simulation_dir / "Results" / args.experiment
     config = load_study_config(
-        args.config,
+        POD_STUDY_CONFIG,
         results_dir=results_dir,
         output_dir=args.output_dir,
     )
@@ -306,19 +305,9 @@ def main(arguments: Sequence[str] | None = None) -> None:
             raise ValueError("energy-fraction must be in (0, 1].")
         config = replace(config, energy_fraction=args.energy_fraction, rank=None)
     if args.output_dir is None:
-        pod_label = (
-            f"e{config.energy_fraction:g}"
-            if config.energy_fraction is not None
-            else f"rank{config.rank}"
-        )
-        config = replace(
-            config,
-            output_dir=config.results_dir
-            / "Study"
-            / f"training_size_comparison_{args.grid_size}x{args.grid_size}_{pod_label}",
-        )
+        config = replace(config, output_dir=config.results_dir / "Study" / args.name)
     landmarks = build_grid_landmarks(config, args.grid_size)
-    max_training = args.max_training or min(2 * len(landmarks), case_count - 1)
+    max_training = args.max_training or case_count - 1
     if not 1 <= args.min_training <= max_training <= case_count - 1:
         raise ValueError(
             f"Training sizes must satisfy 1 <= min <= max <= {case_count - 1}."
@@ -357,6 +346,11 @@ def main(arguments: Sequence[str] | None = None) -> None:
         config.energy_fraction,
     )
     print(f"Results written to {output_dir}")
+
+
+def main(arguments: Sequence[str] | None = None) -> None:
+    args = parse_args(arguments)
+    run_study(args)
 
 
 if __name__ == "__main__":

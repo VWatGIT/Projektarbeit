@@ -21,6 +21,7 @@ try:
     from .study_landmarks_grid import METRICS, build_grid_landmarks
     from .study_pod_surfaces import format_duration, write_csv
     from .utils.gappy_pod import PODBasis, reconstruction_errors
+    from .utils.script_defaults import POD_STUDY_CONFIG, load_script_defaults
     from .utils.study_pipeline import (
         _grid_coordinates_3d,
         _landmark_operator,
@@ -31,6 +32,7 @@ except ImportError:
     from study_landmarks_grid import METRICS, build_grid_landmarks
     from study_pod_surfaces import format_duration, write_csv
     from utils.gappy_pod import PODBasis, reconstruction_errors
+    from utils.script_defaults import POD_STUDY_CONFIG, load_script_defaults
     from utils.study_pipeline import (
         _grid_coordinates_3d,
         _landmark_operator,
@@ -119,6 +121,16 @@ def summarize(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return summaries
 
 
+def _set_energy_log_axis(axis) -> None:
+    """Log x-axis with evenly spaced, labelled ticks that adapt to the data range."""
+    from matplotlib.ticker import FormatStrFormatter, MaxNLocator, NullLocator
+
+    axis.set_xscale("log")
+    axis.xaxis.set_major_locator(MaxNLocator(nbins=10, steps=[1, 2, 2.5, 5, 10]))
+    axis.xaxis.set_major_formatter(FormatStrFormatter("%.2f"))
+    axis.xaxis.set_minor_locator(NullLocator())
+
+
 def plot_mode_count(output_file: Path, summaries: list[dict[str, Any]]) -> None:
     import matplotlib
 
@@ -131,6 +143,7 @@ def plot_mode_count(output_file: Path, summaries: list[dict[str, Any]]) -> None:
         energies,
         [row["mean_pod_rank"] for row in summaries],
         marker="o",
+        markersize=3,
         linewidth=1.8,
         label="Mean",
     )
@@ -141,8 +154,7 @@ def plot_mode_count(output_file: Path, summaries: list[dict[str, Any]]) -> None:
         alpha=0.25,
         label="Min-max",
     )
-    axis.set_xscale("log")
-    axis.set_xlabel("Cumulative energy fraction")
+    _set_energy_log_axis(axis)
     axis.set_ylabel("Number of POD modes")
     axis.set_title("POD modes required by energy fraction")
     axis.grid(True, alpha=0.3, which="both")
@@ -174,7 +186,7 @@ def plot_error_metrics(
     for axis, metric, title in zip(axes.flat, METRICS, titles):
         mean = np.array([row[f"mean_{metric}"] for row in summaries], dtype=float)
         std = np.array([row[f"std_{metric}"] for row in summaries], dtype=float)
-        axis.plot(energies, mean, marker="o", linewidth=1.8, label="Mean")
+        axis.plot(energies, mean, marker="o", markersize=3, linewidth=1.8, label="Mean")
         axis.fill_between(
             energies,
             np.maximum(mean - std, 0),
@@ -183,8 +195,7 @@ def plot_error_metrics(
             label="±1 std",
         )
         axis.set_title(title)
-        axis.set_xscale("log")
-        axis.set_yscale("log")
+        _set_energy_log_axis(axis)
         axis.grid(True, alpha=0.3, which="both")
         axis.legend(fontsize=7)
         if "relative" in metric:
@@ -200,43 +211,36 @@ def plot_error_metrics(
 
 
 def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
-    simulation_dir = Path(__file__).resolve().parent
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--config",
-        type=Path,
-        default=simulation_dir / "StudyConfigs" / "config_landmarks_grid_3.json",
-        help="Study config providing domain bounds, interpolation grid and POD settings.",
+        "--settings",
+        default="config_pod_modes.json",
+        help="Default arguments file in StudyConfigs, or a path to one.",
     )
     parser.add_argument("--experiment", required=True)
-    parser.add_argument("--grid-size", type=int, default=3)
-    parser.add_argument("--min-energy", type=float, default=0.6)
+    parser.add_argument("--grid-size", type=int)
+    parser.add_argument("--min-energy", type=float)
     parser.add_argument(
         "--points",
         type=int,
-        default=10,
         help="Number of logarithmically spaced energy fractions from --min-energy to 1.",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
-        help="Defaults to Study/energy_fraction_comparison_<N>x<N>.",
+        help="Defaults to Study/<name> from the settings file.",
     )
+    pre_args, _ = parser.parse_known_args(arguments)
+    parser.set_defaults(**load_script_defaults(pre_args.settings))
     return parser.parse_args(arguments)
 
 
-def main(arguments: Sequence[str] | None = None) -> None:
-    args = parse_args(arguments)
-    if not 0 < args.min_energy < 1:
-        raise ValueError("min-energy must be in (0, 1).")
-    if args.points < 2:
-        raise ValueError("points must be at least 2.")
-
+def run_study(args: argparse.Namespace) -> None:
     simulation_dir = Path(__file__).resolve().parent
     results_dir = simulation_dir / "Results" / args.experiment
     config = load_study_config(
-        args.config,
+        POD_STUDY_CONFIG,
         results_dir=results_dir,
         output_dir=args.output_dir,
     )
@@ -247,12 +251,7 @@ def main(arguments: Sequence[str] | None = None) -> None:
     )
     config = replace(config, rank=None)
     if args.output_dir is None:
-        config = replace(
-            config,
-            output_dir=config.results_dir
-            / "Study"
-            / f"energy_fraction_comparison_{args.grid_size}x{args.grid_size}",
-        )
+        config = replace(config, output_dir=config.results_dir / "Study" / args.name)
     landmarks = build_grid_landmarks(config, args.grid_size)
     operator, _ = _landmark_operator(snapshots, landmarks)
     valid_coordinates = _grid_coordinates_3d(snapshots)[snapshots.valid_mask]
@@ -282,6 +281,15 @@ def main(arguments: Sequence[str] | None = None) -> None:
         len(landmarks),
     )
     print(f"Results written to {output_dir}")
+
+
+def main(arguments: Sequence[str] | None = None) -> None:
+    args = parse_args(arguments)
+    if not 0 < args.min_energy < 1:
+        raise ValueError("min-energy must be in (0, 1).")
+    if args.points < 2:
+        raise ValueError("points must be at least 2.")
+    run_study(args)
 
 
 if __name__ == "__main__":

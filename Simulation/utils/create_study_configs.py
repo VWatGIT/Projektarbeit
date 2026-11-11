@@ -53,7 +53,7 @@ def create_study_config(
 	]
 	config: dict[str, object] = {
 		"name": name,
-		"grid": {"nx": nx, "nz": nz},
+		"interpolation_grid": {"nx": nx, "nz": nz},
 		"energy_fraction": 0.999 if energy_fraction is None else energy_fraction,
 		"landmark_grid": {"l_total": x_count * z_count, "lx": x_count, "lz": z_count},
 		"landmarks": landmarks,

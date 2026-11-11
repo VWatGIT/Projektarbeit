@@ -1,6 +1,6 @@
 {
   "name": "landmarks_custom",
-  "grid": {
+  "interpolation_grid": {
     "nx": 51,
     "nz": 51
   },

@@ -27,7 +27,8 @@ Parameters -> Output Control Directives -> RSLTFILETYPE: NASTRANBINARY
 
 
 Notes to self:
-Later compare improvement of Gappy-POD surface with just working with the CAD/wrong surface
+- Later compare improvement of Gappy-POD surface with just working with the CAD/wrong surface
+- with 0 displacement, the Gappy-POD should interpolate perfectly using a single Landmark
 
 Error:
 eTotal ≈ eRegistration + ePOD + eGappy

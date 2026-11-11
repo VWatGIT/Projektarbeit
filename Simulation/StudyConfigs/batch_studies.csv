@@ -1,0 +1,8 @@
+script,config
+study_landmarks_grid,config_landmarks_grid_11.json
+study_landmarks_offset,config_landmarks_offset_1.json
+study_landmarks_offset,config_landmarks_offset_4.json
+study_landmarks_random,config_landmarks_random.json
+study_pod_modes,config_pod_modes.json
+study_pod_surfaces,config_pod_surfaces.json
+

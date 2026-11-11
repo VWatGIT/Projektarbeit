@@ -210,7 +210,7 @@ def _selected_case_record(
 		"selection_metric_value": float(row[config.best_worst_selection_metric]),
 		"maximum_absolute_error": float(row["maximum_absolute_error"]),
 		"metrics": {metric: float(row[metric]) for metric in METRICS},
-		"grid": {"nx": config.nx, "nz": config.nz},
+		"interpolation_grid": {"nx": config.nx, "nz": config.nz},
 		"landmark_count": int(row["amount"]),
 		"landmarks_nastran_xz": scenario_metadata[row["scenario_id"]]["landmarks"],
 		"sauger_positions_nastran_xyz": _sauger_positions_nastran(
@@ -593,7 +593,7 @@ def run_random_landmark_study(
 		"name": config.name,
 		"results_dir": str(config.results_dir),
 		"output_dir": str(config.output_dir),
-		"grid": {"nx": config.nx, "nz": config.nz},
+		"interpolation_grid": {"nx": config.nx, "nz": config.nz},
 		"energy_fraction": config.energy_fraction,
 		"rank": config.rank,
 		"amounts": list(selected_amounts),

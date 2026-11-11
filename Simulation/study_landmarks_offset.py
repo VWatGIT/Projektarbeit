@@ -400,7 +400,7 @@ def plot_surface_comparison(
             0.005,
             1.0 - (row_index + 0.5) / len(cases),
             f"{case_label}: r={record['radius']:g}, trial {record['trial']}\n"
-            f"{record['case_name']}, grid {record['grid']['nx']}x{record['grid']['nz']}\n"
+            f"{record['case_name']}, grid {record['interpolation_grid']['nx']}x{record['interpolation_grid']['nz']}\n"
             f"max abs error={record['maximum_absolute_error']:.6g}\n"
             f"Saugers Nastran (x,z), y position:\n" + "\n".join(sauger_lines),
             ha="left",
@@ -602,7 +602,7 @@ def run_study(
                 metric: float(case_row[metric])
                 for metric in METRICS
             },
-            "grid": {"nx": config.nx, "nz": config.nz},
+            "interpolation_grid": {"nx": config.nx, "nz": config.nz},
             "landmarks_per_sauger": config.landmarks_per_sauger,
             "landmark_count": len(metadata["landmarks"]),
             "landmarks_nastran_xz": metadata["landmarks"],
@@ -710,7 +710,7 @@ def run_study(
     best_worst_metadata = {
         "selection_metric": config.best_worst_selection_metric,
         "results_dir": str(config.results_dir),
-        "grid": {"nx": config.nx, "nz": config.nz},
+        "interpolation_grid": {"nx": config.nx, "nz": config.nz},
         "landmarks_per_sauger": config.landmarks_per_sauger,
         "per_radius": per_radius_best_worst,
         "global": {"best": global_best, "worst": global_worst},
@@ -798,7 +798,7 @@ def run_study(
         "results_dir": str(config.results_dir),
         "initial_positions_file": str(config.initial_positions_file),
         "output_dir": str(config.output_dir),
-        "grid": {"nx": config.nx, "nz": config.nz},
+        "interpolation_grid": {"nx": config.nx, "nz": config.nz},
         "energy_fraction": config.energy_fraction,
         "rank": config.rank,
         "landmarks_per_sauger": config.landmarks_per_sauger,

@@ -66,7 +66,7 @@ def load_random_landmark_study_config(
     if trials_per_amount < 1:
         raise ValueError("trials_per_amount must be positive.")
 
-    grid = raw.get("grid", {})
+    grid = raw.get("interpolation_grid", {})
     nx = int(grid.get("nx", 51))
     nz = int(grid.get("nz", 51))
     if nx < 2 or nz < 2:

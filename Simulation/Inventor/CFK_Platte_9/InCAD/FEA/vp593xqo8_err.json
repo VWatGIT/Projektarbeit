@@ -28,40 +28,40 @@
                 "entityType": "Node",
                 "info": [
                     {
-                        "entityID": 946,
+                        "entityID": 794,
                         "location": [
-                            -502.624303274,
+                            -414.341532548,
                             0.0,
-                            -705.985376063
+                            -417.498670266
                         ],
-                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 946 COMPONENT 5"
+                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 794 COMPONENT 4"
                     },
                     {
-                        "entityID": 946,
+                        "entityID": 495,
                         "location": [
-                            -502.624303274,
+                            -949.218924582,
                             0.0,
-                            -705.985376063
+                            -899.245960079
                         ],
-                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 946 COMPONENT 4"
+                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 495 COMPONENT 6"
                     },
                     {
-                        "entityID": 214,
+                        "entityID": 284,
                         "location": [
-                            -480.299843497,
+                            -897.527806398,
                             0.0,
-                            -432.678810256
+                            -847.115155368
                         ],
-                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 214 COMPONENT 1"
+                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 284 COMPONENT 1"
                     },
                     {
-                        "entityID": 449,
+                        "entityID": 1338,
                         "location": [
-                            -839.028373871,
+                            -385.329640647,
                             0.0,
-                            -485.066946483
+                            -646.708845471
                         ],
-                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 449 COMPONENT 6"
+                        "message": "WARNING E5049: SINGULARITY DETECTED AT GRID 1338 COMPONENT 5"
                     }
                 ],
                 "type": "Warning"

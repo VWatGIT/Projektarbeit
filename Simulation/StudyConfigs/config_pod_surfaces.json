@@ -1,0 +1,9 @@
+{
+  "name": "pod_surfaces",
+  "grid_size": 3,
+  "min_training": 1,
+  "max_training": null,
+  "trials": 10,
+  "seed": 0,
+  "energy_fraction": 0.999
+}

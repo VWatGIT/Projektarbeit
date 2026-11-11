@@ -4,40 +4,40 @@
   "random_seed": 42,
   "saugers": [
     {
-      "nominal_x": 200.0,
-      "nominal_z": 200.0
+      "nominal_x": 750.0,
+      "nominal_z": 250.0
+    },
+    {
+      "nominal_x": 750.0,
+      "nominal_z": 500.0
+    },
+    {
+      "nominal_x": 750.0,
+      "nominal_z": 750.0
     },
     {
       "nominal_x": 500.0,
-      "nominal_z": 200.0
+      "nominal_z": 250.0
     },
     {
-      "nominal_x": 800.0,
-      "nominal_z": 200.0
-    },
-    {
-      "nominal_x": 200.0,
+      "nominal_x": 500.0,
       "nominal_z": 500.0
     },
     {
       "nominal_x": 500.0,
+      "nominal_z": 750.0
+    },
+    {
+      "nominal_x": 250.0,
+      "nominal_z": 250.0
+    },
+    {
+      "nominal_x": 250.0,
       "nominal_z": 500.0
     },
     {
-      "nominal_x": 800.0,
-      "nominal_z": 500.0
-    },
-    {
-      "nominal_x": 200.0,
-      "nominal_z": 800.0
-    },
-    {
-      "nominal_x": 500.0,
-      "nominal_z": 800.0
-    },
-    {
-      "nominal_x": 800.0,
-      "nominal_z": 800.0
+      "nominal_x": 250.0,
+      "nominal_z": 750.0
     }
   ],
   "variation": {

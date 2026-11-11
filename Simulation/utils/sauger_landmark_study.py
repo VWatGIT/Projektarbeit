@@ -82,7 +82,7 @@ def load_sauger_landmark_study_config(
     if len(set(radii)) != len(radii):
         raise ValueError("radii must not contain duplicates.")
 
-    grid = raw.get("grid", {})
+    grid = raw.get("interpolation_grid", {})
     nx = int(grid.get("nx", 51))
     nz = int(grid.get("nz", 51))
     if nx < 2 or nz < 2:

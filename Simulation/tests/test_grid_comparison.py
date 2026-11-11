@@ -67,7 +67,7 @@ class GridComparisonTests(unittest.TestCase):
                 json.dumps(
                     {
                         "name": "grid",
-                        "grid": {"nx": 51, "nz": 51},
+                    "interpolation_grid": {"nx": 51, "nz": 51},
                         "energy_fraction": 0.999,
                         "landmarks": [{"x": -1000.0, "z": -1000.0}],
                     }
