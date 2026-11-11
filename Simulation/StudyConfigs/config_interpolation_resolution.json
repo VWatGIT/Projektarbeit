@@ -1,0 +1,8 @@
+{
+  "name": "interpolation_resolution",
+  "grid_size": 3,
+  "min_resolution": 2,
+  "max_resolution": 20,
+  "resolution_step": 1,
+  "energy_fraction": 0.999
+}

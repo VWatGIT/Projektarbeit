@@ -1,8 +1,8 @@
 """Run study scripts from a batch CSV on one experiment, one after another.
 
 The CSV has the columns 'script' and 'config' (a file name inside StudyConfigs).
-Landmark studies receive the file as --config (their study config). The POD
-studies receive it as --settings (their default arguments). Each row runs as
+Landmark studies receive the file as --config (their study config). The POD and
+interpolation studies receive it as --settings (their default arguments). Each row runs as
 its own process.
 """
 
@@ -17,7 +17,7 @@ from pathlib import Path
 SIMULATION_DIR = Path(__file__).resolve().parent
 STUDY_CONFIGS_DIR = SIMULATION_DIR / "StudyConfigs"
 DEFAULT_BATCH_FILE = STUDY_CONFIGS_DIR / "batch_studies.csv"
-SETTINGS_SCRIPTS = {"study_pod_modes", "study_pod_surfaces"}
+SETTINGS_SCRIPTS = {"study_interpolation_resolution", "study_pod_modes", "study_pod_surfaces"}
 
 
 def available_scripts() -> set[str]:
