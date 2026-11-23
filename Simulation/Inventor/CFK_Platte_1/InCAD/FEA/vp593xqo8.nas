@@ -1,5 +1,5 @@
 NASTRAN RSLTFILETYPE=NASTRANBINARY
-ID 27F78C12-2590-48CC-8373-694D3608100B
+ID 6B1DCDEA-D296-4F0E-AC3E-9CC6A4820179
 SOL NONLINEAR STATIC
 CEND
 ECHO = NONE
@@ -15,9 +15,9 @@ $ ******************************************************************************
 $ Written by : Autodesk Inventor Nastran
 $ Version    : 2025-SP0 -- Database V15
 $ Translator : Autodesk Nastran
-$ From Model : C:\Users\val83626\Documents\GitLab\Projektarbeit\Simulation\Inventor\CFK_Platte_1.ipt
+$ From Model : C:\Users\Valentin\Documents\GIT_REPS\Fraunhofer GitLab\Projektarbeit\Simulation\Inventor\CFK_Platte_1.ipt
 $ Analysis   : Analyse 1
-$ Date       : Wednesday, Wed Nov 11 12:20:50 2026 
+$ Date       : Monday, Mon Nov 23 17:31:27 2026 
 $ ******************************************************************************************
 $ 
 PARAM,UNITS,MM
@@ -3536,23 +3536,23 @@ $   Load Set       :    1
 $   Description    : Combined Load  
 $ ***************************************************************************
 $  
-LOAD           11.0000+01.0000+0     2591.0000+0     148
+LOAD           11.0000+01.0000+0     3091.0000+0     198
 $  
 $ ***************************************************************************
-$   Load Set       :  259  
+$   Load Set       :  309  
 $   Description    : Verschiebung_1  
 $ ***************************************************************************
 $  
-SPCD         259    1322       2-1.000+1
+SPCD         309    1322       2-1.000+1
 $  
 $ ***************************************************************************
-$   Load Set       :  148  
+$   Load Set       :  198  
 $   Description    : Rotation_1  
 $ ***************************************************************************
 $  
-SPCD         148    1322       4-1.745-2
-SPCD         148    1322       5     0.0
-SPCD         148    1322       61.7453-2
+SPCD         198    1322       4-1.745-2
+SPCD         198    1322       5     0.0
+SPCD         198    1322       61.7453-2
 $------1-------2-------3-------4-------5-------6-------7-------8-------9-------0
 $  
 $ ***************************************************************************
