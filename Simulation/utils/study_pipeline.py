@@ -13,10 +13,10 @@ import numpy as np
 
 try:
     from .gappy_pod import ObservationOperator, PODBasis, reconstruction_errors
-    from .surface_resampling import ResampledSnapshotSet, load_resampled_snapshots
+    from .surface_resampling import ResampledSnapshotSet, load_resampled_snapshots, validate_surface_resampling
 except ImportError:
     from utils.gappy_pod import ObservationOperator, PODBasis, reconstruction_errors
-    from utils.surface_resampling import ResampledSnapshotSet, load_resampled_snapshots
+    from utils.surface_resampling import ResampledSnapshotSet, load_resampled_snapshots, validate_surface_resampling
 
 
 @dataclass(frozen=True)
@@ -39,6 +39,7 @@ class StudyConfig:
     landmarks: tuple[Landmark, ...]
     energy_fraction: float | None = 0.999
     rank: int | None = None
+    surface_resampling: str = "linear"
 
 
 def load_study_config(
@@ -69,6 +70,7 @@ def load_study_config(
         energy_fraction = 0.999
     if rank is not None and energy_fraction is not None:
         raise ValueError("Configure either rank or energy_fraction, not both.")
+    surface_resampling = validate_surface_resampling(raw.get("surface_resampling", "linear"))
 
     results_path = Path(results_dir).resolve()
     if output_dir is None:
@@ -91,6 +93,7 @@ def load_study_config(
         landmarks=landmarks,
         energy_fraction=None if energy_fraction is None else float(energy_fraction),
         rank=None if rank is None else int(rank),
+        surface_resampling=surface_resampling,
     )
 
 
@@ -184,6 +187,7 @@ def evaluate_study(
             config.results_dir,
             nx=config.nx,
             nz=config.nz,
+            method=config.surface_resampling,
         )
     available_case_names = set(snapshots.case_names)
     if case_names is not None:
@@ -207,6 +211,7 @@ def evaluate_study(
             "results_dir": str(config.results_dir),
             "output_dir": str(config.output_dir),
             "interpolation_grid": {"nx": config.nx, "nz": config.nz},
+            "surface_resampling": config.surface_resampling,
             "rank": config.rank,
             "energy_fraction": config.energy_fraction,
             "landmark_interpolation": "inverse_distance_weighted_4_nearest_grid_points",

@@ -111,6 +111,17 @@ class SurfaceGenerationComparisonTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "inconsistent"):
                 load_baseline(root, "test", "landmarks_grid")
 
+    def test_baseline_uses_recorded_element_resampling(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = self.write_study(root, "test", [self.row(3, 0.4)])
+            metadata_file = path.parent / "global_best_worst_metadata.json"
+            metadata = json.loads(metadata_file.read_text(encoding="utf-8"))
+            metadata["surface_resampling"] = "elements"
+            metadata_file.write_text(json.dumps(metadata), encoding="utf-8")
+            load_baseline(root, "test", "landmarks_grid")
+            self.loader.assert_called_once_with(root / "test", nx=51, nz=51, method="elements")
+
     def test_reads_maximum_and_rejects_nonfinite_cases(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

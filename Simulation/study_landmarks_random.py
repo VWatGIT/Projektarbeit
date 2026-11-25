@@ -384,6 +384,7 @@ def run_random_landmark_study(
 			config.results_dir,
 			nx=config.nx,
 			nz=config.nz,
+			method=config.surface_resampling,
 		)
 	sampler = AreaWeightedSurfaceSampler.from_snapshots(snapshots)
 	case_parameters = _load_case_parameters(config.results_dir / "parameters.csv")
@@ -594,6 +595,7 @@ def run_random_landmark_study(
 		"results_dir": str(config.results_dir),
 		"output_dir": str(config.output_dir),
 		"interpolation_grid": {"nx": config.nx, "nz": config.nz},
+		"surface_resampling": config.surface_resampling,
 		"energy_fraction": config.energy_fraction,
 		"rank": config.rank,
 		"amounts": list(selected_amounts),

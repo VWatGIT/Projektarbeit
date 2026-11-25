@@ -1,8 +1,9 @@
 {
   "name": "interpolation_resolution",
+  "surface_resampling": "linear",
   "grid_size": 3,
-  "min_resolution": 2,
-  "max_resolution": 20,
-  "resolution_step": 1,
+  "min_resolution": 20,
+  "max_resolution": 201,
+  "resolution_step": 20,
   "energy_fraction": 0.999
 }

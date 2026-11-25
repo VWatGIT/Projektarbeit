@@ -468,6 +468,7 @@ def run_study(
         config.results_dir,
         nx=config.nx,
         nz=config.nz,
+        method=config.surface_resampling,
     )
     valid_coordinates = snapshots.grid.coordinates_2d[snapshots.valid_mask]
     if valid_coordinates.shape[0] < 3:
@@ -603,6 +604,7 @@ def run_study(
                 for metric in METRICS
             },
             "interpolation_grid": {"nx": config.nx, "nz": config.nz},
+            "surface_resampling": config.surface_resampling,
             "landmarks_per_sauger": config.landmarks_per_sauger,
             "landmark_count": len(metadata["landmarks"]),
             "landmarks_nastran_xz": metadata["landmarks"],
@@ -799,6 +801,7 @@ def run_study(
         "initial_positions_file": str(config.initial_positions_file),
         "output_dir": str(config.output_dir),
         "interpolation_grid": {"nx": config.nx, "nz": config.nz},
+        "surface_resampling": config.surface_resampling,
         "energy_fraction": config.energy_fraction,
         "rank": config.rank,
         "landmarks_per_sauger": config.landmarks_per_sauger,

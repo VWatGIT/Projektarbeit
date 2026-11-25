@@ -267,6 +267,7 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--trials", type=int)
     parser.add_argument("--seed", type=int)
+    parser.add_argument("--surface-resampling", choices=("linear", "elements"), default="linear")
     parser.add_argument(
         "--energy-fraction",
         type=float,
@@ -298,6 +299,7 @@ def run_study(args: argparse.Namespace) -> None:
         config.results_dir,
         nx=config.nx,
         nz=config.nz,
+        method=args.surface_resampling,
     )
     case_count = len(snapshots.case_names)
     if args.energy_fraction is not None:

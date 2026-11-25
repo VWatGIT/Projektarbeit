@@ -1,5 +1,6 @@
 {
   "name": "pod_modes",
+  "surface_resampling": "linear",
   "grid_size": 3,
   "min_energy": 0.9,
   "points": 100

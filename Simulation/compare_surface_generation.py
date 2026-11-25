@@ -70,7 +70,13 @@ def load_baseline(results_dir: Path, experiment: str, study: str) -> Baseline:
     nx, nz = grids[0]
     if not isinstance(nx, int) or isinstance(nx, bool) or not isinstance(nz, int) or isinstance(nz, bool):
         raise ValueError(f"{metadata_file}: invalid interpolation grid dimensions")
-    snapshots = load_resampled_snapshots(results_dir / experiment, nx=nx, nz=nz)
+    method = metadata.get("surface_resampling", "linear")
+    if method not in ("linear", "elements"):
+        raise ValueError(f"{metadata_file}: invalid surface resampling method {method!r}")
+    if method == "linear":
+        snapshots = load_resampled_snapshots(results_dir / experiment, nx=nx, nz=nz)
+    else:
+        snapshots = load_resampled_snapshots(results_dir / experiment, nx=nx, nz=nz, method=method)
     states = snapshots.state_matrix()
     if states.shape[0] == 0 or states.shape[1] == 0 or not np.isfinite(states).all():
         raise ValueError(f"{experiment}: no finite valid FEM displacement states")

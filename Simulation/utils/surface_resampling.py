@@ -14,6 +14,12 @@ except ImportError:
     from utils.result_status import successful_npz_files
 
 
+def validate_surface_resampling(method: str) -> str:
+    if method not in ("linear", "elements"):
+        raise ValueError("surface_resampling must be 'linear' or 'elements'.")
+    return method
+
+
 @dataclass(frozen=True)
 class SurfaceGrid:
     """Common grid defined in the two varying coordinates of a planar surface."""
@@ -133,10 +139,23 @@ def resample_displacement(
 def resample_npz(
     npz_file: str | Path,
     grid: SurfaceGrid,
+    method: str = "linear",
 ) -> ResampledSurface:
     """Load one existing result archive and resample its displacement field."""
+    validate_surface_resampling(method)
     npz_path = Path(npz_file)
     with np.load(npz_path) as archive:
+        if method == "elements":
+            from .element_resampling import resample_elements
+
+            return resample_elements(
+                npz_path.with_suffix(".nas"),
+                archive["node_ids"],
+                archive["original_coordinates"],
+                archive["displacement"],
+                grid,
+                npz_path.parent.name,
+            )
         return resample_displacement(
             coordinates=archive["original_coordinates"],
             displacement=archive["displacement"],
@@ -149,8 +168,10 @@ def load_resampled_snapshots(
     results_dir: str | Path,
     nx: int = 50,
     nz: int = 50,
+    method: str = "linear",
 ) -> ResampledSnapshotSet:
     """Resample every result archive onto a grid derived from the first case."""
+    validate_surface_resampling(method)
     results_path = Path(results_dir)
     files = successful_npz_files(results_path)
 
@@ -165,7 +186,7 @@ def load_resampled_snapshots(
     displacements: list[np.ndarray] = []
     valid_mask: np.ndarray | None = None
     for file_path in files:
-        resampled = resample_npz(file_path, grid)
+        resampled = resample_npz(file_path, grid, method=method)
         if valid_mask is None:
             valid_mask = resampled.valid_mask
         elif not np.array_equal(valid_mask, resampled.valid_mask):

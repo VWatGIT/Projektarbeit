@@ -1,5 +1,6 @@
 {
   "name": "landmarks_offset_4",
+  "surface_resampling": "linear",
   "best_worst_selection_metric": "deformed_coordinate_relative_l2_error",
   "interpolation_grid": {
     "nx": 51,

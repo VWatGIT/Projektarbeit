@@ -219,6 +219,7 @@ def parse_args(arguments: Sequence[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--experiment", required=True)
     parser.add_argument("--grid-size", type=int)
+    parser.add_argument("--surface-resampling", choices=("linear", "elements"), default="linear")
     parser.add_argument("--min-energy", type=float)
     parser.add_argument(
         "--points",
@@ -248,6 +249,7 @@ def run_study(args: argparse.Namespace) -> None:
         config.results_dir,
         nx=config.nx,
         nz=config.nz,
+        method=args.surface_resampling,
     )
     config = replace(config, rank=None)
     if args.output_dir is None:

@@ -1,5 +1,6 @@
 {
   "name": "landmarks_custom",
+  "surface_resampling": "linear",
   "interpolation_grid": {
     "nx": 51,
     "nz": 51

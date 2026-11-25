@@ -14,10 +14,10 @@ from scipy.spatial import Delaunay, QhullError
 
 try:
     from .study_pipeline import Landmark
-    from .surface_resampling import ResampledSnapshotSet
+    from .surface_resampling import ResampledSnapshotSet, validate_surface_resampling
 except ImportError:
     from utils.study_pipeline import Landmark
-    from utils.surface_resampling import ResampledSnapshotSet
+    from utils.surface_resampling import ResampledSnapshotSet, validate_surface_resampling
 
 
 STUDY_METRICS = (
@@ -64,6 +64,7 @@ class SaugerLandmarkStudyConfig:
     best_worst_selection_metric: str = DEFAULT_BEST_WORST_SELECTION_METRIC
     energy_fraction: float | None = 0.999
     rank: int | None = None
+    surface_resampling: str = "linear"
 
 
 def load_sauger_landmark_study_config(
@@ -146,6 +147,7 @@ def load_sauger_landmark_study_config(
             None if energy_fraction is None else float(energy_fraction)
         ),
         rank=None if rank is None else int(rank),
+        surface_resampling=validate_surface_resampling(raw.get("surface_resampling", "linear")),
     )
 
 

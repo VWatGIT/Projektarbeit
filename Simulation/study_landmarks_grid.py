@@ -470,6 +470,7 @@ def main(arguments: Sequence[str] | None = None) -> None:
         results_dir,
         nx=base_config.nx,
         nz=base_config.nz,
+        method=base_config.surface_resampling,
     )
     simulation_parameters = load_case_parameters(
         results_dir / "parameters.csv"
@@ -487,6 +488,7 @@ def main(arguments: Sequence[str] | None = None) -> None:
             landmarks=build_grid_landmarks(base_config, grid_size),
             energy_fraction=base_config.energy_fraction,
             rank=base_config.rank,
+            surface_resampling=base_config.surface_resampling,
         )
         print(
             f"Evaluating {grid_size}x{grid_size} grid "
@@ -575,6 +577,7 @@ def main(arguments: Sequence[str] | None = None) -> None:
             {
                 "selection_metric": selection_metric,
                 "results_dir": str(results_dir),
+                "surface_resampling": base_config.surface_resampling,
                 "per_grid": per_grid_cases,
                 "global": global_records,
             },

@@ -1,0 +1,101 @@
+{
+    "errors": {
+        "count": 0,
+        "data": []
+    },
+    "nastranVersion": "19.1.0.27",
+    "schemaVersion": "1.0.1",
+    "warnings": {
+        "count": 2,
+        "data": [
+            {
+                "code": "G3012",
+                "count": 5,
+                "entityType": "Element",
+                "info": [
+                    {
+                        "entityID": 12,
+                        "location": [
+                            -521.454179147,
+                            0.0,
+                            -819.095576241
+                        ],
+                        "message": "WARNING G3012: TRI ELEMENT 12 HAS A SKEW ANGLE GREATER THAN 65.0"
+                    },
+                    {
+                        "entityID": 83,
+                        "location": [
+                            -518.057634806,
+                            0.0,
+                            -786.838977099
+                        ],
+                        "message": "WARNING G3012: TRI ELEMENT 83 HAS A SKEW ANGLE GREATER THAN 65.0"
+                    },
+                    {
+                        "entityID": 103,
+                        "location": [
+                            -514.060535945,
+                            0.0,
+                            -783.747458811
+                        ],
+                        "message": "WARNING G3012: TRI ELEMENT 103 HAS A SKEW ANGLE GREATER THAN 65.0"
+                    },
+                    {
+                        "entityID": 109,
+                        "location": [
+                            -523.811141622,
+                            0.0,
+                            -795.096241562
+                        ],
+                        "message": "WARNING G3012: TRI ELEMENT 109 HAS A SKEW ANGLE GREATER THAN 65.0"
+                    },
+                    {
+                        "entityID": 128,
+                        "location": [
+                            -499.595761483,
+                            0.0,
+                            -779.998529697
+                        ],
+                        "message": "WARNING G3012: TRI ELEMENT 128 HAS A SKEW ANGLE GREATER THAN 65.0"
+                    }
+                ],
+                "type": "Warning"
+            },
+            {
+                "code": "G3015",
+                "count": 3,
+                "entityType": "Element",
+                "info": [
+                    {
+                        "entityID": 83,
+                        "location": [
+                            -518.057634806,
+                            0.0,
+                            -786.838977099
+                        ],
+                        "message": "WARNING G3015: TRI ELEMENT 83 HAS AN INTERIOR ANGLE LESS THAN 10.0"
+                    },
+                    {
+                        "entityID": 103,
+                        "location": [
+                            -514.060535945,
+                            0.0,
+                            -783.747458811
+                        ],
+                        "message": "WARNING G3015: TRI ELEMENT 103 HAS AN INTERIOR ANGLE LESS THAN 10.0"
+                    },
+                    {
+                        "entityID": 128,
+                        "location": [
+                            -499.595761483,
+                            0.0,
+                            -779.998529697
+                        ],
+                        "message": "WARNING G3015: TRI ELEMENT 128 HAS AN INTERIOR ANGLE LESS THAN 10.0"
+                    }
+                ],
+                "type": "Warning"
+            }
+        ]
+    }
+}

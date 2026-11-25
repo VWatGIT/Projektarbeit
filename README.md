@@ -18,6 +18,44 @@ python Simulation/utils/create_study_configs.py --name landmarks_grid --x-min -8
 
 The generated landmarks contain only `x` and `z`. Customize the interpolation grid with `--nx` and `--nz`, reconstruction rank with `--rank` or `--energy-fraction`, paths with `--results-dir` and `--output-dir`, and the output file with `--output`.
 
+Surface resampling:
+
+All surface study JSON configs accept `"surface_resampling": "linear"`
+(the default) or `"surface_resampling": "elements"`.
+Element resampling reads the `.nas` file with the same base name as each result `.npz`
+and uses CQUAD8 and CTRIA6 shape functions. All element nodes must have
+displacement results; unsupported element types are reported as errors. Grid
+points outside the elements are invalid. This option changes FEM-to-grid
+resampling, not the separate landmark-to-grid interpolation used by Gappy POD.
+The POD and interpolation-resolution studies also support
+`--surface-resampling linear` or `--surface-resampling elements`, overriding
+their settings JSON. The surface-generation comparison uses the grid study's
+recorded method for its baseline.
+
+Interpolation-resolution comparison:
+
+Run `python .\Simulation\study_interpolation_resolution.py` to compare the
+three-sauger d1, d5, and d10 experiments over the configured grid resolutions.
+It writes one graph per resampling method and case-level and summary CSVs to
+`Simulation\Comparison\interpolation_resolution`. Each curve is the arithmetic
+mean across held-out cases of their maximum absolute displacement-component
+error. The methods can have different valid grid regions; the CSVs record the
+number of valid points for each result. The curves describe reconstruction
+error sampled on each grid, not resampling error against an independent truth.
+Use `--output-dir` to choose another output directory. With `--experiment`,
+the script retains its original single-experiment study and uses the selected
+`--surface-resampling` method.
+
+To compare both resampling methods for one experiment on the same graph:
+
+```powershell
+python .\Simulation\study_interpolation_resolution.py --experiment cl3_sf25_d1_r0 --compare-resampling
+```
+
+The graph and case/summary CSVs are written to the experiment's
+`Study\interpolation_resolution` directory. The plotted metric is the mean
+of the held-out cases' maximum absolute displacement-component errors.
+
 Surface-generation comparison:
 
 After running the grid study for `cl1_sf25_d1_r0`, `cl1_sf25_d5_r0`, `cl3_sf25_d5_r0`,
