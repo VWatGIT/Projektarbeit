@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Real_Surfaces",
+        "number_of_surfaces": 20,
+        "displacement": 5,
+        "clamps": 9,
+        "landmarks": 9
+    },
+    {
+        "name": "Simulated Surfaces",
+        "number_of_surfaces": 20,
+        "displacement": 5,
+        "clamps": 9,
+        "landmarks": 9
+    }
+]

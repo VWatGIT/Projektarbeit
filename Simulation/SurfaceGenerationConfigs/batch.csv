@@ -1,9 +1,10 @@
 config
 cl1_sf25_d1_r0
 cl1_sf25_d5_r0
+cl1_sf25_d10_r0
 cl3_sf25_d1_r0
 cl3_sf25_d5_r0
 cl3_sf25_d10_r0
 cl9_sf25_d1_r0
 cl9_sf25_d5_r0
-cl9_sf5_d5_r0
+cl9_sf25_d10_r0
